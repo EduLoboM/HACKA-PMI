@@ -8,6 +8,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>KrillShield v2.0 · Krill Tech</title>
 </svelte:head>
 
 {@render children()}
