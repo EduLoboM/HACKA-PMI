@@ -4,11 +4,23 @@
 
 	let {
 		analise,
+		ranking = null,
+		totalCarteira = 57,
+		posicaoCorte = null,
 		onClose,
 		onVerDossie,
 		onNovoCadastro
 	} = $props<{
 		analise: AnaliseKrillShield;
+		ranking?: {
+			posicao: number;
+			zona: 'SALVAVEL' | 'REBAIXAMENTO';
+			taxaBlindagem: number;
+			ultimoASalvar?: boolean;
+			primeiroRebaixado?: boolean;
+		} | null;
+		totalCarteira?: number;
+		posicaoCorte?: number | null;
 		onClose: () => void;
 		onVerDossie: () => void;
 		onNovoCadastro?: () => void;
@@ -44,12 +56,19 @@
 	>
 		<!-- Top Bar / Header -->
 		<div class="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-200 bg-slate-50 shrink-0">
-			<div class="flex items-center gap-2 min-w-0">
-				<div class="w-2.5 h-2.5 rounded-full {d.estado === 'FIADO' ? 'bg-emerald-600' : d.estado === 'SÓ_EXTRACONCURSAL' ? 'bg-amber-500' : 'bg-rose-600'} shrink-0"></div>
+			<div class="flex items-center gap-2.5 min-w-0">
+				<div class="w-3 h-3 rounded-full {d.estado === 'FIADO' ? 'bg-emerald-600' : d.estado === 'SÓ_EXTRACONCURSAL' ? 'bg-amber-500' : 'bg-rose-600'} shrink-0"></div>
 				<div class="min-w-0">
-					<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block font-mono">
-						Posição Cadastrada & Avaliada · KrillShield
-					</span>
+					<div class="flex items-center gap-2">
+						<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block font-mono">
+							Posição Cadastrada & Avaliada · KrillShield
+						</span>
+						{#if ranking?.posicao}
+							<span class="px-1.5 py-0.2 bg-slate-900 text-emerald-400 font-mono text-[10px] font-bold">
+								#{ranking.posicao}º LUGAR
+							</span>
+						{/if}
+					</div>
 					<h3 id="modal-posicao-titulo" class="text-sm font-bold text-slate-900 truncate">
 						{p.nome}
 					</h3>
@@ -67,8 +86,70 @@
 
 		<!-- Scrollable Body Content -->
 		<div class="p-4 sm:p-6 space-y-4 sm:space-y-5 overflow-y-auto">
+			<!-- Posição no Ranking da Carteira (Destaque Principal) -->
+			<div class="p-3.5 bg-slate-50 border border-slate-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+				<div class="flex items-center gap-3">
+					<div class="w-12 h-12 bg-slate-900 text-white flex flex-col items-center justify-center font-mono shrink-0 shadow-xs border border-slate-700">
+						<span class="text-[8px] uppercase font-bold text-slate-400 leading-none">Rank</span>
+						<span class="text-lg font-black leading-tight text-emerald-400">
+							#{ranking?.posicao ?? '—'}
+						</span>
+					</div>
+					<div>
+						<div class="flex items-center gap-2">
+							<span class="text-xs sm:text-sm font-bold text-slate-900">
+								{ranking?.posicao ? `${ranking.posicao}º Lugar no Ranking Geral` : 'Classificação na Carteira'}
+							</span>
+							<span class="text-[10px] font-mono text-slate-500 font-semibold">
+								(de {totalCarteira} empresas)
+							</span>
+						</div>
+						<div class="text-[11px] flex items-center gap-1.5 mt-0.5">
+							{#if ranking?.zona === 'SALVAVEL'}
+								<span class="inline-flex items-center gap-1 text-emerald-800 font-bold font-mono">
+									<span class="i-lucide-shield-check text-xs text-emerald-600"></span>
+									<span>Zona Salvável</span>
+								</span>
+								<span class="text-slate-400">·</span>
+								<span class="text-slate-600 text-[11px]">Crédito operável com garantias</span>
+							{:else if ranking?.zona === 'REBAIXAMENTO'}
+								<span class="inline-flex items-center gap-1 text-rose-800 font-bold font-mono">
+									<span class="i-lucide-shield-x text-xs text-rose-600"></span>
+									<span>Zona de Rebaixamento</span>
+								</span>
+								<span class="text-slate-400">·</span>
+								<span class="text-rose-700 font-semibold text-[11px]">Abaixo do corte (Somente à vista)</span>
+							{:else}
+								<span class="text-slate-600 font-mono">Em processamento</span>
+							{/if}
+						</div>
+					</div>
+				</div>
+
+				{#if posicaoCorte != null && ranking?.posicao}
+					<div class="sm:text-right border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-200 shrink-0">
+						<span class="text-[10px] text-slate-500 uppercase font-bold block font-mono">
+							Linha de Corte: {posicaoCorte}º
+						</span>
+						{#if ranking.posicao < posicaoCorte}
+							<span class="inline-block mt-0.5 px-2 py-0.5 text-[11px] font-bold font-mono text-emerald-800 bg-emerald-50 border border-emerald-300">
+								+{posicaoCorte - ranking.posicao} posições acima do corte
+							</span>
+						{:else if ranking.posicao === posicaoCorte}
+							<span class="inline-block mt-0.5 px-2 py-0.5 text-[11px] font-bold font-mono text-rose-800 bg-rose-50 border border-rose-300">
+								1º na Zona de Rebaixamento
+							</span>
+						{:else}
+							<span class="inline-block mt-0.5 px-2 py-0.5 text-[11px] font-bold font-mono text-rose-800 bg-rose-50 border border-rose-200">
+								-{ranking.posicao - posicaoCorte + 1} posições abaixo do corte
+							</span>
+						{/if}
+					</div>
+				{/if}
+			</div>
+
 			<!-- CNPJ & Local Badge -->
-			<div class="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-slate-50 border border-slate-200 text-xs">
+			<div class="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-white border border-slate-200 text-xs">
 				<div class="flex items-center gap-1.5 font-mono text-slate-700">
 					<span class="text-slate-400 font-semibold">CNPJ:</span>
 					<strong class="text-slate-900">{p.cnpjCpf}</strong>

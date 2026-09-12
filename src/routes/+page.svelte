@@ -209,6 +209,12 @@
 
 	let classificacao = $derived(classificarCarteira(produtores));
 
+	let linhaRankingModal = $derived.by(() => {
+		const m = analiseModalPosicao;
+		if (!m) return null;
+		return classificacao.ranking.find((r) => r.id === m.perfil.id) ?? null;
+	});
+
 	let filtrados = $derived.by(() => {
 		const base =
 			filtro === 'TODOS'
@@ -796,6 +802,9 @@
 {#if analiseModalPosicao}
 	<ModalPosicaoProdutor
 		analise={analiseModalPosicao}
+		ranking={linhaRankingModal}
+		totalCarteira={classificacao.ranking.length}
+		posicaoCorte={classificacao.posicaoCorte}
 		onClose={() => (analiseModalPosicao = null)}
 		onVerDossie={verDossieCompleto}
 		onNovoCadastro={abrirCriar}
