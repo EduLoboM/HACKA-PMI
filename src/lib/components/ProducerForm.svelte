@@ -15,7 +15,7 @@
 		nome: produtor?.nome ?? '',
 		cnpjCpf: produtor?.cnpjCpf ?? '',
 		dataRegistroJunta: produtor?.dataRegistroJunta ?? new Date().toISOString().slice(0, 10),
-		escrituracaoLCDPR: produtor?.escrituracaoLCDPR ?? true,
+		escrituracaoLCDPR: produtor?.escrituracaoLCDPR ?? false,
 		areaPlantadaCAR: produtor?.areaPlantadaCAR ?? 500,
 		produtividadeZarc: produtor?.produtividadeZarc ?? 60,
 		volumeComprometidoCPR: produtor?.volumeComprometidoCPR ?? 30000,

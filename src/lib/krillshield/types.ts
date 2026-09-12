@@ -139,12 +139,27 @@ export interface DecisaoPoster {
 	sempreSim: boolean;
 }
 
+export type ClasseDegrau = 'Estrutural' | 'Reversível';
+
+export interface Degrau {
+	codigo: string;
+	texto: string;
+	classe: ClasseDegrau;
+	valor: number;
+	origemValor: string;
+	provaExigida: string;
+	responsavel: string | null;
+	dataProva: string | null;
+	ativo: boolean;
+}
+
 export interface AnaliseKrillShield {
 	perfil: PerfilProdutor;
 	relogio: ResultadoRelogio216;
 	safra: ResultadoSafraVsCpr;
 	stay: CalculoStay;
 	decisao: DecisaoPoster;
+	degraus: Degrau[];
 	textoEspelho?: string;
 }
 

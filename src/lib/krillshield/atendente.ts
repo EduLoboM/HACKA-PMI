@@ -89,6 +89,35 @@ export function redigirEspelho(a: AnaliseKrillShield): string {
 		linhas.push(`  · ${r}`);
 	}
 	linhas.push('');
+
+	linhas.push('■ PENALIDADES APLICADAS (REASON CODES)');
+	const pendentes = a.degraus.filter((d) => d.ativo);
+	const superadas = a.degraus.filter((d) => !d.ativo);
+	linhas.push(`  Total de sinais calculados: ${a.degraus.length} · Ativos: ${pendentes.length}`);
+	linhas.push('');
+	for (const d of pendentes) {
+		linhas.push(`  [ATIVO] ${d.codigo} — ${d.texto}`);
+		linhas.push(`          Classe: ${d.classe}`);
+		linhas.push(`          Origem do valor: ${d.origemValor}`);
+		linhas.push(`          Prova exigida: ${d.provaExigida}`);
+	}
+	if (pendentes.length === 0) {
+		linhas.push('  Nenhuma penalidade ativa — cadastro sem pendência documental ou de risco.');
+	}
+	if (superadas.length > 0) {
+		linhas.push('');
+		linhas.push('  → Superadas (efetivadas pelo cadastro):');
+		for (const d of superadas) {
+			linhas.push(`  [OK] ${d.codigo} — ${d.texto}`);
+		}
+	}
+	linhas.push('');
+	linhas.push('  Trilha de subida = reason codes invertidos: cada degrau retorna exatamente');
+	linhas.push('  a penalidade que o gerou (zero calibração, zero arbitragem). Estrutural nunca');
+	linhas.push('  sobe por comportamento — sequência longa não compra imunidade.');
+	linhas.push('  Prova é DECLARADA com responsável nomeado e data. Não simular verificação automática.');
+	linhas.push('');
+
 	linhas.push('■ BASE LEGAL');
 	linhas.push('  · Lei nº 11.101/2005, art. 6º (Stay Period de 180 dias prorrogáveis)');
 	linhas.push('  · Lei nº 14.112/2020, Tema 1.145 do STJ');

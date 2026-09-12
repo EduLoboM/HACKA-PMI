@@ -14,6 +14,7 @@
 	import Espelho216 from '$lib/components/Espelho216.svelte';
 	import RexControl from '$lib/components/RexControl.svelte';
 	import ProducerForm from '$lib/components/ProducerForm.svelte';
+	import TrilhaDeDegraus from '$lib/components/TrilhaDeDegraus.svelte';
 
 	type LinhaBalcao = {
 		id: number;
@@ -436,6 +437,8 @@
 
 							<div class="space-y-6">
 								<StayVisor stay={analise.stay} />
+
+								<TrilhaDeDegraus degraus={analise.degraus} />
 
 								<div class="rounded-2xl border border-slate-800 bg-slate-900/50 p-5">
 									<div class="flex items-center justify-between mb-3">
