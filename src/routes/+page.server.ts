@@ -1,8 +1,11 @@
+import { redirect } from '@sveltejs/kit';
 import { getDb, buscarProdutorCompleto } from '$lib/server/db';
 import { ensureSeeded } from '$lib/server/seed';
 import { analisar } from '$lib/krillshield/engine';
 
-export async function load() {
+export async function load({ locals }) {
+	if (!locals.user) throw redirect(303, '/login');
+
 	const db = getDb();
 	ensureSeeded(db);
 
@@ -35,5 +38,5 @@ export async function load() {
 		'À_VISTA': produtores.filter((p) => p.estado === 'À_VISTA').length
 	};
 
-	return { produtores, resumo };
+	return { produtores, resumo, user: locals.user };
 }

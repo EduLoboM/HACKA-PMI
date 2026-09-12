@@ -1,51 +1,77 @@
-# KrillShield
+# KrillShield v2.0 · Hackathon PMI-DF 2026
 
-Projeto desenvolvido com **SvelteKit**, **Svelte 5 (Runes)**, **TypeScript**, **Vite** e **UnoCSS**.
+**Consolidação Operacional de Balcão do Crédito no Agro** — motor determinístico de
+decisão de crédito que responde **sim/não** para cada operação, com cartaz de
+decisão em três estados, trilha de auditoria e reescrita do laudo por LLM.
+
+Projeto **SvelteKit 2** + **Svelte 5 (Runes)** + **TypeScript** + **UnoCSS** + **better-sqlite3**.
+
+---
+
+## 🧭 O produto
+
+| Elemento | O que faz |
+|---|---|
+| **Poster de Decisão** | `FIADO` · `SÓ EXTRACONCURSAL` (instrumento nomeado) · `À VISTA` |
+| **R$ Stay** | Reais que **morrem** vs **sobrevivem** em caso de insolvência (deságio 30%) |
+| **Relógio 216** | < 2 anos de Junta = sinal `FORMALIZANDO`; ≥ 2 anos + LCDPR = `ELEGÍVEL RJ` |
+| **Safra vs CPR** | Capacidade (área CAR × ZARC) contra volume comprometido da CPR; CPR física perde extraconcursalidade em déficit |
+| **Cartaz do Starter Rex** | Se já há um sim na análise, Rex recebe **um sim de saída** |
+
+Regras 100% determinísticas (`src/lib/krillshield/`). A LLM **só redige** o laudo
+Espelho 216 (`/api/atendente`): usa Gemini Free via `GEMINI_API_KEY` quando definida,
+senão cai num template determinístico — arquitetura pronta para trocar por watsonx.
 
 ---
 
 ## 🚀 Tecnologias
 
-- **[SvelteKit](https://svelte.dev/docs/kit)**: Framework full-stack para Svelte com SSR e roteamento.
-- **[Svelte 5](https://svelte.dev/docs/svelte/overview)**: Nova reatividade baseada em Runes (`$state`, `$derived`, `$effect`).
-- **[UnoCSS](https://unocss.dev/)**: Motor CSS atômico ultrarrápido com reset Tailwind e ícones via `@iconify-json/lucide`.
-- **[Vite](https://vite.dev/)**: Bundler de última geração com HMR instantâneo.
-- **[TypeScript](https://www.typescriptlang.org/)**: Tipagem estática em todo o projeto.
+- **SvelteKit 2** — full-stack com SSR e roteamento (config em `vite.config.ts`)
+- **Svelte 5** — reatividade via Runes (`$state`, `$derived`, `$effect`)
+- **UnoCSS** — motor CSS atômico + reset + ícones `@iconify-json/lucide`
+- **better-sqlite3** — SQLite síncrono, WAL mode, dados em `data/krillshield.db` (ignorado no git)
+- **Autenticação** — sessão em cookie `httpOnly`, senha com hash **scrypt**, sessões no banco (expiráveis e revogáveis)
 
 ---
 
-## 🛠️ Comandos Disponíveis
+## 📋 Requisitos
 
-### Instalação de Dependências
-```bash
-npm install
-```
+- **Node.js ≥ 22** (testado em v22.23.0)
+- `better-sqlite3` é um módulo nativo (compilado no `npm install`)
 
-### Ambiente de Desenvolvimento
-Inicia o servidor Vite local:
+---
+
+## 🔐 Autenticação
+
+- `/login` e `/registro` — conta própria (email único, senha mín. 6, scrypt)
+- **Conta demo** — botão "Entrar com conta demo" → `demo@krillshield.com.br`
+- Sessão: cookie `krillshield_session` (httpOnly, 7 dias), revogada no logout
+- Todas as APIs de dados exigem sessão válida (401 caso contrário)
+
+---
+
+## 🛠️ Comandos
+
 ```bash
-npm run dev
-# ou para abrir direto no navegador:
+npm install          # instalar dependências (compila better-sqlite3)
+npm run dev          # servidor de desenvolvimento (http://localhost:5173)
 npm run dev -- --open
+
+npm run check        # checagem de tipos + Svelte (svelte-check)
+npm run check:watch  # checagem contínua
+
+npm run build        # build otimizado de produção
+npm run preview      # preview local da build de produção
 ```
 
-### Checagem de Tipos e Svelte
-Valida os tipos TypeScript e componentes Svelte:
+### Configuração do LLM (opcional)
+
 ```bash
-npm run check
+# .env (não versionado)
+GEMINI_API_KEY=chave_do_gemini
 ```
 
-### Build de Produção
-Gera os artefatos otimizados para produção:
-```bash
-npm run build
-```
-
-### Preview da Produção
-Testa localmente a versão compilada de produção:
-```bash
-npm run preview
-```
+Sem a chave, o Espelho 216 é redigido pelo template determinístico.
 
 ---
 
@@ -53,15 +79,52 @@ npm run preview
 
 ```text
 ├── src/
-│   ├── app.d.ts             # Tipagens globais do SvelteKit
-│   ├── app.html             # Template HTML base
-│   ├── lib/                 # Componentes e módulos compartilhados ($lib)
-│   └── routes/              # Rotas e páginas da aplicação
-│       ├── +layout.svelte   # Layout raiz (estilos UnoCSS e head global)
-│       └── +page.svelte     # Página inicial (home)
-├── static/                  # Arquivos estáticos servidos diretamente
-├── svelte.config.js         # Configurações do Svelte
-├── uno.config.ts            # Configurações de presets e extratores do UnoCSS
-├── vite.config.ts           # Configuração do Vite e plugins
-└── tsconfig.json            # Configuração do TypeScript
+│   ├── app.d.ts                  # Tipagens globais (App.Locals.user)
+│   ├── hooks.server.ts           # Carrega sessão em locals.user
+│   ├── lib/
+│   │   ├── krillshield/          # Motor determinístico (regras puras)
+│   │   │   ├── types.ts          # Domínio: garantias, estados do cartaz
+│   │   │   ├── rules.ts          # Relógio 216 + Safra vs CPR
+│   │   │   ├── engine.ts         # analisar → R$ Stay + Poster de Decisão
+│   │   │   └── atendente.ts      # Template do laudo Espelho 216
+│   │   ├── server/
+│   │   │   ├── db.ts             # SQLite (WAL, schema, consultas, auditoria)
+│   │   │   ├── seed.ts           # Semeadura do demo (57 empresas)
+│   │   │   ├── dadosDemo.ts      # Gerador determinístico de perfis
+│   │   │   └── auth.ts           # scrypt + sessões + exigeAuth
+│   │   └── components/           # PosterDeDecisao, StayVisor, RegraCard,
+│   │                             # Espelho216, RexControl, ProducerForm
+│   └── routes/
+│       ├── +page.svelte          # Balcão (carteira, análise, CRUD, Rex Flip)
+│       ├── +page.server.ts       # Load protegido + resumo dos estados
+│       ├── login/  registro/     # Autenticação
+│       └── api/
+│           ├── auth/             # login · registro · logout · demo
+│           ├── avaliar/          # Análise + auditoria (perfil override)
+│           ├── produtor/         # CRUD da carteira
+│           ├── atendente/        # Reescrita do Espelho 216 (LLM/fallback)
+│           └── seed/             # Semear / forçar demo de 57 empresas
+├── data/krillshield.db           # Banco SQLite (runtime, ignorado no git)
+├── static/
+├── uno.config.ts                 # Presets e extratores do UnoCSS
+├── vite.config.ts                # Vite + SvelteKit + adapter-auto
+└── tsconfig.json
 ```
+
+---
+
+## 🔌 API (resumo)
+
+| Rota | Método | Descrição |
+|---|---|---|
+| `/api/auth/registro` | POST | Cria conta e abre sessão |
+| `/api/auth/login` | POST | Login — retorna 401 se credenciais inválidas |
+| `/api/auth/logout` | POST | Revoga sessão e limpa cookie |
+| `/api/auth/demo` | POST | Entra com a conta de demonstração |
+| `/api/avaliar` | POST | Analisa um produtor; aceita override `perfil` para cenários |
+| `/api/produtor` | GET/POST | Lista / cria produtor |
+| `/api/produtor/[id]` | GET/PUT/DELETE | Lê / edita / exclui produtor |
+| `/api/atendente` | POST | Reescreve o laudo Espelho 216 (LLM + fallback) |
+| `/api/seed` | POST | Semeia o banco; `{ force: true }` restaura o demo de 57 |
+
+> Todas as APIs de dados exigem sessão (`Set-Cookie` do login).

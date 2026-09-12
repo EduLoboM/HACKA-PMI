@@ -6,10 +6,11 @@ import type {
 	ItemStay,
 	Garantia,
 	DestinoStay,
-	ResultadoRelogio216
+	ResultadoRelogio216,
+	Degrau
 } from './types';
 import { GARANTIAS } from './types';
-import { relogio216, safraVsCpr } from './rules';
+import { relogio216, safraVsCpr, montarDegraus, verificarFaltasDocumentais } from './rules';
 
 function calcularStay(
 	p: PerfilProdutor,
@@ -75,8 +76,13 @@ function decidirPoster(
 	p: PerfilProdutor,
 	relogio: ResultadoRelogio216['grau'],
 	sinalRisco: boolean,
-	safraCoberturaOk: boolean
+	safraCoberturaOk: boolean,
+	faltasDocAtivas: Degrau[]
 ): DecisaoPoster {
+	const fiduciaPossivel = p.podeConstituirFiducia;
+	const cprFisicaViavel = p.possuiCPRFisica && safraCoberturaOk;
+	const temExtraconcursal = fiduciaPossivel || cprFisicaViavel;
+
 	if (p.riscoMoratoria) {
 		return {
 			estado: 'À_VISTA',
@@ -84,6 +90,40 @@ function decidirPoster(
 			instrumentoRotulo: null,
 			razoes: ['Moratória judicial iminente detectada', 'Aguarda-se ajuizamento a qualquer momento'],
 			passo: 3,
+			sempreSim: true
+		};
+	}
+
+	// Ausência de prova não é boa conduta: pendência documental bloqueia FIADO até entregar.
+	// Cliente novo não abre FIADO "de graça" — abre SÓ EXTRACONCURSAL enquanto a prova não chega.
+	if (faltasDocAtivas.length > 0) {
+		const codigos = faltasDocAtivas.map((d) => d.codigo).join(', ');
+		const razoes = [
+			`Pendências documentais em aberto: ${codigos}`,
+			'Cadastro sem prova documental completa — FIADO exige lastro comprovado'
+		];
+
+		if (!temExtraconcursal) {
+			return {
+				estado: 'À_VISTA',
+				instrumentoNomeado: null,
+				instrumentoRotulo: null,
+				razoes: [
+					...razoes,
+					'Sem instrumento extraconcursal disponível enquanto a documentação não é entregue'
+				],
+				passo: 2,
+				sempreSim: true
+			};
+		}
+
+		const instrumento: Garantia = fiduciaPossivel ? 'alienacao_fiduciaria' : 'cpr_fisica';
+		return {
+			estado: 'SÓ_EXTRACONCURSAL',
+			instrumentoNomeado: instrumento,
+			instrumentoRotulo: GARANTIAS[instrumento].rotulo,
+			razoes: [...razoes, `Crédito liberado apenas com ${GARANTIAS[instrumento].rotulo} até a prova ser entregue`],
+			passo: 2,
 			sempreSim: true
 		};
 	}
@@ -98,10 +138,6 @@ function decidirPoster(
 			sempreSim: true
 		};
 	}
-
-	const fiduciaPossivel = p.podeConstituirFiducia;
-	const cprFisicaViavel = p.possuiCPRFisica && safraCoberturaOk;
-	const temExtraconcursal = fiduciaPossivel || cprFisicaViavel;
 
 	if (!temExtraconcursal) {
 		return {
@@ -140,9 +176,12 @@ function decidirPoster(
 export function analisar(p: PerfilProdutor): AnaliseKrillShield {
 	const rel = relogio216(p);
 	const saf = safraVsCpr(p);
-	const sinalAtivo = rel.sinalRisco || saf.sinalRisco;
+	const faltasDocAtivas = verificarFaltasDocumentais(p, rel.grau).filter((d) => d.ativo);
+	const sinalAtivo =
+		rel.sinalRisco || saf.sinalRisco || faltasDocAtivas.length > 0 || p.riscoMoratoria;
 	const stay = calcularStay(p, sinalAtivo, saf.coberturaOk);
-	const decisao = decidirPoster(p, rel.grau, sinalAtivo, saf.coberturaOk);
+	const degraus = montarDegraus(p, rel, saf, stay);
+	const decisao = decidirPoster(p, rel.grau, sinalAtivo, saf.coberturaOk, faltasDocAtivas);
 
-	return { perfil: p, relogio: rel, safra: saf, stay, decisao };
+	return { perfil: p, relogio: rel, safra: saf, stay, decisao, degraus };
 }

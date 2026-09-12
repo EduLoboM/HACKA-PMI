@@ -65,10 +65,29 @@ function initSchema(db: Database.Database): void {
 			created_at TEXT DEFAULT (datetime('now'))
 		);
 
+		CREATE TABLE IF NOT EXISTS usuarios (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			nome TEXT NOT NULL,
+			email TEXT NOT NULL UNIQUE,
+			senha_hash TEXT NOT NULL,
+			created_at TEXT DEFAULT (datetime('now'))
+		);
+
+		CREATE TABLE IF NOT EXISTS sessoes (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+			token TEXT NOT NULL UNIQUE,
+			expires_at TEXT NOT NULL,
+			created_at TEXT DEFAULT (datetime('now'))
+		);
+
 		CREATE INDEX IF NOT EXISTS idx_carteira_produtor ON carteira_krill(produtor_id);
 		CREATE INDEX IF NOT EXISTS idx_avaliacoes_produtor ON avaliacoes(produtor_id);
 		CREATE INDEX IF NOT EXISTS idx_avaliacoes_data ON avaliacoes(created_at DESC);
 		CREATE INDEX IF NOT EXISTS idx_cnpj_cpf ON produtores(cnpj_cpf);
+		CREATE INDEX IF NOT EXISTS idx_usuarios_email ON usuarios(email);
+		CREATE INDEX IF NOT EXISTS idx_sessoes_token ON sessoes(token);
+		CREATE INDEX IF NOT EXISTS idx_sessoes_usuario ON sessoes(usuario_id);
 	`);
 
 	db.exec('PRAGMA journal_mode = WAL');

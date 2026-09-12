@@ -17,6 +17,7 @@
 	import RexControl from '$lib/components/RexControl.svelte';
 	import ProducerForm from '$lib/components/ProducerForm.svelte';
 	import ZonaRebaixamento from '$lib/components/ZonaRebaixamento.svelte';
+	import TrilhaDeDegraus from '$lib/components/TrilhaDeDegraus.svelte';
 
 	type LinhaBalcao = {
 		id: number;
@@ -29,8 +30,18 @@
 	};
 
 	let { data } = $props<{
-		data: { produtores: LinhaBalcao[]; resumo: Record<EstadoCartaz, number> };
+		data: {
+			produtores: LinhaBalcao[];
+			resumo: Record<EstadoCartaz, number>;
+			user: { id: number; nome: string; email: string } | null;
+		};
 	}>();
+
+	async function sair() {
+		await fetch('/api/auth/logout', { method: 'POST' });
+		await invalidateAll();
+		window.location.assign('/login');
+	}
 
 	let produtores = $derived((data.produtores ?? []) as LinhaBalcao[]);
 	let resumo = $derived(
@@ -256,6 +267,20 @@
 
 		<!-- Direct Action -->
 		<div class="flex items-center gap-2.5">
+			{#if data.user}
+				<span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs font-mono">
+					<span class="i-lucide-user text-xs"></span>
+					<span class="truncate max-w-[160px]">{data.user.email}</span>
+				</span>
+				<button
+					onclick={sair}
+					class="inline-flex items-center gap-1 px-2.5 py-1 border border-slate-200 bg-white hover:bg-rose-50 text-slate-700 hover:text-rose-700 text-xs font-medium transition cursor-pointer"
+					title="Sair da conta"
+				>
+					<span class="i-lucide-log-out text-xs"></span>
+					<span class="max-sm:hidden">Sair</span>
+				</button>
+			{/if}
 			<a
 				href="/admin"
 				class="flex items-center gap-1.5 px-3 py-1 border border-slate-300 bg-white hover:bg-slate-100 text-slate-800 text-xs font-bold transition-colors duration-150"
@@ -604,9 +629,13 @@
 							{/if}
 						</div>
 
-						<!-- Right Column (4 cols): Stay Visor & Position Breakdown -->
+						<!-- Right Column (4 cols): Stay Visor, Trilha de Degraus & Position Breakdown -->
 						<div class="lg:col-span-4 space-y-4">
 							<StayVisor stay={analise.stay} />
+
+							{#if analise.degraus && analise.degraus.length > 0}
+								<TrilhaDeDegraus degraus={analise.degraus} />
+							{/if}
 
 							<!-- Posições por Instrumento Details Card -->
 							<div class="bg-white border border-slate-200 p-4 space-y-3">

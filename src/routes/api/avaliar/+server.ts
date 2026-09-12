@@ -4,8 +4,10 @@ import { getDb, buscarProdutorCompleto } from '$lib/server/db';
 import { analisar } from '$lib/krillshield/engine';
 import { redigirEspelho } from '$lib/krillshield/atendente';
 import { salvarAvaliacao } from '$lib/server/db';
+import { exigeAuth } from '$lib/server/auth';
 
-export async function POST({ request }) {
+export async function POST({ request, locals }) {
+	exigeAuth(locals);
 	const db = getDb();
 	const body = await request.json();
 	const produtorId = Number(body.produtorId);

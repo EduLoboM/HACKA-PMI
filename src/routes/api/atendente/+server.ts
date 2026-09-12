@@ -2,8 +2,10 @@ import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import type { AnaliseKrillShield, RespostaIA } from '$lib/krillshield/types';
 import { gerarRespostaPadrao } from '$lib/krillshield/atendente';
+import { exigeAuth } from '$lib/server/auth';
 
-export async function POST({ request }) {
+export async function POST({ request, locals }) {
+	exigeAuth(locals);
 	let payload: unknown;
 	try {
 		payload = await request.json();
