@@ -17,7 +17,7 @@ export async function GET({ params }) {
 		const timeoutId = setTimeout(() => controller.abort(), 4000);
 
 		const res = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpjLimpo}`, {
-			headers: { 'User-Agent': 'KrillShield/2.0' },
+			headers: { 'User-Agent': 'KrillFortress/2.0' },
 			signal: controller.signal
 		});
 		clearTimeout(timeoutId);
@@ -51,3 +51,4 @@ export async function GET({ params }) {
 		situacao: 'VALIDADO'
 	});
 }
+
