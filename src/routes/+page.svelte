@@ -253,60 +253,64 @@
 
 <!-- Header -->
 <header class="sticky top-0 z-40 bg-white border-b border-slate-200">
-	<div class="max-w-7xl mx-auto px-4 sm:px-5 2xl:max-w-[88rem] h-14 flex items-center justify-between gap-3">
+	<div class="max-w-7xl mx-auto px-3 sm:px-5 h-14 flex items-center justify-between gap-2 sm:gap-4">
 		<!-- Brand & Logo -->
-		<div class="flex items-center gap-3 min-w-0">
+		<div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
 			<div class="w-7 h-7 bg-slate-900 text-white flex items-center justify-center shrink-0 font-bold text-xs font-mono">
 				KF
 			</div>
 			<div class="min-w-0">
-				<span class="block text-sm font-bold tracking-tight text-slate-900 leading-none">
+				<span class="block text-sm font-bold tracking-tight text-slate-900 leading-none truncate">
 					KRILL<span class="text-emerald-700">SHIELD</span>
-					<span class="text-xs font-normal text-slate-500 ml-2 font-mono hidden sm:inline">Terminal de Risco de Crédito Agro</span>
+					<span class="text-xs font-normal text-slate-500 ml-2 font-mono hidden md:inline">Terminal de Risco de Crédito Agro</span>
 				</span>
 			</div>
 		</div>
 
 		<!-- Direct Action -->
-		<div class="flex items-center gap-2.5">
+		<div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
 			{#if data.user}
-				<span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs font-mono">
+				<span class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs font-mono">
 					<span class="i-lucide-user text-xs"></span>
-					<span class="truncate max-w-[160px]">{data.user.email}</span>
+					<span class="truncate max-w-[140px]">{data.user.email}</span>
 				</span>
 				<button
 					onclick={sair}
-					class="inline-flex items-center gap-1 px-2.5 py-1 border border-slate-200 bg-white hover:bg-rose-50 text-slate-700 hover:text-rose-700 text-xs font-medium transition cursor-pointer"
+					class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 border border-slate-200 bg-white hover:bg-rose-50 text-slate-700 hover:text-rose-700 text-xs font-medium transition cursor-pointer"
 					title="Sair da conta"
 				>
 					<span class="i-lucide-log-out text-xs"></span>
-					<span class="max-sm:hidden">Sair</span>
+					<span class="hidden sm:inline">Sair</span>
 				</button>
 			{/if}
 			<a
 				href="/admin"
-				class="flex items-center gap-1.5 px-3 py-1 border border-slate-300 bg-white hover:bg-slate-100 text-slate-800 text-xs font-bold transition-colors duration-150"
+				class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 border border-slate-300 bg-white hover:bg-slate-100 text-slate-800 text-xs font-bold transition-colors duration-150"
+				title="Painel Financeiro Admin"
 			>
 				<span class="i-lucide-shield-alert text-xs text-rose-600"></span>
-				<span>Painel Financeiro Admin</span>
+				<span class="hidden sm:inline">Painel Financeiro Admin</span>
+				<span class="sm:hidden">Admin</span>
 			</a>
 			<button
 				type="button"
 				onclick={abrirCriar}
-				class="flex items-center gap-1.5 px-3 py-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors duration-150 cursor-pointer"
+				class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors duration-150 cursor-pointer"
+				title="Cadastrar Nova Empresa"
 			>
 				<span class="i-lucide-plus text-xs"></span>
-				<span>Nova Empresa</span>
+				<span class="hidden sm:inline">Nova Empresa</span>
+				<span class="sm:hidden">Nova</span>
 			</button>
 		</div>
 	</div>
 </header>
 
-<main class="max-w-7xl mx-auto w-full px-4 sm:px-5 2xl:max-w-[88rem] py-5 sm:py-6 space-y-5 flex-1">
+<main class="max-w-7xl mx-auto px-3 sm:px-5 py-4 sm:py-6 space-y-4 sm:space-y-6">
 	<!-- Title & Actions Bar -->
 	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
 		<div>
-			<h1 class="text-xl font-bold tracking-tight text-slate-900">
+			<h1 class="text-lg sm:text-xl font-bold tracking-tight text-slate-900">
 				Balcão de Decisão & Classificação de Carteira
 			</h1>
 			<p class="text-xs text-slate-600 mt-0.5">
@@ -332,26 +336,13 @@
 		</div>
 	{/if}
 
-	<!-- Telemetry Window (workspace strip) -->
-	<section class="bg-white border border-slate-200 shadow-sm overflow-hidden">
-		<div class="h-9 px-3 flex items-center gap-2 bg-slate-50/80 border-b border-slate-200">
-			<div class="flex items-center gap-1.5 shrink-0">
-				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-			</div>
-			<div class="w-px h-3 bg-slate-200 shrink-0"></div>
-			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 shrink-0">Telemetria da carteira</span>
-			<span class="ml-auto text-[10px] font-mono text-slate-500 hidden sm:inline truncate">
-				{produtores.length} monitoradas · RJ {formatarBRL(totalExposicao)}
-			</span>
-		</div>
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-200">
+	<!-- Telemetry Ribbon (2x2 on mobile, 4-col on desktop) -->
+	<section class="bg-slate-200 gap-px border border-slate-200 grid grid-cols-2 lg:grid-cols-4 overflow-hidden">
 		<!-- Carteira Total -->
 		<button
 			type="button"
 			onclick={() => (filtro = 'TODOS')}
-			class="text-left p-4 transition-colors duration-150 cursor-pointer {filtro === 'TODOS'
+			class="bg-white text-left p-3 sm:p-4 transition-colors duration-150 cursor-pointer {filtro === 'TODOS'
 				? 'bg-slate-50 ring-2 ring-inset ring-slate-900'
 				: 'hover:bg-slate-50/60'}"
 		>
@@ -361,10 +352,10 @@
 				</span>
 				<span class="text-[10px] font-mono text-slate-400">Geral</span>
 			</div>
-			<span class="block text-2xl font-black text-slate-900 mt-1 tabular-nums font-mono">
+			<span class="block text-xl sm:text-2xl font-black text-slate-900 mt-1 tabular-nums font-mono">
 				{produtores.length}
 			</span>
-			<span class="block text-xs text-slate-500 mt-0.5 truncate font-mono">
+			<span class="block text-[11px] sm:text-xs text-slate-500 mt-0.5 truncate font-mono">
 				Risco Stay: <strong class="text-slate-900">{formatarBRL(totalExposicao)}</strong>
 			</span>
 		</button>
@@ -373,7 +364,7 @@
 		<button
 			type="button"
 			onclick={() => (filtro = 'FIADO')}
-			class="text-left p-4 transition-colors duration-150 cursor-pointer {filtro === 'FIADO'
+			class="bg-white text-left p-3 sm:p-4 transition-colors duration-150 cursor-pointer {filtro === 'FIADO'
 				? 'bg-emerald-50/60 ring-2 ring-inset ring-emerald-600'
 				: 'hover:bg-emerald-50/30'}"
 		>
@@ -383,10 +374,10 @@
 				</span>
 				<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
 			</div>
-			<span class="block text-2xl font-black text-emerald-900 mt-1 tabular-nums font-mono">
+			<span class="block text-xl sm:text-2xl font-black text-emerald-900 mt-1 tabular-nums font-mono">
 				{resumo.FIADO}
 			</span>
-			<span class="block text-xs text-emerald-700 mt-0.5 truncate">
+			<span class="block text-[11px] sm:text-xs text-emerald-700 mt-0.5 truncate">
 				Fluxo padrão de balcão
 			</span>
 		</button>
@@ -395,7 +386,7 @@
 		<button
 			type="button"
 			onclick={() => (filtro = 'SÓ_EXTRACONCURSAL')}
-			class="text-left p-4 transition-colors duration-150 cursor-pointer {filtro === 'SÓ_EXTRACONCURSAL'
+			class="bg-white text-left p-3 sm:p-4 transition-colors duration-150 cursor-pointer {filtro === 'SÓ_EXTRACONCURSAL'
 				? 'bg-amber-50/60 ring-2 ring-inset ring-amber-500'
 				: 'hover:bg-amber-50/30'}"
 		>
@@ -405,10 +396,10 @@
 				</span>
 				<span class="w-2 h-2 rounded-full bg-amber-500"></span>
 			</div>
-			<span class="block text-2xl font-black text-amber-950 mt-1 tabular-nums font-mono">
+			<span class="block text-xl sm:text-2xl font-black text-amber-950 mt-1 tabular-nums font-mono">
 				{resumo['SÓ_EXTRACONCURSAL']}
 			</span>
-			<span class="block text-xs text-amber-800 mt-0.5 truncate">
+			<span class="block text-[11px] sm:text-xs text-amber-800 mt-0.5 truncate">
 				Recuperáveis com garantia
 			</span>
 		</button>
@@ -417,20 +408,20 @@
 		<button
 			type="button"
 			onclick={() => (filtro = 'À_VISTA')}
-			class="text-left p-4 transition-colors duration-150 cursor-pointer {filtro === 'À_VISTA'
+			class="bg-white text-left p-3 sm:p-4 transition-colors duration-150 cursor-pointer {filtro === 'À_VISTA'
 				? 'bg-rose-50/60 ring-2 ring-inset ring-rose-600'
 				: 'hover:bg-rose-50/30'}"
 		>
 			<div class="flex items-center justify-between">
 				<span class="text-[10px] font-bold uppercase tracking-wider text-rose-900">
-					ZONA DE REBAIXAMENTO
+					ZONA REBAIXADA
 				</span>
 				<span class="w-2 h-2 rounded-full bg-rose-600"></span>
 			</div>
-			<span class="block text-2xl font-black text-rose-950 mt-1 tabular-nums font-mono">
+			<span class="block text-xl sm:text-2xl font-black text-rose-950 mt-1 tabular-nums font-mono">
 				{resumo['À_VISTA']}
 			</span>
-			<span class="block text-xs text-rose-800 mt-0.5 truncate">
+			<span class="block text-[11px] sm:text-xs text-rose-800 mt-0.5 truncate">
 				Cobrança imediata D+0
 			</span>
 		</button>
@@ -445,33 +436,32 @@
 	/>
 
 	<!-- Table of Producers -->
-	<section class="bg-white border border-slate-200 shadow-sm overflow-hidden">
-		<div class="h-9 px-3 border-b border-slate-200 flex items-center gap-2 bg-slate-50/80">
-			<div class="flex items-center gap-1.5 shrink-0">
-				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+	<section class="bg-white border border-slate-200 overflow-hidden">
+		<div class="px-3 sm:px-5 py-2.5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 bg-slate-50">
+			<div class="flex items-center gap-2">
+				<span class="i-lucide-list-ordered text-slate-500 text-sm"></span>
+				<h3 class="text-xs font-bold uppercase tracking-wider text-slate-900">Classificação da Carteira</h3>
 			</div>
-			<div class="w-px h-3 bg-slate-200 shrink-0"></div>
-			<div class="flex items-center gap-1.5 min-w-0">
-				<span class="i-lucide-list-ordered text-slate-500 text-sm shrink-0"></span>
-				<h3 class="text-[10px] font-bold uppercase tracking-wider text-slate-600 truncate">Classificação da Carteira</h3>
-			</div>
-			<div class="ml-auto flex items-center gap-2 min-w-0">
-				<span class="text-[10px] font-mono text-slate-500 hidden md:inline whitespace-nowrap">
-					Exibindo <strong class="text-slate-900">{filtrados.length}</strong> de {produtores.length}
-					{#if classificacao.posicaoCorte != null && filtro === 'TODOS'}
-						<span class="text-rose-700 font-bold"> · corte no {classificacao.posicaoCorte}º</span>
-					{/if}
-				</span>
-				<div class="relative">
-					<span class="absolute left-2 top-1/2 -translate-y-1/2 i-lucide-search text-xs text-slate-400"></span>
+			<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+				<div class="relative w-full sm:w-64">
+					<span class="absolute left-2.5 top-1/2 -translate-y-1/2 i-lucide-search text-xs text-slate-400"></span>
 					<input
 						type="text"
 						bind:value={busca}
-						placeholder="Buscar empresa..."
-						class="pl-7 pr-2 py-0.5 text-xs bg-white border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-400 w-32 sm:w-64"
+						placeholder="Buscar empresa ou CNPJ..."
+						class="w-full pl-8 pr-3 py-1.5 sm:py-1 text-xs bg-white border border-slate-200 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-500"
 					/>
+				</div>
+				<div class="flex items-center justify-between sm:justify-start gap-2">
+					<span class="text-[11px] sm:text-xs font-mono text-slate-500 shrink-0">
+						Exibindo <strong class="text-slate-900">{filtrados.length}</strong> de {produtores.length}
+						{#if classificacao.posicaoCorte != null && filtro === 'TODOS'}
+							<span class="text-rose-700 font-bold"> · corte no {classificacao.posicaoCorte}º</span>
+						{/if}
+					</span>
+					<span class="text-[10px] text-slate-400 font-mono sm:hidden">
+						← deslize →
+					</span>
 				</div>
 			</div>
 		</div>
@@ -581,22 +571,16 @@
 	<!-- Deep Analysis Section for the Selected Producer -->
 	{#if selecionadaLinha}
 		<section class="space-y-4">
-			<div class="h-9 px-3 border-b border-slate-200 flex items-center gap-2 bg-slate-50/80">
-				<div class="flex items-center gap-1.5 shrink-0">
-					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-				</div>
-				<div class="w-px h-3 bg-slate-200 shrink-0"></div>
-				<div class="flex items-center gap-2 min-w-0">
-					<h2 class="text-[10px] font-bold uppercase tracking-wider text-slate-600 truncate">
+			<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 pb-2 border-b border-slate-200">
+				<div class="flex flex-wrap items-center gap-2">
+					<h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900">
 						Prancha de Análise · {selecionadaLinha.nome}
 					</h2>
 					<span class="inline-flex items-center px-2 py-0.5 text-[10px] font-bold font-mono border shrink-0 {badgeClasse(selecionadaLinha.estado as EstadoCartaz)}">
 						{ESTADOS_CARTAZ[selecionadaLinha.estado as EstadoCartaz].rotulo}
 					</span>
 				</div>
-				<span class="ml-auto text-[10px] text-slate-500 font-mono hidden md:inline whitespace-nowrap">
+				<span class="text-[11px] sm:text-xs text-slate-600 font-mono">
 					CNPJ: {selecionadaLinha.cnpjCpf}
 				</span>
 			</div>
@@ -729,7 +713,7 @@
 
 <!-- Minimalist Corporate Footer -->
 <footer class="mt-auto border-t border-slate-200 bg-white py-4 text-[11px] text-slate-500 font-mono">
-	<div class="max-w-7xl mx-auto px-4 sm:px-5 2xl:max-w-[88rem] flex flex-col sm:flex-row items-center justify-between gap-2">
+	<div class="max-w-7xl mx-auto px-3 sm:px-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
 		<span>KrillShield · Krill Tech · Inteligência e Risco de Crédito no Agro</span>
 		<span>Regras determinísticas sobre bases oficiais (DataJud, SICAR, ZARC, Junta Comercial)</span>
 	</div>

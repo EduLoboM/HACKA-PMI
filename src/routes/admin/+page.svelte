@@ -105,41 +105,42 @@
 
 <!-- Header Corporativo -->
 <header class="sticky top-0 z-40 bg-white border-b border-slate-200">
-	<div class="max-w-7xl mx-auto px-5 h-14 flex items-center justify-between gap-4">
-		<div class="flex items-center gap-3 min-w-0">
+	<div class="max-w-7xl mx-auto px-3 sm:px-5 h-14 flex items-center justify-between gap-2 sm:gap-4">
+		<div class="flex items-center gap-2 sm:gap-3 min-w-0">
 			<a
 				href="/"
-				class="flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold text-slate-700 hover:text-slate-900 border border-slate-200 hover:bg-slate-50 transition-colors duration-150 font-mono"
+				class="flex items-center gap-1.5 px-2 sm:px-2.5 py-1 text-xs font-bold text-slate-700 hover:text-slate-900 border border-slate-200 hover:bg-slate-50 transition-colors duration-150 font-mono"
+				title="Voltar ao Balcão"
 			>
 				<span class="i-lucide-arrow-left text-xs"></span>
-				<span>Balcão</span>
+				<span class="hidden sm:inline">Balcão</span>
 			</a>
-			<div class="h-4 w-px bg-slate-200"></div>
+			<div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
 			<div class="w-6 h-6 bg-slate-900 text-white flex items-center justify-center shrink-0 font-bold text-[10px] font-mono">
 				KF
 			</div>
 			<div class="min-w-0">
-				<span class="block text-sm font-bold tracking-tight text-slate-900 leading-none">
+				<span class="block text-sm font-bold tracking-tight text-slate-900 leading-none truncate">
 					KRILL<span class="text-emerald-700">SHIELD</span>
-					<span class="text-xs font-normal text-slate-500 ml-2 font-mono">Painel Executivo Financeiro</span>
+					<span class="text-xs font-normal text-slate-500 ml-2 font-mono hidden md:inline">Painel Executivo Financeiro</span>
 				</span>
 			</div>
 		</div>
 
-		<div class="flex items-center gap-2.5 text-xs font-mono">
-			<span class="text-slate-500 hidden sm:inline">Perfil: <strong>Comitê de Crédito & CFO</strong></span>
-			<span class="px-2 py-0.5 bg-slate-100 border border-slate-200 text-slate-700 font-bold">
+		<div class="flex items-center gap-2 text-xs font-mono shrink-0">
+			<span class="text-slate-500 hidden lg:inline">Perfil: <strong>Comitê de Crédito & CFO</strong></span>
+			<span class="px-2 py-0.5 bg-slate-100 border border-slate-200 text-slate-700 font-bold text-[11px] sm:text-xs">
 				{data.kpis.totalEmpresas} Empresas
 			</span>
 		</div>
 	</div>
 </header>
 
-<main class="max-w-7xl mx-auto px-5 py-6 space-y-6">
+<main class="max-w-7xl mx-auto px-3 sm:px-5 py-4 sm:py-6 space-y-4 sm:space-y-6">
 	<!-- Title & Subtitle -->
 	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
 		<div>
-			<h1 class="text-xl font-bold tracking-tight text-slate-900">
+			<h1 class="text-lg sm:text-xl font-bold tracking-tight text-slate-900">
 				Consolidação Financeira Global & Exposição ao Stay Period
 			</h1>
 			<p class="text-xs text-slate-600 mt-0.5">
@@ -167,91 +168,91 @@
 		</div>
 	</div>
 
-	<!-- Executive KPI Ribbon (5 métricas sólidas) -->
-	<section class="bg-white border border-slate-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-slate-200">
+	<!-- Executive KPI Ribbon (2x2 on mobile + 5th item spanning 2 cols, 5-col on desktop) -->
+	<section class="bg-slate-200 gap-px border border-slate-200 grid grid-cols-2 lg:grid-cols-5 overflow-hidden">
 		<!-- Total Carteira -->
-		<div class="p-4 space-y-1">
+		<div class="bg-white p-3 sm:p-4 space-y-1">
 			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
 				Carteira Total
 			</span>
-			<span class="block text-xl font-black text-slate-900 tabular-nums font-mono">
+			<span class="block text-lg sm:text-xl font-black text-slate-900 tabular-nums font-mono">
 				{formatarBRL(data.kpis.totalGeral)}
 			</span>
-			<span class="block text-[11px] text-slate-500 font-mono">
+			<span class="block text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">
 				Volume total faturado
 			</span>
 		</div>
 
 		<!-- Total Sobrevivem (Blindados) -->
-		<div class="p-4 space-y-1 bg-emerald-50/20">
+		<div class="bg-white p-3 sm:p-4 space-y-1">
 			<div class="flex items-center justify-between">
 				<span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block">
-					Créditos Blindados
+					Blindados
 				</span>
 				<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
 			</div>
-			<span class="block text-xl font-black text-emerald-950 tabular-nums font-mono">
+			<span class="block text-lg sm:text-xl font-black text-emerald-950 tabular-nums font-mono">
 				{formatarBRL(data.kpis.totalSobrevivem)}
 			</span>
-			<span class="block text-[11px] text-emerald-700 font-mono">
-				Sobrevivem (Extraconcursal)
+			<span class="block text-[10px] sm:text-[11px] text-emerald-700 font-mono truncate">
+				Extraconcursal protegido
 			</span>
 		</div>
 
 		<!-- Total Morrem (Presos no Stay) -->
-		<div class="p-4 space-y-1 bg-rose-50/20">
+		<div class="bg-white p-3 sm:p-4 space-y-1">
 			<div class="flex items-center justify-between">
 				<span class="text-[10px] font-bold uppercase tracking-wider text-rose-800 block">
 					Presos no Stay
 				</span>
 				<span class="w-2 h-2 rounded-full bg-rose-600"></span>
 			</div>
-			<span class="block text-xl font-black text-rose-950 tabular-nums font-mono">
+			<span class="block text-lg sm:text-xl font-black text-rose-950 tabular-nums font-mono">
 				{formatarBRL(data.kpis.totalMorrem)}
 			</span>
-			<span class="block text-[11px] text-rose-700 font-mono">
+			<span class="block text-[10px] sm:text-[11px] text-rose-700 font-mono truncate">
 				Suspensos no concurso
 			</span>
 		</div>
 
 		<!-- Deságio Previsto (Perda) -->
-		<div class="p-4 space-y-1">
-			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
-				Perda Est. Deságio (30%)
+		<div class="bg-white p-3 sm:p-4 space-y-1">
+			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block truncate">
+				Perda Est. (30%)
 			</span>
-			<span class="block text-xl font-black text-slate-900 tabular-nums font-mono">
+			<span class="block text-lg sm:text-xl font-black text-slate-900 tabular-nums font-mono">
 				{formatarBRL(data.kpis.perdaPrevistaDesagio)}
 			</span>
-			<span class="block text-[11px] text-slate-500 font-mono">
-				Evaporação estimada em RJ
+			<span class="block text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">
+				Evaporação est. em RJ
 			</span>
 		</div>
 
-		<!-- Taxa Global de Blindagem -->
-		<div class="p-4 space-y-1">
+		<!-- Taxa Global de Blindagem (Spans 2 cols on mobile) -->
+		<div class="bg-white p-3 sm:p-4 space-y-1 col-span-2 lg:col-span-1">
 			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
 				Índice de Blindagem
 			</span>
-			<span class="block text-xl font-black tabular-nums font-mono {data.kpis.taxaBlindagemGlobal >= 70 ? 'text-emerald-700' : 'text-amber-700'}">
+			<span class="block text-lg sm:text-xl font-black tabular-nums font-mono {data.kpis.taxaBlindagemGlobal >= 70 ? 'text-emerald-700' : 'text-amber-700'}">
 				{data.kpis.taxaBlindagemGlobal.toFixed(1)}%
 			</span>
-			<span class="block text-[11px] text-slate-500 font-mono">
+			<span class="block text-[10px] sm:text-[11px] text-slate-500 font-mono truncate">
 				Recuperação: {formatarBRL(data.kpis.recuperacaoProvavel)}
 			</span>
 		</div>
 	</section>
 
 	<!-- Barra de Proporção Técnica Global -->
-	<section class="bg-white border border-slate-200 p-4 space-y-2">
-		<div class="flex justify-between text-xs font-mono font-bold">
+	<section class="bg-white border border-slate-200 p-3.5 sm:p-4 space-y-2">
+		<div class="flex flex-col sm:flex-row justify-between text-xs font-mono font-bold gap-1">
 			<span class="text-emerald-700">
-				Blindados à Recuperação Judicial: {data.kpis.taxaBlindagemGlobal.toFixed(1)}% ({formatarBRL(data.kpis.totalSobrevivem)})
+				Blindados à RJ: {data.kpis.taxaBlindagemGlobal.toFixed(1)}% ({formatarBRL(data.kpis.totalSobrevivem)})
 			</span>
 			<span class="text-rose-700">
-				Expostos à Suspensão (Stay): {(100 - data.kpis.taxaBlindagemGlobal).toFixed(1)}% ({formatarBRL(data.kpis.totalMorrem)})
+				Expostos ao Stay: {(100 - data.kpis.taxaBlindagemGlobal).toFixed(1)}% ({formatarBRL(data.kpis.totalMorrem)})
 			</span>
 		</div>
-		<div class="h-3 w-full bg-slate-100 flex overflow-hidden border border-slate-200">
+		<div class="h-2.5 sm:h-3 w-full bg-slate-100 flex overflow-hidden border border-slate-200">
 			<div
 				class="h-full bg-emerald-600 transition-[width] duration-300"
 				style="width: {data.kpis.taxaBlindagemGlobal}%"
@@ -263,17 +264,17 @@
 				title="Morrem no Stay"
 			></div>
 		</div>
-		<div class="flex items-center justify-between text-[11px] text-slate-500 font-mono pt-1">
-			<span>Art. 49, § 3º (Alienação Fiduciária) & Lei 8.929/94 (CPR Física Lastreada)</span>
-			<span>Art. 6º (Suspensão de Execuções e Cobranças por 180 dias)</span>
+		<div class="flex flex-col sm:flex-row sm:items-center justify-between text-[10px] sm:text-[11px] text-slate-500 font-mono pt-0.5 gap-0.5">
+			<span>Art. 49, § 3º (Alienação Fiduciária) & CPR Física</span>
+			<span>Art. 6º (Suspensão por 180 dias)</span>
 		</div>
 	</section>
 
 	<!-- 2-Column Grid: Balanço de Instrumentos & Concentração de Risco -->
-	<div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+	<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-start">
 		<!-- Coluna 1 (7 cols): Balanço Consolidado por Instrumento Jurídico -->
 		<div class="lg:col-span-7 bg-white border border-slate-200 overflow-hidden space-y-0">
-			<div class="px-5 py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+			<div class="px-3.5 sm:px-5 py-2.5 sm:py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
 				<div>
 					<h3 class="text-xs font-bold uppercase tracking-wider text-slate-900">
 						Balanço por Instrumento Jurídico
@@ -286,7 +287,7 @@
 			</div>
 
 			<div class="overflow-x-auto">
-				<table class="w-full text-xs">
+				<table class="w-full text-xs min-w-[480px]">
 					<thead>
 						<tr class="text-left text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200 bg-slate-50">
 							<th class="px-4 py-2.5">Instrumento</th>
@@ -327,7 +328,7 @@
 
 		<!-- Coluna 2 (5 cols): Radar de Concentração de Risco (Top Exposições Concursais) -->
 		<div class="lg:col-span-5 bg-white border border-slate-200 overflow-hidden space-y-0">
-			<div class="px-5 py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+			<div class="px-3.5 sm:px-5 py-2.5 sm:py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
 				<div>
 					<h3 class="text-xs font-bold uppercase tracking-wider text-rose-900">
 						Maior Risco no Stay (Top 10)
@@ -340,7 +341,7 @@
 			</div>
 
 			<div class="overflow-x-auto">
-				<table class="w-full text-xs">
+				<table class="w-full text-xs min-w-[340px]">
 					<thead>
 						<tr class="text-left text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200 bg-slate-50">
 							<th class="px-4 py-2.5">Empresa</th>
@@ -380,7 +381,7 @@
 
 	<!-- Seção 3: Livro-Razão & Histórico Cronológico de Auditorias -->
 	<section class="bg-white border border-slate-200 overflow-hidden space-y-0">
-		<div class="px-5 py-3 border-b border-slate-200 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+		<div class="px-3.5 sm:px-5 py-2.5 sm:py-3 border-b border-slate-200 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
 			<div>
 				<h3 class="text-xs font-bold uppercase tracking-wider text-slate-900">
 					Histórico de Avaliações & Livro-Razão de Auditorias
@@ -391,20 +392,20 @@
 			</div>
 
 			<!-- Filtros e Busca -->
-			<div class="flex flex-wrap items-center gap-2">
-				<div class="relative">
+			<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
+				<div class="relative w-full sm:w-52">
 					<input
 						type="text"
 						bind:value={busca}
 						placeholder="Buscar empresa ou CNPJ..."
-						class="w-52 pl-7 pr-2 py-1 text-xs border border-slate-300 bg-white text-slate-900 font-mono placeholder:text-slate-400 focus:outline-none focus:border-slate-900"
+						class="w-full pl-7 pr-2 py-1.5 sm:py-1 text-xs border border-slate-300 bg-white text-slate-900 font-mono placeholder:text-slate-400 focus:outline-none focus:border-slate-900"
 					/>
 					<span class="i-lucide-search absolute left-2 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></span>
 				</div>
 
 				<select
 					bind:value={filtroEstado}
-					class="py-1 px-2 text-xs border border-slate-300 bg-white text-slate-800 font-mono focus:outline-none focus:border-slate-900 cursor-pointer"
+					class="py-1.5 sm:py-1 px-2 text-xs border border-slate-300 bg-white text-slate-800 font-mono focus:outline-none focus:border-slate-900 cursor-pointer w-full sm:w-auto"
 				>
 					<option value="TODOS">Todos os Cartazes</option>
 					<option value="FIADO">NORMALIDADE</option>
@@ -415,7 +416,7 @@
 		</div>
 
 		<div class="overflow-x-auto">
-			<table class="w-full text-xs">
+			<table class="w-full text-xs min-w-[620px]">
 				<thead>
 					<tr class="text-left text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200 bg-slate-50 font-mono">
 						<th class="px-4 py-2.5">Data / Hora</th>
@@ -454,7 +455,7 @@
 								<button
 									type="button"
 									onclick={() => abrirLaudo(h)}
-									class="px-2 py-0.5 text-[11px] font-bold font-sans text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition-colors duration-150 cursor-pointer"
+									class="px-2.5 py-1 text-[11px] font-bold font-sans text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition-colors duration-150 cursor-pointer"
 								>
 									Ver Laudo
 								</button>
@@ -476,36 +477,36 @@
 
 <!-- Modal de Inspeção do Laudo Pericial -->
 {#if laudoSelecionado}
-	<div class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/60 p-4 sm:p-8">
-		<div class="w-full max-w-3xl bg-white border border-slate-300 shadow-xl overflow-hidden space-y-0">
-			<div class="flex items-center justify-between px-6 py-3.5 border-b border-slate-200 bg-slate-50">
+	<div class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/60 p-2 sm:p-8">
+		<div class="w-full max-w-3xl bg-white border border-slate-300 shadow-xl overflow-hidden space-y-0 my-auto">
+			<div class="flex flex-col sm:flex-row sm:items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-200 bg-slate-50 gap-2">
 				<div>
 					<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900">
 						Laudo Oficial de Balcão · {laudoSelecionado.nome}
 					</h3>
-					<span class="text-xs text-slate-500 font-mono">
-						CNPJ: {laudoSelecionado.cnpjCpf} · Registrado em {laudoSelecionado.data}
+					<span class="text-xs text-slate-500 font-mono block sm:inline">
+						CNPJ: {laudoSelecionado.cnpjCpf} · {laudoSelecionado.data}
 					</span>
 				</div>
-				<div class="flex items-center gap-2">
+				<div class="flex items-center gap-1.5 self-end sm:self-auto">
 					<button
 						type="button"
 						onclick={exportarPdfLaudo}
 						disabled={exportandoLaudo}
-						class="flex items-center gap-1.5 px-3 py-1 text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors duration-150 cursor-pointer disabled:opacity-60"
+						class="flex items-center gap-1 px-2.5 py-1 text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors duration-150 cursor-pointer disabled:opacity-60"
 					>
 						{#if exportandoLaudo}
 							<span class="i-lucide-loader-2 text-xs animate-spin"></span>
 							<span>PDF...</span>
 						{:else}
 							<span class="i-lucide-file-down text-xs"></span>
-							<span>Exportar PDF</span>
+							<span>PDF</span>
 						{/if}
 					</button>
 					<button
 						type="button"
 						onclick={copiarLaudo}
-						class="flex items-center gap-1.5 px-3 py-1 text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition-colors duration-150 cursor-pointer"
+						class="flex items-center gap-1 px-2.5 py-1 text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition-colors duration-150 cursor-pointer"
 					>
 						<span class="{copiado ? 'i-lucide-check text-emerald-600' : 'i-lucide-copy text-slate-500'} text-xs"></span>
 						<span>{copiado ? 'Copiado!' : 'Copiar'}</span>
@@ -521,16 +522,16 @@
 				</div>
 			</div>
 
-			<div class="p-5 bg-slate-50 max-h-[70vh] overflow-y-auto border-b border-slate-200">
-				<pre class="text-xs leading-relaxed text-slate-800 font-mono whitespace-pre-wrap break-words">{laudoSelecionado.texto}</pre>
+			<div class="p-3.5 sm:p-5 bg-slate-50 max-h-[65vh] sm:max-h-[70vh] overflow-y-auto border-b border-slate-200">
+				<pre class="text-[11px] sm:text-xs leading-relaxed text-slate-800 font-mono whitespace-pre-wrap break-words">{laudoSelecionado.texto}</pre>
 			</div>
 
-			<div class="px-6 py-2.5 bg-white flex items-center justify-between text-xs text-slate-500 font-mono">
+			<div class="px-4 sm:px-6 py-2.5 bg-white flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-mono gap-2 text-center sm:text-left">
 				<span>Provimento CNJ nº 216/2026 & Lei nº 11.101/2005</span>
 				<button
 					type="button"
 					onclick={() => (laudoSelecionado = null)}
-					class="px-3 py-1 bg-slate-900 text-white font-bold hover:bg-slate-800 transition-colors duration-150 cursor-pointer"
+					class="px-3 py-1 bg-slate-900 text-white font-bold hover:bg-slate-800 transition-colors duration-150 cursor-pointer w-full sm:w-auto"
 				>
 					Fechar
 				</button>

@@ -10,38 +10,41 @@
 
 	function badgeClasse(classe: ClasseDegrau): string {
 		return classe === 'Estrutural'
-			? 'border-rose-300 bg-rose-50 text-rose-800'
-			: 'border-emerald-300 bg-emerald-50 text-emerald-800';
+			? 'border-rose-200 bg-rose-50 text-rose-800'
+			: 'border-emerald-200 bg-emerald-50 text-emerald-800';
 	}
 </script>
 
-<div class="bg-white border border-slate-200 overflow-hidden shadow-sm">
-	<div class="h-9 px-3 flex items-center gap-2 bg-slate-50/80 border-b border-slate-200">
-		<div class="flex items-center gap-1.5 shrink-0">
-			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+<div class="bg-white border border-slate-200 p-5 space-y-4">
+	<!-- Header -->
+	<div class="flex items-center justify-between pb-3 border-b border-slate-200">
+		<div>
+			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
+				Reason Codes Invertidos · Esteira Jurídica
+			</span>
+			<h4 class="text-sm font-bold text-slate-900 tracking-tight flex items-center gap-2">
+				<span class="i-lucide-stairs text-amber-600 text-sm"></span>
+				Trilha de Subida & Penalidades
+			</h4>
 		</div>
-		<div class="w-px h-3 bg-slate-200 shrink-0"></div>
-		<div class="flex items-center gap-1.5 min-w-0">
-			<span class="i-lucide-stairs text-slate-500 shrink-0"></span>
-			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 truncate">Trilha de subida</span>
-		</div>
-		<span class="ml-auto text-[10px] uppercase tracking-wider text-slate-500 shrink-0">reason codes invertidos</span>
+		<span class="text-[10px] font-bold font-mono text-slate-600 bg-slate-100 px-2 py-0.5 border border-slate-200">
+			LREF · DOC / SAF / REL
+		</span>
 	</div>
 
-	<div class="px-4 py-3 space-y-3">
+	<div class="space-y-3.5">
+		<!-- Summary Tags -->
 		<div class="flex flex-wrap gap-2 text-[11px]">
-			<span class="inline-flex items-center gap-1.5 px-2 py-0.5 border border-slate-200 text-slate-600 bg-slate-50">
-				<span class="w-1.5 h-1.5 rounded-full bg-rose-600 shrink-0"></span>
-				{estruturais.length} estrutural(is)
+			<span class="inline-flex items-center gap-1.5 px-2.5 py-1 border border-rose-200 bg-rose-50 text-rose-800 font-medium">
+				<span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+				{estruturais.length} estrutural(is) — tempo / fato consumado
 			</span>
-			<span class="inline-flex items-center gap-1.5 px-2 py-0.5 border border-slate-200 text-slate-600 bg-slate-50">
-				<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0"></span>
-				{reversiveis.length} reversível(is)
+			<span class="inline-flex items-center gap-1.5 px-2.5 py-1 border border-emerald-200 bg-emerald-50 text-emerald-800 font-medium">
+				<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+				{reversiveis.length} reversível(is) — superáveis por prova
 			</span>
-			<span class="inline-flex items-center gap-1.5 px-2 py-0.5 border border-amber-300/60 text-amber-800 bg-amber-50/50">
-				{ativos.length} penalidade(s) ativa(s)
+			<span class="inline-flex items-center gap-1.5 px-2.5 py-1 border border-amber-200 bg-amber-50 text-amber-900 font-bold font-mono">
+				{ativos.length} penalidade(s) ativa(s) bloqueando o cartaz
 			</span>
 		</div>
 
@@ -49,56 +52,66 @@
 			<div class="text-xs text-slate-500 italic py-2">Sem degraus calculados.</div>
 		{:else}
 			<div class="overflow-x-auto border border-slate-200">
-				<table class="w-full text-xs min-w-[680px]">
+				<table class="w-full text-xs min-w-[640px]">
 					<thead>
-						<tr class="text-left text-[10px] uppercase tracking-wider text-slate-500 border-b border-slate-200 bg-slate-50/90">
-							<th class="px-3 py-2 font-semibold">Código</th>
-							<th class="px-3 py-2 font-semibold">Classe</th>
-							<th class="px-3 py-2 font-semibold">Penalidade</th>
-							<th class="px-3 py-2 font-semibold">Prova exigida</th>
-							<th class="px-3 py-2 font-semibold text-right">Origem do valor (R$ Stay)</th>
-							<th class="px-3 py-2 font-semibold text-center">Status</th>
-							<th class="px-3 py-2 font-semibold">Responsável</th>
-							<th class="px-3 py-2 font-semibold">Data</th>
+						<tr class="text-left text-[10px] uppercase font-bold text-slate-600 border-b border-slate-200 bg-slate-50">
+							<th class="px-3 py-2 font-mono">Código</th>
+							<th class="px-3 py-2">Classe</th>
+							<th class="px-3 py-2">Penalidade</th>
+							<th class="px-3 py-2">Prova Exigida</th>
+							<th class="px-3 py-2 text-right font-mono">R$ no Stay</th>
+							<th class="px-3 py-2 text-center">Status</th>
+							<th class="px-3 py-2">Responsável</th>
+							<th class="px-3 py-2">Data</th>
 						</tr>
 					</thead>
 					<tbody class="divide-y divide-slate-100">
 						{#each degraus as d}
-							<tr class="hover:bg-slate-50 transition-colors duration-100 {d.ativo ? '' : 'opacity-50'}">
-								<td class="px-3 py-2">
-									<span class="font-mono font-bold {d.ativo ? (d.classe === 'Estrutural' ? 'text-rose-700' : 'text-amber-700') : 'text-slate-500'}">{d.codigo}</span>
-								</td>
-								<td class="px-3 py-2">
-									<span class="inline-flex px-2 py-0.5 text-[10px] font-bold border {badgeClasse(d.classe)}">{d.classe}</span>
-								</td>
-								<td class="px-3 py-2 text-slate-700 max-w-55">
-									<span class="block truncate" title={d.texto}>{d.texto}</span>
-									<span class="block text-[10px] text-slate-500 mt-0.5 truncate" title={d.origemValor}>{d.origemValor}</span>
-								</td>
-								<td class="px-3 py-2 text-slate-600 max-w-48">
-									<span class="block truncate" title={d.provaExigida}>{d.provaExigida}</span>
-								</td>
-								<td class="px-3 py-2 text-right">
-									<span class="font-bold tabular-nums font-mono {d.valor > 0 ? 'text-rose-700' : 'text-slate-500'}">{formatarBRL(d.valor)}</span>
-								</td>
-								<td class="px-3 py-2 text-center">
-									<span class="inline-flex items-center gap-1 text-[10px] font-bold {d.ativo ? 'text-amber-700' : 'text-slate-500'}">
-										<span class="w-1.5 h-1.5 rounded-full {d.ativo ? 'bg-amber-500' : 'bg-slate-400'}"></span>
-										{d.ativo ? 'Pendente' : 'Superado'}
+							<tr class="transition-colors duration-100 {d.ativo ? 'bg-amber-50/30' : 'opacity-60'}">
+								<td class="px-3 py-2.5">
+									<span class="font-mono font-bold {d.ativo ? (d.classe === 'Estrutural' ? 'text-rose-700' : 'text-amber-800') : 'text-slate-500'}">
+										{d.codigo}
 									</span>
 								</td>
-								<td class="px-3 py-2 text-slate-500 text-center">{d.responsavel ?? '—'}</td>
-								<td class="px-3 py-2 text-slate-500 text-center font-mono">{d.dataProva ?? '—'}</td>
+								<td class="px-3 py-2.5">
+									<span class="inline-flex px-2 py-0.5 text-[10px] font-bold border {badgeClasse(d.classe)}">
+										{d.classe}
+									</span>
+								</td>
+								<td class="px-3 py-2.5 text-slate-800 max-w-56">
+									<span class="block font-medium truncate" title={d.texto}>{d.texto}</span>
+									<span class="block text-[10px] text-slate-500 mt-0.5 truncate" title={d.origemValor}>{d.origemValor}</span>
+								</td>
+								<td class="px-3 py-2.5 text-slate-600 max-w-44">
+									<span class="block text-[11px] truncate" title={d.provaExigida}>{d.provaExigida}</span>
+								</td>
+								<td class="px-3 py-2.5 text-right font-mono">
+									<span class="font-bold tabular-nums {d.valor > 0 ? 'text-rose-700' : 'text-slate-400'}">
+										{formatarBRL(d.valor)}
+									</span>
+								</td>
+								<td class="px-3 py-2.5 text-center">
+									{#if d.ativo}
+										<span class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold font-mono bg-amber-100 text-amber-900 border border-amber-300">
+											<span class="w-1.5 h-1.5 rounded-full bg-amber-600 animate-pulse"></span>
+											Pendente
+										</span>
+									{:else}
+										<span class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-mono text-slate-600 bg-slate-100 border border-slate-200">
+											Superado
+										</span>
+									{/if}
+								</td>
+								<td class="px-3 py-2.5 text-slate-600 text-center font-mono text-[11px]">{d.responsavel ?? '—'}</td>
+								<td class="px-3 py-2.5 text-slate-600 text-center font-mono text-[11px]">{d.dataProva ?? '—'}</td>
 							</tr>
 						{/each}
 					</tbody>
 				</table>
 			</div>
 
-			<p class="text-[10px] text-slate-500 leading-relaxed pt-1">
-				O valor devolvido em cada degrau é exatamente a penalidade que o gerou — zero calibração,
-				zero arbitragem. Provas são declaradas com responsável nomeado e data; consulta SICAR/CNDT
-				/PGFN não é automatizada.
+			<p class="text-[11px] text-slate-500 leading-relaxed pt-2 border-t border-slate-100 font-sans">
+				<strong>Regra do degrau:</strong> o valor devolvido é exatamente a penalidade que o gerou (zero calibração, zero arbitragem). Degraus estruturais jamais sobem por comportamento. A prova é <strong class="text-slate-700">declarada com responsável nomeado e data</strong> — nunca simulamos verificação automática.
 			</p>
 		{/if}
 	</div>

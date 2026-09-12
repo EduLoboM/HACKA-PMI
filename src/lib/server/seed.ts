@@ -10,31 +10,32 @@ function showcase(): Omit<PerfilProdutor, 'id'>[] {
 			nome: 'Boa Safra Sementes S.A. — Unidade Arbolina',
 			dataRegistroJunta: '2018-05-10',
 			escrituracaoLCDPR: true,
-			areaPlantadaCAR: 1000,
+			areaPlantadaCAR: 1200,
 			produtividadeZarc: 60,
 			volumeComprometidoCPR: 30000,
 			possuiCPRFisica: true,
 			podeConstituirFiducia: true,
 			riscoMoratoria: false,
 			posicaoPorInstrumento: {
-				duplicata_mercantil: 400000,
-				cpr_fisica: 100000
+				duplicata_mercantil: 350000,
+				alienacao_fiduciaria: 250000,
+				cpr_fisica: 150000
 			}
 		},
 		{
 			cnpjCpf: '03.143.716/0001-36',
 			nome: 'Agropecuária Tamakavy S.A. (São Félix do Araguaia - MT)',
-			dataRegistroJunta: '2023-02-20',
+			dataRegistroJunta: '2025-02-15', // Inscrita há 12 meses (< 24m, Relógio 216 FORMALIZANDO)
 			escrituracaoLCDPR: true,
-			areaPlantadaCAR: 500,
-			produtividadeZarc: 55,
-			volumeComprometidoCPR: 40000,
+			areaPlantadaCAR: 1100,
+			produtividadeZarc: 58,
+			volumeComprometidoCPR: 28000,
 			possuiCPRFisica: false,
-			podeConstituirFiducia: false,
+			podeConstituirFiducia: true,
 			riscoMoratoria: false,
 			posicaoPorInstrumento: {
-				nota_promissoria: 250000,
-				penhor_agricola: 120000
+				duplicata_mercantil: 280000,
+				alienacao_fiduciaria: 320000
 			}
 		},
 		{
@@ -42,16 +43,16 @@ function showcase(): Omit<PerfilProdutor, 'id'>[] {
 			nome: 'BrasilAgro — Cia. Brasileira de Propriedades Agrícolas',
 			dataRegistroJunta: '2015-09-01',
 			escrituracaoLCDPR: true,
-			areaPlantadaCAR: 2000,
+			areaPlantadaCAR: 2400,
 			produtividadeZarc: 65,
-			volumeComprometidoCPR: 100000,
+			volumeComprometidoCPR: 75000,
 			possuiCPRFisica: true,
 			podeConstituirFiducia: true,
 			riscoMoratoria: false,
 			posicaoPorInstrumento: {
-				duplicata_mercantil: 900000,
+				duplicata_mercantil: 800000,
+				alienacao_fiduciaria: 600000,
 				cpr_fisica: 400000,
-				alienacao_fiduciaria: 350000,
 				cpr_financeira: 200000
 			}
 		}

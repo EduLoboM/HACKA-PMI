@@ -33,13 +33,23 @@
 	}
 </script>
 
-<div class="bg-white border border-slate-200 shadow-sm overflow-hidden">
-	<!-- Window title bar -->
-	<div class="h-9 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
-		<div class="flex items-center gap-1.5 shrink-0">
-			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+<div class="bg-white border border-slate-200 p-3.5 sm:p-6 space-y-4 sm:space-y-6">
+	<!-- Top Bar -->
+	<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 pb-3 sm:pb-4 border-b border-slate-200">
+		<div class="flex items-start gap-3">
+			<div class="w-8 h-8 bg-slate-900 text-white flex items-center justify-center shrink-0 text-base font-bold">
+				<span class="i-lucide-file-text"></span>
+			</div>
+			<div>
+				<div class="flex items-center gap-2">
+					<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900">
+						Espelho
+					</h3>
+				</div>
+				<p class="text-xs text-slate-500 mt-0.5">
+					Parecer Técnico & Auditoria de Balcão · Verificação prévia do passivo agro e enquadramento LREF
+				</p>
+			</div>
 		</div>
 		<div class="w-px h-3 bg-slate-200 shrink-0"></div>
 		<span class="i-lucide-file-text text-slate-500 shrink-0"></span>
@@ -49,54 +59,51 @@
 		</span>
 	</div>
 
-	<div class="p-4 sm:p-6 space-y-5">
-		<!-- Toolbar: provider + tabs + rewrite -->
-		<div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-200">
+		<!-- Actions & Tab Switcher -->
+		<div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
 			<!-- Live Provider Tag -->
-			<span class="inline-flex items-center gap-1.5 px-2 py-1 text-[11px] font-mono font-medium bg-slate-100 border border-slate-200 text-slate-700">
+			<span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono font-medium bg-slate-100 border border-slate-200 text-slate-700 justify-center sm:justify-start">
 				<span class="w-1.5 h-1.5 rounded-full {provedor.includes('gemini') ? 'bg-sky-600' : 'bg-emerald-600'}"></span>
 				{provedor.includes('gemini') ? 'Motor: Gemini 3.6 Flash' : 'Motor: Determinístico'}
 			</span>
 
-			<div class="flex flex-wrap items-center gap-2">
-				<!-- Tab Switcher -->
-				<div class="flex items-center border border-slate-200 text-xs">
-					<button
-						type="button"
-						onclick={() => (abaAtiva = 'inteligencia')}
-						class="px-3 py-1 font-semibold transition-colors duration-150 cursor-pointer {abaAtiva === 'inteligencia'
-							? 'bg-slate-900 text-white'
-							: 'bg-white text-slate-600 hover:text-slate-900'}"
-					>
-						Parecer & Rastreabilidade
-					</button>
-					<button
-						type="button"
-						onclick={() => (abaAtiva = 'laudo')}
-						class="px-3 py-1 font-semibold border-l border-slate-200 transition-colors duration-150 cursor-pointer {abaAtiva === 'laudo'
-							? 'bg-slate-900 text-white'
-							: 'bg-white text-slate-600 hover:text-slate-900'}"
-					>
-						Laudo Pericial Formal
-					</button>
-				</div>
-
-				<!-- Trigger Rewrite Button -->
+			<!-- Tab Switcher -->
+			<div class="flex items-center border border-slate-200 text-xs w-full sm:w-auto">
 				<button
 					type="button"
-					onclick={onRegredigir}
-					disabled={carregando}
-					class="flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 border border-slate-900 transition-colors duration-150 cursor-pointer disabled:opacity-50"
+					onclick={() => (abaAtiva = 'inteligencia')}
+					class="flex-1 sm:flex-none px-3 py-1.5 sm:py-1 text-center font-semibold transition-colors duration-150 cursor-pointer {abaAtiva === 'inteligencia'
+						? 'bg-slate-900 text-white'
+						: 'bg-white text-slate-600 hover:text-slate-900'}"
 				>
-					{#if carregando}
-						<span class="i-lucide-loader-2 text-xs animate-spin"></span>
-						<span>Atualizando Parecer...</span>
-					{:else}
-						<span class="i-lucide-refresh-cw text-xs"></span>
-						<span>Atualizar Parecer Técnico</span>
-					{/if}
+					Parecer & Rastreabilidade
+				</button>
+				<button
+					type="button"
+					onclick={() => (abaAtiva = 'laudo')}
+					class="flex-1 sm:flex-none px-3 py-1.5 sm:py-1 text-center font-semibold border-l border-slate-200 transition-colors duration-150 cursor-pointer {abaAtiva === 'laudo'
+						? 'bg-slate-900 text-white'
+						: 'bg-white text-slate-600 hover:text-slate-900'}"
+				>
+					Laudo Pericial Formal
 				</button>
 			</div>
+
+			<!-- Trigger Rewrite Button -->
+			<button
+				type="button"
+				onclick={onRegredigir}
+				disabled={carregando}
+				class="flex items-center justify-center gap-1.5 px-3 py-1.5 sm:py-1 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 border border-slate-900 transition-colors duration-150 cursor-pointer disabled:opacity-50 w-full sm:w-auto"
+			>
+				{#if carregando}
+					<span class="i-lucide-loader-2 text-xs animate-spin"></span>
+					<span>Atualizando Parecer...</span>
+				{:else}
+					<span class="i-lucide-refresh-cw text-xs"></span>
+					<span>Atualizar Parecer Técnico</span>
+				{/if}
+			</button>
 		</div>
 
 	<!-- TAB 1: PARECER EXECUTIVO & FONTES AUDITADAS -->
@@ -235,7 +242,7 @@
 	{:else}
 		<!-- TAB 2: LAUDO TÉCNICO FORMAL COMPLETO (DOCUMENTO) -->
 		<div class="space-y-3">
-			<div class="flex items-center justify-between pb-2 border-b border-slate-200">
+			<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-slate-200 gap-2">
 				<div>
 					<span class="text-xs font-bold text-slate-900 uppercase tracking-wider">Documento Oficial de Balcão (Laudo Pericial)</span>
 					<p class="text-[11px] text-slate-500">Formatado para impressão, dossiê do comitê e auditoria jurídica</p>
@@ -243,14 +250,14 @@
 				<button
 					type="button"
 					onclick={copiarLaudo}
-					class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors duration-150 cursor-pointer"
+					class="flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors duration-150 cursor-pointer w-full sm:w-auto"
 				>
 					<span class="{copiado ? 'i-lucide-check text-emerald-600' : 'i-lucide-copy text-slate-500'} text-xs"></span>
-					<span>{copiado ? 'Copiado para Área de Transferência!' : 'Copiar Laudo'}</span>
+					<span>{copiado ? 'Copiado!' : 'Copiar Laudo'}</span>
 				</button>
 			</div>
 
-			<div class="border border-slate-200 bg-slate-50 p-4">
+			<div class="border border-slate-200 bg-slate-50 p-3 sm:p-4">
 				<pre class="text-[11px] leading-relaxed text-slate-800 font-mono whitespace-pre-wrap break-words max-h-120 overflow-y-auto">{iaResposta?.laudoFormatado || texto}</pre>
 			</div>
 		</div>

@@ -14,12 +14,15 @@
 	});
 </script>
 
-<div class="bg-white border border-slate-200 shadow-sm overflow-hidden">
-	<div class="h-9 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
-		<div class="flex items-center gap-1.5 shrink-0">
-			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+<div class="bg-white border border-slate-200 p-3.5 sm:p-5 space-y-3 sm:space-y-4">
+	<div class="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-slate-200">
+		<div>
+			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
+				Simulação de Insolvência (Art. 6º e 49 da LREF)
+			</span>
+			<h4 class="text-sm font-bold text-slate-900 tracking-tight">
+				Balanço do Stay Period (180 dias)
+			</h4>
 		</div>
 		<div class="w-px h-3 bg-slate-200 shrink-0"></div>
 		<div class="flex items-center gap-1.5 min-w-0">
@@ -35,7 +38,7 @@
 
 	<!-- Progress Ratio Bar -->
 	<div class="space-y-1.5">
-		<div class="flex justify-between text-[11px] font-semibold font-mono">
+		<div class="flex flex-col sm:flex-row justify-between text-[10px] sm:text-[11px] font-semibold font-mono gap-0.5">
 			<span class="text-rose-700">Suspensos (Concurso): {pctMorrem.toFixed(1)}%</span>
 			<span class="text-emerald-700">Blindados (Extraconcursal): {pctSobrevivem.toFixed(1)}%</span>
 		</div>
@@ -56,7 +59,7 @@
 	</div>
 
 	<!-- Financial Columns (Concurso vs Blindado) -->
-	<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+	<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
 		<!-- Suspensos no Stay -->
 		<div class="p-3 bg-rose-50/40 border border-rose-200">
 			<div class="flex items-center justify-between mb-1">
