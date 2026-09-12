@@ -128,3 +128,29 @@ Sem a chave, o Espelho 216 é redigido pelo template determinístico.
 | `/api/seed` | POST | Semeia o banco; `{ force: true }` restaura o demo de 57 |
 
 > Todas as APIs de dados exigem sessão (`Set-Cookie` do login).
+
+---
+
+## ☁️ Deploy no Render
+
+O projeto já está configurado com `@sveltejs/adapter-node`, `render.yaml` e `Dockerfile`.
+
+### Opção 1: Via Render Blueprint (Automático)
+1. Conecte seu repositório no [dashboard do Render](https://dashboard.render.com/).
+2. Clique em **New** → **Blueprint**.
+3. Selecione o repositório do KrillShield.
+4. O Render detectará automaticamente o arquivo [`render.yaml`](file:///home/eduardolm/Documents/HACKA-PMI/render.yaml).
+5. Preencha a variável secreta `GEMINI_API_KEY` (opcional).
+6. Clique em **Apply** e o deploy iniciará.
+
+### Opção 2: Web Service Manual (Node)
+* **Environment:** `Node`
+* **Build Command:** `npm ci && npm run build`
+* **Start Command:** `npm start`
+* **Environment Variables:**
+  * `NODE_VERSION`: `22.14.0`
+  * `GEMINI_API_KEY`: sua chave de API (opcional)
+  * `DEFAULT_MODEL`: `gemini-3.6-flash`
+  * `PORT`: `10000` (definido pelo Render)
+
+*(Opcional para persistência do SQLite entre deploys: crie um Render Persistent Disk montado em `/var/data` e defina `KRILLSHIELD_DB=/var/data/krillshield.db`)*.
