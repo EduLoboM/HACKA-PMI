@@ -13,7 +13,6 @@
 	import PosterDeDecisao from '$lib/components/PosterDeDecisao.svelte';
 	import StayVisor from '$lib/components/StayVisor.svelte';
 	import RegraCard from '$lib/components/RegraCard.svelte';
-	import Espelho216 from '$lib/components/Espelho216.svelte';
 	import Espelho from '$lib/components/Espelho.svelte';
 	import RexControl from '$lib/components/RexControl.svelte';
 	import ProducerForm from '$lib/components/ProducerForm.svelte';
@@ -176,11 +175,6 @@
 
 	let classificacao = $derived(classificarCarteira(produtores));
 
-	let filtrados = $derived(
-		filtro === 'TODOS'
-			? classificacao.ranking
-			: classificacao.ranking.filter((p) => p.estado === filtro)
-	);
 	let filtrados = $derived.by(() => {
 		const base =
 			filtro === 'TODOS'
@@ -411,18 +405,11 @@
 
 	<!-- Table of Producers -->
 	<section class="bg-white border border-slate-200 overflow-hidden">
-		<div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between bg-slate-50">
 		<div class="px-5 py-2.5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50">
 			<div class="flex items-center gap-2">
 				<span class="i-lucide-list-ordered text-slate-500 text-sm"></span>
 				<h3 class="text-xs font-bold uppercase tracking-wider text-slate-900">Classificação da Carteira</h3>
 			</div>
-			<span class="text-xs font-mono text-slate-500">
-				Exibindo <strong class="text-slate-900">{filtrados.length}</strong> de {produtores.length}
-				{#if classificacao.posicaoCorte != null && filtro === 'TODOS'}
-					<span class="text-rose-700 font-bold"> · corte no {classificacao.posicaoCorte}º</span>
-				{/if}
-			</span>
 			<div class="flex items-center gap-3">
 				<div class="relative">
 					<span class="absolute left-2.5 top-1/2 -translate-y-1/2 i-lucide-search text-xs text-slate-400"></span>
@@ -660,10 +647,8 @@
 			{/if}
 		</section>
 
-		<!-- Espelho 216 Technical Document Sheet -->
 		<!-- Espelho Technical Document Sheet -->
 		<section>
-			<Espelho216
 			<Espelho
 				analise={analise}
 				texto={analise?.textoEspelho ?? ''}
@@ -685,7 +670,6 @@
 <!-- Minimalist Corporate Footer -->
 <footer class="mt-auto border-t border-slate-200 bg-white py-4 text-[11px] text-slate-500 font-mono">
 	<div class="max-w-7xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-2">
-		<span>Krill Fortress · Krill Tech · Inteligência e Risco de Crédito no Agro</span>
 		<span>KrillShield · Krill Tech · Inteligência e Risco de Crédito no Agro</span>
 		<span>Regras determinísticas sobre bases oficiais (DataJud, SICAR, ZARC, Junta Comercial)</span>
 	</div>

@@ -6,8 +6,6 @@ import { gerarDemoProdutores } from './dadosDemo';
 function showcase(): Omit<PerfilProdutor, 'id'>[] {
 	return [
 		{
-			cnpjCpf: '12.345.678/0001-90',
-			nome: 'Fazenda Boa Safra — Arbolina de Campo',
 			cnpjCpf: '10.807.374/0001-77',
 			nome: 'Boa Safra Sementes S.A. — Unidade Arbolina',
 			dataRegistroJunta: '2018-05-10',
@@ -24,8 +22,6 @@ function showcase(): Omit<PerfilProdutor, 'id'>[] {
 			}
 		},
 		{
-			cnpjCpf: '98.765.432/0001-01',
-			nome: 'Agropecuária Sudoeste LTDA',
 			cnpjCpf: '03.143.716/0001-36',
 			nome: 'Agropecuária Tamakavy S.A. (São Félix do Araguaia - MT)',
 			dataRegistroJunta: '2023-02-20',
@@ -42,8 +38,6 @@ function showcase(): Omit<PerfilProdutor, 'id'>[] {
 			}
 		},
 		{
-			cnpjCpf: '45.678.900/0001-12',
-			nome: 'Grãos do Cerrado S.A.',
 			cnpjCpf: '07.628.528/0001-59',
 			nome: 'BrasilAgro — Cia. Brasileira de Propriedades Agrícolas',
 			dataRegistroJunta: '2015-09-01',

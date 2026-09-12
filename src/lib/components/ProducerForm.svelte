@@ -14,7 +14,6 @@
 	// svelte-ignore state_referenced_locally
 	const inicial = {
 		nome: produtor?.nome ?? '',
-		cnpjCpf: produtor?.cnpjCpf ?? '',
 		cnpjCpf: produtor?.cnpjCpf ? formatarCNPJ(produtor.cnpjCpf) : '',
 		dataRegistroJunta: produtor?.dataRegistroJunta ?? new Date().toISOString().slice(0, 10),
 		escrituracaoLCDPR: produtor?.escrituracaoLCDPR ?? true,
@@ -116,7 +115,6 @@
 
 			const payload = {
 				nome,
-				cnpjCpf,
 				cnpjCpf: formatarCNPJ(cnpjCpf),
 				dataRegistroJunta,
 				escrituracaoLCDPR,
@@ -184,20 +182,12 @@
 						id="pf-nome"
 						bind:value={nome}
 						required
-						placeholder="Ex.: Agropecuária Rio Bonito Ltda"
 						placeholder="Ex.: SLC Agrícola S.A."
 						class="w-full px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm"
 					/>
 				</div>
 				<div>
 					<label for="pf-cnpj" class="block text-xs font-semibold text-slate-700 mb-1">CNPJ / CPF</label>
-					<input
-						id="pf-cnpj"
-						bind:value={cnpjCpf}
-						required
-						placeholder="00.000.000/0001-00"
-						class="w-full px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm font-mono"
-					/>
 					<div class="flex items-center gap-1.5">
 						<input
 							id="pf-cnpj"

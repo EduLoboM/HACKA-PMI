@@ -99,8 +99,6 @@ export function redigirEspelho(a: AnaliseKrillShield): string {
 	const linhas: string[] = [];
 
 	linhas.push('———————————————————————————————————————————————————————————————');
-	linhas.push('ESPELHO 216 — LAUDO DE TELA ÚNICA');
-	linhas.push('Krill Fortress · Relatório Operacional de Balcão');
 	linhas.push('ESPELHO — LAUDO DE TELA ÚNICA');
 	linhas.push('KrillShield · Relatório Operacional de Balcão');
 	linhas.push(`Data de emissão: ${dataRef}`);
@@ -178,7 +176,6 @@ export function redigirEspelho(a: AnaliseKrillShield): string {
 	linhas.push('   e o número informado é o montante exato blindado contra o stay.');
 	linhas.push('');
 	linhas.push('———————————————————————————————————————————————————————————————');
-	linhas.push('Atendente Inteligente Krill Fortress · Regras Determinísticas de Crédito Agro');
 	linhas.push('Atendente Inteligente KrillShield · Regras Determinísticas de Crédito Agro');
 	linhas.push('———————————————————————————————————————————————————————————————');
 
