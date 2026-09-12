@@ -24,3 +24,4 @@ COPY --from=builder /app/build ./build
 EXPOSE 10000
 
 CMD ["node", "build"]
+

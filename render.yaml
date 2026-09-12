@@ -18,3 +18,4 @@ services:
         sync: false
       - key: DEFAULT_MODEL
         value: gemini-3.6-flash
+
