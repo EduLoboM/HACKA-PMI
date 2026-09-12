@@ -145,10 +145,10 @@
 	}
 </script>
 
-<div class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/60 p-4 sm:p-8">
-	<div class="w-full max-w-2xl bg-white border border-slate-300 shadow-xl overflow-hidden">
+<div class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/60 p-2 sm:p-8">
+	<div class="w-full max-w-2xl bg-white border border-slate-300 shadow-xl overflow-hidden my-auto">
 		<!-- Header -->
-		<div class="flex items-center justify-between px-6 py-3.5 border-b border-slate-200 bg-slate-50">
+		<div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 border-b border-slate-200 bg-slate-50">
 			<div>
 				<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900">
 					{produtor ? 'Editar Perfil do Produtor' : 'Nova Empresa na Carteira'}
@@ -173,7 +173,7 @@
 				e.preventDefault();
 				salvar();
 			}}
-			class="px-6 py-5 space-y-5"
+			class="px-4 sm:px-6 py-4 sm:py-5 space-y-4 sm:space-y-5"
 		>
 			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<div class="sm:col-span-2">
@@ -314,7 +314,7 @@
 
 				<div class="space-y-2">
 					{#each posicoes as pos, i}
-						<div class="flex items-center gap-2 p-2 rounded-xl bg-slate-50/70 border border-slate-200/80">
+						<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-2.5 rounded-xl bg-slate-50/70 border border-slate-200/80">
 							<select
 								bind:value={pos.instrumento}
 								class="flex-1 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs text-slate-900 focus:border-emerald-500 focus:outline-none cursor-pointer"
@@ -323,24 +323,26 @@
 									<option value={g}>{GARANTIAS[g].rotulo} ({GARANTIAS[g].categoria})</option>
 								{/each}
 							</select>
-							<div class="relative w-36">
-								<span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">R$</span>
-								<input
-									type="number"
-									min="0"
-									bind:value={pos.valor}
-									placeholder="0,00"
-									class="w-full pl-8 pr-2 py-1.5 rounded-lg bg-white border border-slate-200 text-xs text-slate-900 focus:border-emerald-500 focus:outline-none font-mono tabular-nums"
-								/>
+							<div class="flex items-center gap-2">
+								<div class="relative flex-1 sm:w-36">
+									<span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">R$</span>
+									<input
+										type="number"
+										min="0"
+										bind:value={pos.valor}
+										placeholder="0,00"
+										class="w-full pl-8 pr-2 py-1.5 rounded-lg bg-white border border-slate-200 text-xs text-slate-900 focus:border-emerald-500 focus:outline-none font-mono tabular-nums"
+									/>
+								</div>
+								<button
+									type="button"
+									onclick={() => removerPosicao(i)}
+									aria-label="Remover instrumento"
+									class="w-8 h-8 shrink-0 flex items-center justify-center rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-[background-color,color] duration-150 cursor-pointer"
+								>
+									<span class="i-lucide-trash-2 text-sm"></span>
+								</button>
 							</div>
-							<button
-								type="button"
-								onclick={() => removerPosicao(i)}
-								aria-label="Remover instrumento"
-								class="w-8 h-8 shrink-0 flex items-center justify-center rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-[background-color,color] duration-150 cursor-pointer"
-							>
-								<span class="i-lucide-trash-2 text-sm"></span>
-							</button>
 						</div>
 					{/each}
 				</div>
@@ -353,18 +355,18 @@
 			{/if}
 
 			<!-- Bottom Actions -->
-			<div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
+			<div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 pt-3 border-t border-slate-200">
 				<button
 					type="button"
 					onclick={onClose}
-					class="px-4 py-1.5 border border-slate-300 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors duration-150 cursor-pointer"
+					class="px-4 py-2 sm:py-1.5 border border-slate-300 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors duration-150 cursor-pointer text-center"
 				>
 					Cancelar
 				</button>
 				<button
 					type="submit"
 					disabled={salvando}
-					class="px-5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors duration-150 cursor-pointer disabled:opacity-50"
+					class="px-5 py-2 sm:py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors duration-150 cursor-pointer disabled:opacity-50 text-center"
 				>
 					{salvando ? 'Salvando...' : produtor ? 'Salvar Alterações' : 'Cadastrar e Avaliar'}
 				</button>

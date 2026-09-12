@@ -36,90 +36,100 @@
 	}
 </script>
 
-<div class="min-h-screen bg-slate-950 flex items-center justify-center p-4 selection:bg-rose-500/30 selection:text-white">
+<div class="min-h-screen bg-[#f6f9f8] flex items-center justify-center p-4 selection:bg-emerald-500/20 selection:text-emerald-950 font-sans">
 	<div class="w-full max-w-sm">
-		<div class="text-center mb-8">
-			<div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-orange-500 to-rose-600 shadow-lg shadow-orange-500/20 mb-4">
-				<span class="i-lucide-shield text-white text-3xl"></span>
+		<!-- Brand Header -->
+		<div class="text-center mb-6">
+			<div class="inline-flex items-center justify-center w-10 h-10 bg-slate-900 text-white font-bold text-sm font-mono mb-3 shadow-sm">
+				KF
 			</div>
-			<h1 class="text-2xl font-black text-white tracking-tight">KrillShield <span class="text-rose-400">v2.0</span></h1>
-			<p class="text-sm text-slate-500 mt-1">Crie sua conta de acesso ao balcão</p>
+			<h1 class="text-xl font-bold tracking-tight text-slate-900 leading-none">
+				KRILL<span class="text-emerald-700">SHIELD</span>
+				<span class="text-xs font-mono font-normal text-slate-500 ml-1.5">v2.0</span>
+			</h1>
+			<p class="text-xs text-slate-500 mt-1.5 font-sans">Cadastro de Operador do Balcão</p>
 		</div>
 
-		<div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-			<h2 class="text-sm font-bold text-slate-200 mb-4">Criar conta</h2>
+		<!-- Registration Card -->
+		<div class="bg-white border border-slate-200 p-6 space-y-4 shadow-sm">
+			<div class="pb-2 border-b border-slate-100 flex items-center justify-between">
+				<h2 class="text-xs font-bold uppercase tracking-wider text-slate-900">Criar Nova Conta</h2>
+				<span class="text-[10px] font-mono text-slate-500 bg-slate-100 px-2 py-0.5 border border-slate-200">Credencial</span>
+			</div>
 
 			<form
 				onsubmit={(e) => {
 					e.preventDefault();
 					registrar();
 				}}
-				class="space-y-3"
+				class="space-y-3.5"
 			>
 				<div>
-					<label for="nome" class="block text-xs font-semibold text-slate-400 mb-1">Nome completo</label>
+					<label for="nome" class="block text-xs font-semibold text-slate-700 mb-1">Nome completo</label>
 					<input
 						id="nome"
 						type="text"
 						required
 						bind:value={nome}
-						placeholder="João da Silva"
-						class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-slate-200 placeholder-slate-600 focus:border-rose-500 focus:outline-none"
+						placeholder="Ex: João da Silva"
+						class="w-full px-3 py-2 text-xs bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-500 transition-colors"
 					/>
 				</div>
 				<div>
-					<label for="email" class="block text-xs font-semibold text-slate-400 mb-1">E-mail</label>
+					<label for="email" class="block text-xs font-semibold text-slate-700 mb-1">E-mail corporativo</label>
 					<input
 						id="email"
 						type="email"
 						required
 						bind:value={email}
-						placeholder="seu@email.com"
-						class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-slate-200 placeholder-slate-600 focus:border-rose-500 focus:outline-none"
+						placeholder="seu.email@empresa.com"
+						class="w-full px-3 py-2 text-xs bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-500 transition-colors"
 					/>
 				</div>
 				<div>
-					<label for="senha" class="block text-xs font-semibold text-slate-400 mb-1">Senha (mín. 6 caracteres)</label>
+					<label for="senha" class="block text-xs font-semibold text-slate-700 mb-1">Senha (mínimo 6 caracteres)</label>
 					<input
 						id="senha"
 						type="password"
 						required
 						minlength={6}
 						bind:value={senha}
-						placeholder="••••••"
-						class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-slate-200 placeholder-slate-600 focus:border-rose-500 focus:outline-none"
+						placeholder="••••••••"
+						class="w-full px-3 py-2 text-xs bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-500 transition-colors"
 					/>
 				</div>
 				<div>
-					<label for="senha2" class="block text-xs font-semibold text-slate-400 mb-1">Confirmar senha</label>
+					<label for="senha2" class="block text-xs font-semibold text-slate-700 mb-1">Confirmar senha</label>
 					<input
 						id="senha2"
 						type="password"
 						required
 						minlength={6}
 						bind:value={senha2}
-						placeholder="••••••"
-						class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-slate-200 placeholder-slate-600 focus:border-rose-500 focus:outline-none"
+						placeholder="••••••••"
+						class="w-full px-3 py-2 text-xs bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-500 transition-colors"
 					/>
 				</div>
 
 				{#if erro}
-					<div class="rounded-xl border border-rose-500/40 bg-rose-500/10 px-3 py-2 text-xs text-rose-300">{erro}</div>
+					<div class="p-2.5 bg-rose-50 border border-rose-200 text-xs text-rose-800 font-medium">
+						{erro}
+					</div>
 				{/if}
 
 				<button
 					type="submit"
 					disabled={carregando}
-					class="w-full px-4 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-sm font-bold text-white shadow-lg shadow-rose-600/20 transition active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+					class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors duration-150 cursor-pointer disabled:opacity-50"
 				>
-					{carregando ? 'Criando conta...' : 'Criar conta'}
+					{carregando ? 'Criando conta...' : 'Finalizar Cadastro'}
 				</button>
 			</form>
 		</div>
 
-		<p class="text-center text-xs text-slate-500 mt-5">
-			Já tem uma conta?
-			<a href="/login" class="text-rose-400 hover:text-rose-300 font-semibold ml-1">Fazer login</a>
+		<p class="text-center text-xs text-slate-500 mt-4">
+			Já possui cadastro?
+			<a href="/login" class="text-emerald-700 hover:text-emerald-900 font-bold ml-1">Fazer login</a>
 		</p>
 	</div>
 </div>

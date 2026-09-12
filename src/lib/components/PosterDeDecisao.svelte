@@ -25,9 +25,9 @@
 	let metaAtiva = $derived(ESTADOS_CARTAZ[(decisao?.estado ?? 'FIADO') as EstadoCartaz]);
 </script>
 
-<div class="bg-white border border-slate-200 p-5 space-y-4">
+<div class="bg-white border border-slate-200 p-3.5 sm:p-5 space-y-3 sm:space-y-4">
 	<!-- Top Bar -->
-	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-200">
+	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 pb-2.5 sm:pb-3 border-b border-slate-200">
 		<div>
 			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">
 				Diretriz de Balcão · Krill Tech
@@ -43,9 +43,9 @@
 	</div>
 
 	<!-- Main Decision Row -->
-	<div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+	<div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-5 items-stretch">
 		<!-- Active Verdict -->
-		<div class="lg:col-span-7 p-4 border {decisao.estado === 'FIADO' ? 'bg-emerald-50/50 border-emerald-300' : decisao.estado === 'SÓ_EXTRACONCURSAL' ? 'bg-amber-50/50 border-amber-300' : 'bg-rose-50/50 border-rose-300'} flex flex-col justify-between">
+		<div class="lg:col-span-7 p-3.5 sm:p-4 border {decisao.estado === 'FIADO' ? 'bg-emerald-50/50 border-emerald-300' : decisao.estado === 'SÓ_EXTRACONCURSAL' ? 'bg-amber-50/50 border-amber-300' : 'bg-rose-50/50 border-rose-300'} flex flex-col justify-between">
 			<div>
 				<div class="flex items-center justify-between gap-2 mb-1.5">
 					<span class="text-[10px] uppercase font-bold tracking-wider {decisao.estado === 'FIADO' ? 'text-emerald-800' : decisao.estado === 'SÓ_EXTRACONCURSAL' ? 'text-amber-900' : 'text-rose-900'}">
@@ -56,7 +56,7 @@
 					</span>
 				</div>
 
-				<div class="text-2xl font-black tracking-tight text-slate-900 mb-2">
+				<div class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 mb-1.5 sm:mb-2">
 					{metaAtiva.rotulo}
 				</div>
 
@@ -98,7 +98,7 @@
 				{#each etapas as etapa}
 					{@const ativo = decisao.estado === etapa.estado}
 					<div
-						class="flex items-center gap-3 px-3 py-2.5 border transition-colors duration-150 {ativo
+						class="flex items-center gap-2.5 sm:gap-3 px-2.5 sm:px-3 py-2 sm:py-2.5 border transition-colors duration-150 {ativo
 							? 'bg-slate-900 text-white border-slate-900'
 							: 'bg-white text-slate-600 border-slate-200 opacity-60'}"
 					>
@@ -109,7 +109,7 @@
 							<span class="text-xs font-bold block leading-none">
 								{etapa.estado === 'FIADO' ? 'NORMALIDADE' : etapa.estado.replace('_', ' ')}
 							</span>
-							<span class="text-[10px] leading-tight block mt-0.5 truncate {ativo ? 'text-slate-300' : 'text-slate-500'}">
+							<span class="text-[10px] leading-tight block mt-0.5 {ativo ? 'text-slate-300' : 'text-slate-500'}">
 								{etapa.descricaoCurta}
 							</span>
 						</div>
