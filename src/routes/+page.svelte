@@ -18,6 +18,7 @@
 	import ProducerForm from '$lib/components/ProducerForm.svelte';
 	import ZonaRebaixamento from '$lib/components/ZonaRebaixamento.svelte';
 	import TrilhaDeDegraus from '$lib/components/TrilhaDeDegraus.svelte';
+	import ModalPosicaoProdutor from '$lib/components/ModalPosicaoProdutor.svelte';
 
 	type LinhaBalcao = {
 		id: number;
@@ -66,6 +67,7 @@
 		| { modo: 'editar'; produtor: PerfilProdutor }
 		| null;
 	let form = $state<FormEstado>(null);
+	let analiseModalPosicao = $state<AnaliseKrillShield | null>(null);
 
 	async function avaliar(alvo?: PerfilProdutor) {
 		if (produtorId == null) return;
@@ -176,7 +178,28 @@
 		flipAtivo = false;
 		provedor = 'atendente-modelo · determinístico';
 		await invalidateAll();
-		avaliar();
+		await avaliar();
+		if (analise) {
+			analiseModalPosicao = analise;
+		}
+	}
+
+	async function abrirModalPosicao(p: LinhaBalcao) {
+		produtorId = p.id;
+		flipAtivo = false;
+		provedor = 'atendente-modelo · determinístico';
+		await avaliar();
+		if (analise) {
+			analiseModalPosicao = analise;
+		}
+	}
+
+	function verDossieCompleto() {
+		analiseModalPosicao = null;
+		tick().then(() => {
+			const el = document.getElementById('secao-dossie');
+			if (el) el.scrollIntoView({ behavior: 'smooth' });
+		});
 	}
 
 	function badgeClasse(estado: EstadoCartaz) {
@@ -557,6 +580,18 @@
 										type="button"
 										onclick={(e) => {
 											e.stopPropagation();
+											abrirModalPosicao(p);
+										}}
+										class="px-2 py-0.5 text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-300 hover:bg-emerald-100 transition-colors duration-150 cursor-pointer flex items-center gap-1"
+										title="Ver modal de posição desta empresa"
+									>
+										<span class="i-lucide-shield text-xs text-emerald-600"></span>
+										<span>Posição</span>
+									</button>
+									<button
+										type="button"
+										onclick={(e) => {
+											e.stopPropagation();
 											abrirEditar(p.id);
 										}}
 										class="px-2 py-0.5 text-[11px] font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition-colors duration-150 cursor-pointer"
@@ -591,12 +626,15 @@
 
 	<!-- Deep Analysis Section for the Selected Producer -->
 	{#if selecionadaLinha}
-		<section class="space-y-4">
-			<div class="h-9 px-3 flex items-center gap-2 border border-slate-200 bg-slate-50/80">
-				<div class="flex items-center gap-1.5 shrink-0">
-					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
-					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+		<section id="secao-dossie" class="space-y-4">
+			<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 pb-2 border-b border-slate-200">
+				<div class="flex flex-wrap items-center gap-2">
+					<h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900">
+						Prancha de Análise · {selecionadaLinha.nome}
+					</h2>
+					<span class="inline-flex items-center px-2 py-0.5 text-[10px] font-bold font-mono border {badgeClasse(selecionadaLinha.estado as EstadoCartaz)}">
+						{ESTADOS_CARTAZ[selecionadaLinha.estado as EstadoCartaz].rotulo}
+					</span>
 				</div>
 				<div class="w-px h-3 bg-slate-200 shrink-0"></div>
 				<span class="i-lucide-file-search text-slate-500 shrink-0"></span>
@@ -754,4 +792,12 @@
 	/>
 {/if}
 
-</div>
+<!-- Modal de Posição do Produtor Cadastrado / Selecionado -->
+{#if analiseModalPosicao}
+	<ModalPosicaoProdutor
+		analise={analiseModalPosicao}
+		onClose={() => (analiseModalPosicao = null)}
+		onVerDossie={verDossieCompleto}
+		onNovoCadastro={abrirCriar}
+	/>
+{/if}
