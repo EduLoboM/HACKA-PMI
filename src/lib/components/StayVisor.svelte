@@ -14,75 +14,103 @@
 	});
 </script>
 
-<div class="w-full">
-	<div class="flex items-center justify-between mb-3">
-		<span class="text-xs uppercase tracking-widest text-slate-400 font-semibold">
-			Cálculo R$ Stay
+<div class="bg-white border border-slate-200 p-5 space-y-4">
+	<div class="flex items-center justify-between pb-3 border-b border-slate-200">
+		<div>
+			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
+				Simulação de Insolvência (Art. 6º e 49 da LREF)
+			</span>
+			<h4 class="text-sm font-bold text-slate-900 tracking-tight">
+				Balanço do Stay Period (180 dias)
+			</h4>
+		</div>
+		<span class="text-[10px] font-bold font-mono text-slate-600 bg-slate-100 px-2 py-0.5 border border-slate-200">
+			LREF 11.101/05
 		</span>
-		<span class="text-xs text-slate-500">Stay Period: 180 dias (+180)</span>
 	</div>
 
-	<div class="rounded-2xl border border-slate-800 bg-slate-900/50 p-5">
-		<div class="h-3.5 w-full rounded-full overflow-hidden bg-slate-800 flex">
+	<!-- Progress Ratio Bar -->
+	<div class="space-y-1.5">
+		<div class="flex justify-between text-[11px] font-semibold font-mono">
+			<span class="text-rose-700">Suspensos (Concurso): {pctMorrem.toFixed(1)}%</span>
+			<span class="text-emerald-700">Blindados (Extraconcursal): {pctSobrevivem.toFixed(1)}%</span>
+		</div>
+		<div class="h-2 w-full bg-slate-100 flex overflow-hidden border border-slate-200">
 			{#if pctMorrem > 0}
-				<div class="h-full bg-rose-500 transition-all duration-500" style="width: {pctMorrem}%"></div>
+				<div
+					class="h-full bg-rose-600 transition-[width] duration-200"
+					style="width: {pctMorrem}%"
+				></div>
 			{/if}
 			{#if pctSobrevivem > 0}
-				<div class="h-full bg-emerald-500 transition-all duration-500" style="width: {pctSobrevivem}%"></div>
+				<div
+					class="h-full bg-emerald-600 transition-[width] duration-200"
+					style="width: {pctSobrevivem}%"
+				></div>
 			{/if}
 		</div>
+	</div>
 
-		<div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-			<div class="rounded-xl border border-rose-500/25 bg-rose-500/5 p-4">
-				<div class="flex items-center gap-2 mb-2">
-					<span class="i-lucide-trending-down text-rose-400 text-lg"></span>
-					<span class="text-xs font-bold text-rose-300 uppercase tracking-wide">Reais que MORREM</span>
-				</div>
-				<div class="text-2xl font-black text-rose-300 tabular-nums">
-					{formatarBRL(stay.totalMorrem)}
-				</div>
-				<div class="mt-3 space-y-1.5">
-					{#each stay.morrem as item}
-						<div class="text-xs text-slate-400 leading-relaxed border-t border-rose-500/10 pt-1.5">
-							<span class="font-semibold text-slate-300">{item.rotulo}:</span>
-							{formatarBRL(item.valor)}
-						</div>
-					{/each}
-					{#if stay.morrem.length === 0}
-						<div class="text-xs text-slate-500 italic">
-							Nenhum instrumento exposto ao stay sob sinais atuais.
-						</div>
-					{/if}
-				</div>
+	<!-- Financial Columns (Concurso vs Blindado) -->
+	<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+		<!-- Suspensos no Stay -->
+		<div class="p-3 bg-rose-50/40 border border-rose-200">
+			<div class="flex items-center justify-between mb-1">
+				<span class="text-[10px] uppercase font-bold tracking-wider text-rose-800">
+					Presos no Stay
+				</span>
+				<span class="text-[10px] font-mono font-bold text-rose-700">Suspensos</span>
 			</div>
-
-			<div class="rounded-xl border border-emerald-500/25 bg-emerald-500/5 p-4">
-				<div class="flex items-center gap-2 mb-2">
-					<span class="i-lucide-shield-check text-emerald-400 text-lg"></span>
-					<span class="text-xs font-bold text-emerald-300 uppercase tracking-wide">Reais que SOBREVIVEM</span>
-				</div>
-				<div class="text-2xl font-black text-emerald-300 tabular-nums">
-					{formatarBRL(stay.totalSobrevivem)}
-				</div>
-				<div class="mt-3 space-y-1.5">
-					{#each stay.sobrevivem as item}
-						<div class="text-xs text-slate-400 leading-relaxed border-t border-emerald-500/10 pt-1.5">
-							<span class="font-semibold text-slate-300">{item.rotulo}:</span>
-							{formatarBRL(item.valor)}
-						</div>
-					{/each}
-					{#if stay.sobrevivem.length === 0}
-						<div class="text-xs text-slate-500 italic">
-							Nenhum instrumento extraconcursal ativo nesta posição.
-						</div>
-					{/if}
-				</div>
+			<div class="text-lg font-black text-rose-950 tabular-nums font-mono">
+				{formatarBRL(stay.totalMorrem)}
+			</div>
+			<div class="mt-2 space-y-1 text-[11px] border-t border-rose-200/60 pt-1.5">
+				{#each stay.morrem as item}
+					<div class="flex justify-between items-baseline text-slate-700">
+						<span class="truncate pr-1">{item.rotulo}</span>
+						<span class="font-bold text-rose-900 tabular-nums font-mono shrink-0">{formatarBRL(item.valor)}</span>
+					</div>
+				{/each}
+				{#if stay.morrem.length === 0}
+					<span class="text-slate-500 italic block text-[10px]">Nenhum crédito sujeito a suspensão.</span>
+				{/if}
 			</div>
 		</div>
 
-		<div class="mt-4 text-[11px] text-slate-500 leading-relaxed border-t border-slate-800 pt-3">
-			Deságio estimado na recuperação judicial: <span class="text-slate-300 font-semibold">{(stay.desagio * 100).toFixed(0)}%</span>.
-			Recuperação esperada sobre o que morre ≈ <span class="text-slate-300 font-semibold">{formatarBRL(stay.totalMorrem * (1 - stay.desagio))}</span>.
+		<!-- Blindados no Stay -->
+		<div class="p-3 bg-emerald-50/40 border border-emerald-200">
+			<div class="flex items-center justify-between mb-1">
+				<span class="text-[10px] uppercase font-bold tracking-wider text-emerald-800">
+					Extraconcursais
+				</span>
+				<span class="text-[10px] font-mono font-bold text-emerald-700">Protegidos</span>
+			</div>
+			<div class="text-lg font-black text-emerald-950 tabular-nums font-mono">
+				{formatarBRL(stay.totalSobrevivem)}
+			</div>
+			<div class="mt-2 space-y-1 text-[11px] border-t border-emerald-200/60 pt-1.5">
+				{#each stay.sobrevivem as item}
+					<div class="flex justify-between items-baseline text-slate-700">
+						<span class="truncate pr-1">{item.rotulo}</span>
+						<span class="font-bold text-emerald-900 tabular-nums font-mono shrink-0">{formatarBRL(item.valor)}</span>
+					</div>
+				{/each}
+				{#if stay.sobrevivem.length === 0}
+					<span class="text-slate-500 italic block text-[10px]">Sem garantias reais extraconcursais.</span>
+				{/if}
+			</div>
+		</div>
+	</div>
+
+	<!-- Deságio Estimado -->
+	<div class="text-[11px] text-slate-600 bg-slate-50 p-2.5 border border-slate-200 space-y-1 font-mono">
+		<div class="flex items-center justify-between">
+			<span>Deságio médio histórico (RJ):</span>
+			<span class="font-bold text-slate-900">{(stay.desagio * 100).toFixed(0)}%</span>
+		</div>
+		<div class="flex items-center justify-between pt-1 border-t border-slate-200">
+			<span>Recuperação provável quirografário:</span>
+			<strong class="text-slate-900">{formatarBRL(stay.totalMorrem * (1 - stay.desagio))}</strong>
 		</div>
 	</div>
 </div>

@@ -11,7 +11,7 @@
 	function anosDesde(iso: string, ref = new Date().toISOString()) {
 		const a = new Date(iso).getTime();
 		const b = new Date(ref).getTime();
-		if (Number.isNaN(a) || Number.isNaN(b)) return 0;
+		if (Number.isNaN(a) || Number.isNaN(b)) return '0.0';
 		return ((b - a) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1);
 	}
 
@@ -25,82 +25,81 @@
 	let capacidadeFlip = $derived(flipado.areaPlantadaCAR * perfilBase.produtividadeZarc);
 	let coberturaBase = $derived(capacidadeBase >= perfilBase.volumeComprometidoCPR);
 	let coberturaFlip = $derived(capacidadeFlip >= perfilBase.volumeComprometidoCPR);
-
-	const verde = 'text-emerald-400';
-	const vermelho = 'text-rose-400';
-	let corBase = $derived(coberturaBase ? verde : vermelho);
-	let corFlip = $derived(coberturaFlip ? verde : vermelho);
 </script>
 
-<div class="w-full rounded-2xl border border-slate-800 bg-slate-900/50 overflow-hidden">
-	<div class="flex items-center justify-between px-5 py-3 border-b border-slate-800 bg-gradient-to-r from-rose-500/10 to-orange-500/10">
+<div class="bg-white border border-slate-200 p-5 space-y-4">
+	<!-- Top Bar -->
+	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-200">
+		<div>
+			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
+				Análise de Sensibilidade Contratual
+			</span>
+			<h4 class="text-sm font-bold text-slate-900 tracking-tight">
+				Laboratório de Estresse — Simulação Rex Flip
+			</h4>
+		</div>
 		<div class="flex items-center gap-2">
-			<span class="i-lucide-flip-vertical text-rose-400"></span>
-			<span class="text-sm font-bold text-slate-200">Demo de Balcão — Rex Flip</span>
-		</div>
-		<span class="text-[10px] uppercase tracking-wider text-slate-500">Teste de Inversão de Garantia</span>
-	</div>
-
-	<div class="p-5">
-		<div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-800 rounded-xl overflow-hidden">
-			<div class="bg-slate-900/80 p-4">
-				<span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 mb-2 block">Estado inicial</span>
-				<div class="space-y-2 text-xs text-slate-400">
-					<div class="flex justify-between gap-2">
-						<span>Junta Comercial</span>
-						<span class="font-semibold text-slate-200 tabular-nums">{anosDesde(perfilBase.dataRegistroJunta)} anos</span>
-					</div>
-					<div class="flex justify-between gap-2">
-						<span>Área plantada (CAR)</span>
-						<span class="font-semibold text-slate-200 tabular-nums">{formatarNumero(perfilBase.areaPlantadaCAR)} ha</span>
-					</div>
-					<div class="flex justify-between gap-2">
-						<span>Capacidade estimada</span>
-						<span class="font-semibold {corBase} tabular-nums">{formatarNumero(capacidadeBase)} sc</span>
-					</div>
-					<div class="flex justify-between gap-2">
-						<span>Cobertura vs CPR</span>
-						<span class="font-semibold {corBase}">{coberturaBase ? 'OK' : 'Déficit'}</span>
-					</div>
-				</div>
-			</div>
-			<div class="bg-slate-900/80 p-4">
-				<span class="text-[10px] font-bold uppercase tracking-wider text-rose-400 mb-2 block">Após o Rex Flip</span>
-				<div class="space-y-2 text-xs text-slate-400">
-					<div class="flex justify-between gap-2">
-						<span>Junta Comercial</span>
-						<span class="font-semibold text-slate-200 tabular-nums">0.5 anos (&lt; 2)</span>
-					</div>
-					<div class="flex justify-between gap-2">
-						<span>Área plantada (CAR)</span>
-						<span class="font-semibold text-slate-200 tabular-nums">400 ha</span>
-					</div>
-					<div class="flex justify-between gap-2">
-						<span>Capacidade estimada</span>
-						<span class="font-semibold {corFlip} tabular-nums">{formatarNumero(capacidadeFlip)} sc</span>
-					</div>
-					<div class="flex justify-between gap-2">
-						<span>Cobertura vs CPR</span>
-						<span class="font-semibold {corFlip}">{coberturaFlip ? 'OK' : 'Déficit'}</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-			<p class="text-[11px] text-slate-500 leading-relaxed">
-				Se a RJ cair amanhã: <span class="text-slate-300">garantia e reais mudam — não o modelo.</span>
-				Relógio (formalização recente) + área &lt; volume CPR rebaixam a proteção e o cartaz vira.
-			</p>
 			<button
 				type="button"
 				onclick={onToggle}
-				class="shrink-0 px-5 py-2.5 rounded-xl font-bold text-sm transition active:scale-95 cursor-pointer border shadow-lg {flipAtivo
-					? 'border-rose-500/40 bg-rose-500/15 text-rose-300 hover:bg-rose-500/25 shadow-rose-500/10'
-					: 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25 shadow-emerald-500/10'}"
+				class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold border transition-colors duration-150 cursor-pointer {flipAtivo
+					? 'bg-rose-50 text-rose-800 border-rose-300 hover:bg-rose-100'
+					: 'bg-slate-900 text-white border-slate-900 hover:bg-slate-800'}"
 			>
-				{flipAtivo ? '↩ Desfazer Rex Flip' : '⚡ Executar Rex Flip'}
+				<span class="{flipAtivo ? 'i-lucide-rotate-ccw' : 'i-lucide-sliders'} text-xs"></span>
+				<span>{flipAtivo ? 'Restaurar Parâmetros Base' : 'Aplicar Inversão de Risco'}</span>
 			</button>
 		</div>
+	</div>
+
+	<!-- Comparative Table -->
+	<div class="overflow-x-auto">
+		<table class="w-full text-xs">
+			<thead>
+				<tr class="border-b border-slate-200 text-slate-500 font-bold uppercase text-[10px]">
+					<th class="py-2 text-left">Variável Testada</th>
+					<th class="py-2 text-right">Cenário Cadastrado (Base)</th>
+					<th class="py-2 text-right">Cenário sob Estresse (Flip)</th>
+					<th class="py-2 text-right">Impacto Jurídico</th>
+				</tr>
+			</thead>
+			<tbody class="divide-y divide-slate-100 font-mono">
+				<tr>
+					<td class="py-2.5 font-sans font-medium text-slate-700">Formalização Junta Comercial</td>
+					<td class="py-2.5 text-right font-bold text-slate-900">{anosDesde(perfilBase.dataRegistroJunta)} anos</td>
+					<td class="py-2.5 text-right font-bold {flipAtivo ? 'text-rose-700' : 'text-slate-500'}">0.5 anos (&lt; 2 anos)</td>
+					<td class="py-2.5 text-right font-sans text-[11px] {flipAtivo ? 'text-rose-700 font-semibold' : 'text-slate-500'}">
+						{flipAtivo ? 'Inscrição recente arma pedido futuro de RJ' : 'Prazo de 2 anos atendido'}
+					</td>
+				</tr>
+				<tr>
+					<td class="py-2.5 font-sans font-medium text-slate-700">Área Declarada no CAR</td>
+					<td class="py-2.5 text-right font-bold text-slate-900">{formatarNumero(perfilBase.areaPlantadaCAR)} ha</td>
+					<td class="py-2.5 text-right font-bold {flipAtivo ? 'text-rose-700' : 'text-slate-500'}">400 ha</td>
+					<td class="py-2.5 text-right font-sans text-[11px] {flipAtivo ? 'text-rose-700 font-semibold' : 'text-slate-500'}">
+						{flipAtivo ? 'Redução severa da lavoura fiscalizável' : 'Área condizente com o histórico'}
+					</td>
+				</tr>
+				<tr>
+					<td class="py-2.5 font-sans font-medium text-slate-700">Capacidade ZARC vs CPR</td>
+					<td class="py-2.5 text-right font-bold {coberturaBase ? 'text-emerald-700' : 'text-rose-700'}">
+						{formatarNumero(capacidadeBase)} sc ({coberturaBase ? 'Superávit' : 'Déficit'})
+					</td>
+					<td class="py-2.5 text-right font-bold {coberturaFlip ? 'text-emerald-700' : 'text-rose-700'}">
+						{formatarNumero(capacidadeFlip)} sc ({coberturaFlip ? 'Superávit' : 'Déficit'})
+					</td>
+					<td class="py-2.5 text-right font-sans text-[11px] {flipAtivo ? 'text-rose-700 font-semibold' : 'text-emerald-700 font-semibold'}">
+						{flipAtivo ? 'CPR física rebaixada a quirografária' : 'Entrega física garantida'}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="text-[11px] text-slate-500 leading-normal pt-2 border-t border-slate-100 flex items-center justify-between">
+		<span>Simulação executada em memória. Não altera dados cadastrados no banco.</span>
+		<span class="font-mono font-bold {flipAtivo ? 'text-rose-700' : 'text-slate-600'}">
+			Status: {flipAtivo ? 'Simulação Ativa' : 'Parâmetros Reais'}
+		</span>
 	</div>
 </div>

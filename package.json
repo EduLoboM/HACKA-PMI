@@ -1,5 +1,5 @@
 {
-	"name": "hacka-pmi",
+	"name": "krillshield",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -26,6 +26,8 @@
 		"vite": "^8.0.16"
 	},
 	"dependencies": {
-		"better-sqlite3": "^13.0.3"
+		"better-sqlite3": "^13.0.3",
+		"jspdf": "^4.2.1",
+		"jspdf-autotable": "^5.0.8"
 	}
 }

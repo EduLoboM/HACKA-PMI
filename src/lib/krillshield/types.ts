@@ -57,28 +57,28 @@ export const ESTADOS_CARTAZ: Record<
 	{ rotulo: string; cor: string; bg: string; borda: string; texto: string; icone: string }
 > = {
 	FIADO: {
-		rotulo: 'FIADO',
+		rotulo: 'NORMALIDADE',
 		cor: 'emerald',
-		bg: 'bg-emerald-500/10',
-		borda: 'border-emerald-500/40',
-		texto: 'text-emerald-400',
-		icone: 'i-lucide-check-circle'
+		bg: 'bg-emerald-500/10 text-emerald-800 border-emerald-300/80 shadow-[0_1px_2px_rgba(16,185,129,0.06)]',
+		borda: 'border-emerald-300',
+		texto: 'text-emerald-800',
+		icone: 'i-lucide-shield-check'
 	},
 	'SÓ_EXTRACONCURSAL': {
 		rotulo: 'SÓ EXTRACONCURSAL',
 		cor: 'amber',
-		bg: 'bg-amber-500/10',
-		borda: 'border-amber-500/40',
-		texto: 'text-amber-400',
-		icone: 'i-lucide-alert-triangle'
+		bg: 'bg-amber-500/10 text-amber-900 border-amber-300/80 shadow-[0_1px_2px_rgba(245,158,11,0.06)]',
+		borda: 'border-amber-300',
+		texto: 'text-amber-800',
+		icone: 'i-lucide-shield-alert'
 	},
 	'À_VISTA': {
 		rotulo: 'À VISTA',
 		cor: 'rose',
-		bg: 'bg-rose-500/10',
-		borda: 'border-rose-500/40',
-		texto: 'text-rose-400',
-		icone: 'i-lucide-x-circle'
+		bg: 'bg-rose-500/10 text-rose-900 border-rose-300/80 shadow-[0_1px_2px_rgba(244,63,94,0.06)]',
+		borda: 'border-rose-300',
+		texto: 'text-rose-800',
+		icone: 'i-lucide-shield-x'
 	}
 };
 
@@ -139,6 +139,20 @@ export interface DecisaoPoster {
 	sempreSim: boolean;
 }
 
+export interface RespostaIA {
+	resumoExecutivo: string;
+	recomendacoes: string[];
+	restricoes: string[];
+	orientacaoBalcao: string;
+	fontesAuditadas?: {
+		fonte: string;
+		dado: string;
+		status: 'ok' | 'alerta' | 'risco';
+		descricao: string;
+	}[];
+	laudoFormatado?: string;
+}
+
 export interface AnaliseKrillShield {
 	perfil: PerfilProdutor;
 	relogio: ResultadoRelogio216;
@@ -146,6 +160,7 @@ export interface AnaliseKrillShield {
 	stay: CalculoStay;
 	decisao: DecisaoPoster;
 	textoEspelho?: string;
+	iaResposta?: RespostaIA;
 }
 
 export function formatarBRL(valor: number): string {

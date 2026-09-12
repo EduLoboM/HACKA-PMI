@@ -9,55 +9,63 @@
 		detalhe: string;
 	}>();
 
-	function cor(s: Status) {
+	function estiloStatus(s: Status) {
 		switch (s) {
 			case 'ok':
 				return {
-					badge: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
-					dot: 'bg-emerald-400',
-					rotulo: 'Sinal OK'
+					dot: 'bg-emerald-600',
+					tag: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+					iconColor: 'text-emerald-700',
+					rotulo: 'Conforme'
 				};
 			case 'alerta':
 				return {
-					badge: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
-					dot: 'bg-amber-400',
+					dot: 'bg-amber-500',
+					tag: 'bg-amber-50 text-amber-800 border-amber-200',
+					iconColor: 'text-amber-700',
 					rotulo: 'Atenção'
 				};
 			case 'risco':
 				return {
-					badge: 'bg-rose-500/10 text-rose-400 border-rose-500/30',
-					dot: 'bg-rose-400',
-					rotulo: 'Risco'
+					dot: 'bg-rose-600',
+					tag: 'bg-rose-50 text-rose-800 border-rose-200',
+					iconColor: 'text-rose-700',
+					rotulo: 'Risco Ativo'
 				};
 			default:
 				return {
-					badge: 'bg-slate-500/10 text-slate-400 border-slate-500/30',
 					dot: 'bg-slate-400',
+					tag: 'bg-slate-50 text-slate-700 border-slate-200',
+					iconColor: 'text-slate-500',
 					rotulo: 'Neutro'
 				};
 		}
 	}
 
-	let c = $derived(cor(status));
+	let c = $derived(estiloStatus(status));
 </script>
 
-<div class="rounded-2xl border border-slate-800 bg-slate-900/50 p-5 hover:border-slate-700 transition h-full">
-	<div class="flex items-start justify-between gap-2 mb-3">
-		<div class="flex items-center gap-3">
-			<span class="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300">
-				<span class="{icone} text-lg"></span>
-			</span>
-			<div>
-				<h3 class="text-sm font-bold text-slate-200 leading-tight">{titulo}</h3>
-				<span class="text-[10px] uppercase tracking-wider text-slate-500">Regra determinística</span>
+<div class="bg-white border border-slate-200 p-4 flex flex-col justify-between h-full">
+	<div>
+		<div class="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-slate-100">
+			<div class="flex items-center gap-2 min-w-0">
+				<span class="{icone} text-base {c.iconColor} shrink-0"></span>
+				<h4 class="text-xs font-bold text-slate-900 tracking-tight uppercase">
+					{titulo}
+				</h4>
 			</div>
+			<span class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-semibold border {c.tag}">
+				<span class="w-1.5 h-1.5 rounded-full {c.dot}"></span>
+				{c.rotulo}
+			</span>
 		</div>
-		<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold border {c?.badge}">
-			<span class="w-1.5 h-1.5 rounded-full {c?.dot}"></span>
-			{c?.rotulo}
-		</span>
+
+		<p class="text-xs font-semibold text-slate-900 leading-snug mb-1">
+			{resumo}
+		</p>
 	</div>
 
-	<p class="text-xs text-slate-300 font-medium mb-1.5">{resumo}</p>
-	<p class="text-[11px] text-slate-500 leading-relaxed">{detalhe}</p>
+	<p class="text-[11px] text-slate-500 leading-relaxed pt-2 border-t border-slate-100 mt-2">
+		{detalhe}
+	</p>
 </div>

@@ -254,3 +254,27 @@ export function listarAvaliacoes(db: Database.Database, produtorId: number, limi
 		'SELECT * FROM avaliacoes WHERE produtor_id = ? ORDER BY created_at DESC LIMIT ?'
 	).all(produtorId, limite);
 }
+
+export function listarTodasAvaliacoesHistorico(db: Database.Database, limite = 100) {
+	return db.prepare(`
+		SELECT 
+			a.id,
+			a.produtor_id as produtorId,
+			p.nome,
+			p.cnpj_cpf as cnpjCpf,
+			a.estado_cartaz as estadoCartaz,
+			a.instrumento_nomeado as instrumentoNomeado,
+			a.total_morrem as totalMorrem,
+			a.total_sobrevivem as totalSobrevivem,
+			a.relogio_sinal as relogioSinal,
+			a.relogio_grau as relogioGrau,
+			a.safra_sinal as safraSinal,
+			a.safra_cobertura_ok as safraCoberturaOk,
+			a.texto_espelho as textoEspelho,
+			a.created_at as createdAt
+		FROM avaliacoes a
+		JOIN produtores p ON a.produtor_id = p.id
+		ORDER BY a.created_at DESC
+		LIMIT ?
+	`).all(limite);
+}

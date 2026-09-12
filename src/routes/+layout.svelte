@@ -8,7 +8,12 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>KrillShield v2.0 · Krill Tech</title>
+	<title>KrillShield · Balcão de Decisão Agro</title>
 </svelte:head>
 
-{@render children()}
+<!-- Clean Enterprise Layout Base -->
+<div class="fixed inset-0 pointer-events-none -z-10 bg-slate-50"></div>
+
+<div class="relative min-h-screen text-slate-800 flex flex-col antialiased">
+	{@render children()}
+</div>

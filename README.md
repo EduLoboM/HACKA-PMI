@@ -1,4 +1,4 @@
-# HACKA-PMI
+# KrillShield
 
 Projeto desenvolvido com **SvelteKit**, **Svelte 5 (Runes)**, **TypeScript**, **Vite** e **UnoCSS**.
 
