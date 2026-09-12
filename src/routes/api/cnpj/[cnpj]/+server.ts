@@ -18,28 +18,44 @@ const PRODUTIVIDADE_UF: Record<string, number> = {
 	RO: 58
 };
 
-function calcularInferenciaAgro(uf: string, capitalSocial: number, porte: string, dataInicio: string) {
+function calcularInferenciaAgro(
+	cnpjLimpo: string,
+	uf: string,
+	capitalSocial: number,
+	porte: string,
+	dataInicio: string
+) {
 	const zarc = PRODUTIVIDADE_UF[uf.toUpperCase()] ?? 58;
 
-	let area = 600;
-	if (capitalSocial >= 20_000_000) {
-		area = 3500;
-	} else if (capitalSocial >= 5_000_000) {
-		area = 1800;
-	} else if (capitalSocial >= 1_000_000) {
-		area = 950;
+	// Micro-variação determinística baseada na soma ponderada dos dígitos do CNPJ
+	const seed = cnpjLimpo.split('').reduce((acc, c, idx) => acc + parseInt(c, 10) * (idx * 3 + 7), 0);
+
+	// Área estimada do CAR baseada no porte e capital social
+	let areaBase = 600;
+	if (capitalSocial >= 50_000_000) {
+		areaBase = 3800;
+	} else if (capitalSocial >= 10_000_000) {
+		areaBase = 2200;
+	} else if (capitalSocial >= 2_000_000) {
+		areaBase = 1200;
+	} else if (capitalSocial >= 500_000) {
+		areaBase = 700;
 	} else if (porte === 'DEMAIS') {
-		area = 1200;
+		areaBase = 1100;
 	} else if (porte === 'EPP') {
-		area = 450;
+		areaBase = 450;
 	} else if (porte === 'ME') {
-		area = 200;
+		areaBase = 200;
 	}
 
-	const capacidadeSafra = area * zarc;
-	const volumeCPR = Math.round(capacidadeSafra * 0.45);
+	const fatorArea = 0.85 + (seed % 31) * 0.01; // 0.85 a 1.15
+	const area = Math.round((areaBase * fatorArea) / 10) * 10;
 
-	let anosAtividade = 3;
+	const capacidadeSafra = area * zarc;
+	const fatorComprometimento = 0.38 + (seed % 6) * 0.03; // 38% a 53%
+	const volumeCPR = Math.round(capacidadeSafra * fatorComprometimento);
+
+	let anosAtividade = 4;
 	if (dataInicio) {
 		const ano = new Date(dataInicio).getFullYear();
 		if (!isNaN(ano)) {
@@ -48,11 +64,50 @@ function calcularInferenciaAgro(uf: string, capitalSocial: number, porte: string
 	}
 
 	const escrituracaoLCDPR = anosAtividade >= 1;
-	const podeConstituirFiducia = capitalSocial >= 200_000 || porte === 'DEMAIS';
+	const podeConstituirFiducia = capitalSocial >= 150_000 || porte === 'DEMAIS';
 	const possuiCPRFisica = true;
 
-	const valorDuplicata = Math.round((area * 250) / 1000) * 1000;
-	const valorFiducia = Math.round((area * 350) / 1000) * 1000;
+	// Valor total da exposição de crédito estimado para a safra do produtor
+	const exposicaoTotal = Math.max(
+		250000,
+		Math.round((area * (500 + (seed % 7) * 40)) / 10000) * 10000
+	);
+
+	// Alocação realista e contínua de taxa de blindagem (entre 35% e 85%)
+	// Produtores maiores / corporativos contam com garantias reais mais estruturadas
+	let taxaPretendida = 0.52;
+	if (capitalSocial >= 20_000_000) {
+		taxaPretendida = 0.72 + (seed % 14) * 0.01; // 72% a 85%
+	} else if (capitalSocial >= 2_000_000) {
+		taxaPretendida = 0.58 + (seed % 15) * 0.01; // 58% a 72%
+	} else if (capitalSocial >= 500_000) {
+		taxaPretendida = 0.45 + (seed % 15) * 0.01; // 45% a 59%
+	} else {
+		taxaPretendida = 0.34 + (seed % 14) * 0.01; // 34% a 47%
+	}
+
+	const valorSobrevive = Math.max(
+		100000,
+		Math.round((exposicaoTotal * taxaPretendida) / 10000) * 10000
+	);
+	const valorMorre = Math.max(
+		80000,
+		exposicaoTotal - valorSobrevive
+	);
+
+	const sugestaoPosicoes: { instrumento: string; valor: number }[] = [
+		{ instrumento: 'duplicata_mercantil', valor: valorMorre }
+	];
+
+	// Divide a garantia extraconcursal entre Alienação Fiduciária e CPR Física se a empresa for grande
+	if (area >= 1200 && (seed % 2 === 0)) {
+		const parteCpr = Math.round((valorSobrevive * 0.4) / 10000) * 10000;
+		const parteFiducia = valorSobrevive - parteCpr;
+		sugestaoPosicoes.push({ instrumento: 'alienacao_fiduciaria', valor: parteFiducia });
+		sugestaoPosicoes.push({ instrumento: 'cpr_fisica', valor: parteCpr });
+	} else {
+		sugestaoPosicoes.push({ instrumento: 'alienacao_fiduciaria', valor: valorSobrevive });
+	}
 
 	return {
 		produtividadeZarc: zarc,
@@ -62,10 +117,7 @@ function calcularInferenciaAgro(uf: string, capitalSocial: number, porte: string
 		podeConstituirFiducia,
 		possuiCPRFisica,
 		riscoMoratoria: false,
-		sugestaoPosicoes: [
-			{ instrumento: 'duplicata_mercantil', valor: Math.max(150000, valorDuplicata) },
-			{ instrumento: 'alienacao_fiduciaria', valor: Math.max(200000, valorFiducia) }
-		]
+		sugestaoPosicoes
 	};
 }
 
@@ -127,7 +179,7 @@ export async function GET({ params }) {
 		dataInicioAtividade = d.toISOString().slice(0, 10);
 	}
 
-	const inferencia = calcularInferenciaAgro(uf, capitalSocial, porte, dataInicioAtividade);
+	const inferencia = calcularInferenciaAgro(cnpjLimpo, uf, capitalSocial, porte, dataInicioAtividade);
 
 	const nomeComposto = razaoSocial
 		? municipio && uf

@@ -82,9 +82,37 @@ function valor(i: number, base: number, passo = 50000): number {
 }
 
 function verde(empresa: EmpresaRealAgro, i: number): Omit<PerfilProdutor, 'id'> {
-	const area = 950 + (i % 5) * 120;
+	const area = 950 + (i % 5) * 140;
 	const zarc = 62 + (i % 3);
 	const cap = area * zarc;
+
+	const mod = i % 4;
+	let duplicata: number;
+	let alienacao: number;
+	let cprFisica: number;
+
+	if (mod === 0) {
+		// Nível A: Blindagem alta (~78% - 85%)
+		duplicata = 120000 + (i % 4) * 20000;
+		alienacao = 460000 + (i % 5) * 35000;
+		cprFisica = 220000 + (i % 3) * 25000;
+	} else if (mod === 1) {
+		// Nível B: Blindagem forte (~67% - 75%)
+		duplicata = 220000 + (i % 4) * 25000;
+		alienacao = 380000 + (i % 4) * 30000;
+		cprFisica = 150000 + (i % 3) * 20000;
+	} else if (mod === 2) {
+		// Nível C: Blindagem média-alta (~54% - 62%)
+		duplicata = 320000 + (i % 4) * 30000;
+		alienacao = 270000 + (i % 4) * 25000;
+		cprFisica = 140000 + (i % 3) * 20000;
+	} else {
+		// Nível D: Blindagem equilibrada (~44% - 50%)
+		duplicata = 420000 + (i % 4) * 30000;
+		alienacao = 210000 + (i % 4) * 25000;
+		cprFisica = 110000 + (i % 3) * 15000;
+	}
+
 	return {
 		cnpjCpf: empresa.cnpj,
 		nome: `${empresa.nome} — ${empresa.municipio} (${empresa.uf})`,
@@ -97,9 +125,9 @@ function verde(empresa: EmpresaRealAgro, i: number): Omit<PerfilProdutor, 'id'> 
 		podeConstituirFiducia: true,
 		riscoMoratoria: false,
 		posicaoPorInstrumento: {
-			duplicata_mercantil: valor(i, 300000, 35000),
-			alienacao_fiduciaria: valor(i, 240000, 40000),
-			cpr_fisica: valor(i, 160000, 25000)
+			duplicata_mercantil: duplicata,
+			alienacao_fiduciaria: alienacao,
+			cpr_fisica: cprFisica
 		}
 	};
 }
@@ -107,6 +135,24 @@ function verde(empresa: EmpresaRealAgro, i: number): Omit<PerfilProdutor, 'id'> 
 function amareloFiducia(empresa: EmpresaRealAgro, i: number): Omit<PerfilProdutor, 'id'> {
 	const area = 680 + (i % 4) * 80;
 	const zarc = 60;
+	const mod = i % 3;
+	let duplicata: number;
+	let alienacao: number;
+
+	if (mod === 0) {
+		// Boa cobertura fiduciária (~64% - 69%)
+		duplicata = 180000 + (i % 4) * 20000;
+		alienacao = 360000 + (i % 4) * 30000;
+	} else if (mod === 1) {
+		// Cobertura equilibrada (~50% - 56%)
+		duplicata = 260000 + (i % 4) * 25000;
+		alienacao = 280000 + (i % 4) * 25000;
+	} else {
+		// Cobertura mais conservadora (~37% - 43%)
+		duplicata = 360000 + (i % 4) * 30000;
+		alienacao = 220000 + (i % 4) * 20000;
+	}
+
 	return {
 		cnpjCpf: empresa.cnpj,
 		nome: `${empresa.nome} — ${empresa.municipio} (${empresa.uf})`,
@@ -119,8 +165,8 @@ function amareloFiducia(empresa: EmpresaRealAgro, i: number): Omit<PerfilProduto
 		podeConstituirFiducia: true,
 		riscoMoratoria: false,
 		posicaoPorInstrumento: {
-			duplicata_mercantil: valor(i, 280000, 30000),
-			alienacao_fiduciaria: valor(i, 220000, 35000)
+			duplicata_mercantil: duplicata,
+			alienacao_fiduciaria: alienacao
 		}
 	};
 }
@@ -128,6 +174,24 @@ function amareloFiducia(empresa: EmpresaRealAgro, i: number): Omit<PerfilProduto
 function amareloCpr(empresa: EmpresaRealAgro, i: number): Omit<PerfilProdutor, 'id'> {
 	const area = 780 + (i % 3) * 60;
 	const zarc = 58;
+	const mod = i % 3;
+	let duplicata: number;
+	let cprFisica: number;
+
+	if (mod === 0) {
+		// Boa cobertura de CPR (~60% - 66%)
+		duplicata = 170000 + (i % 3) * 20000;
+		cprFisica = 280000 + (i % 3) * 30000;
+	} else if (mod === 1) {
+		// Cobertura média (~48% - 54%)
+		duplicata = 240000 + (i % 3) * 20000;
+		cprFisica = 240000 + (i % 3) * 20000;
+	} else {
+		// Cobertura menor (~36% - 42%)
+		duplicata = 320000 + (i % 3) * 25000;
+		cprFisica = 200000 + (i % 3) * 20000;
+	}
+
 	return {
 		cnpjCpf: empresa.cnpj,
 		nome: `${empresa.nome} — ${empresa.municipio} (${empresa.uf})`,
@@ -140,8 +204,8 @@ function amareloCpr(empresa: EmpresaRealAgro, i: number): Omit<PerfilProdutor, '
 		podeConstituirFiducia: false,
 		riscoMoratoria: false,
 		posicaoPorInstrumento: {
-			duplicata_mercantil: valor(i, 240000, 25000),
-			cpr_fisica: valor(i, 200000, 30000)
+			duplicata_mercantil: duplicata,
+			cpr_fisica: cprFisica
 		}
 	};
 }
