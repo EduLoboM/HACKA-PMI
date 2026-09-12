@@ -24,34 +24,36 @@
 	let leftCorte = $derived(Math.max(0, Math.min(100, 100 - pctRebaix)));
 </script>
 
-<section class="bg-white border border-slate-200">
-	<div class="px-5 py-3.5 flex flex-col sm:flex-row sm:items-start justify-between gap-3 border-b border-slate-200">
-		<div class="min-w-0">
-			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">
-				Classificação da carteira · linha de corte
-			</span>
-			<h3 class="text-sm font-bold text-slate-900 tracking-tight mt-0.5">
-				Zona de rebaixamento
-			</h3>
-			<p class="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
-				Daonde não vale mais ir atrás. Acima da linha ainda dá para salvar; abaixo, não persiga crédito — cobre D+0.
-			</p>
+<section class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+	<div class="h-9 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+		<div class="flex items-center gap-1.5 shrink-0">
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
 		</div>
-		{#if classificacao.posicaoCorte != null}
-			<button
-				type="button"
-				onclick={onIrAoCorte}
-				class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 bg-rose-50 border border-rose-300 text-rose-800 text-xs font-bold hover:bg-rose-100 transition-colors duration-150 cursor-pointer font-mono"
-			>
-				<span class="i-lucide-scissors text-xs"></span>
-				<span>Linha de corte: {classificacao.posicaoCorte}º</span>
-			</button>
-		{:else}
-			<span class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold font-mono">
-				<span class="i-lucide-shield-check text-xs"></span>
-				<span>Ninguém na zona</span>
-			</span>
-		{/if}
+		<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+		<span class="i-lucide-layers text-slate-500 shrink-0"></span>
+		<span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 truncate">Zona de rebaixamento</span>
+		<div class="ml-auto flex items-center gap-2 shrink-0 min-w-0">
+			<p class="text-[10px] text-slate-500 hidden lg:block truncate">
+				Acima da linha ainda dá para salvar; abaixo, cobre D+0.
+			</p>
+			{#if classificacao.posicaoCorte != null}
+				<button
+					type="button"
+					onclick={onIrAoCorte}
+					class="inline-flex items-center gap-1 px-2 py-0.5 bg-rose-50 border border-rose-300 text-rose-800 text-[10px] font-bold hover:bg-rose-100 transition-colors duration-150 cursor-pointer font-mono"
+				>
+					<span class="i-lucide-scissors text-xs"></span>
+					<span>Linha: {classificacao.posicaoCorte}º</span>
+				</button>
+			{:else}
+				<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 border border-emerald-300 text-emerald-800 text-[10px] font-bold font-mono">
+					<span class="i-lucide-shield-check text-xs"></span>
+					<span>Ninguém na zona</span>
+				</span>
+			{/if}
+		</div>
 	</div>
 
 	<div class="px-5 pt-3 pb-2 border-b border-slate-200">

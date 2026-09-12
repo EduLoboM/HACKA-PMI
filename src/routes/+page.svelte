@@ -249,9 +249,11 @@
 	});
 </script>
 
+<div class="min-h-screen bg-slate-100/80 flex flex-col">
+
 <!-- Header -->
 <header class="sticky top-0 z-40 bg-white border-b border-slate-200">
-	<div class="max-w-7xl mx-auto px-5 h-14 flex items-center justify-between gap-4">
+	<div class="max-w-7xl mx-auto px-4 sm:px-5 2xl:max-w-[88rem] h-14 flex items-center justify-between gap-3">
 		<!-- Brand & Logo -->
 		<div class="flex items-center gap-3 min-w-0">
 			<div class="w-7 h-7 bg-slate-900 text-white flex items-center justify-center shrink-0 font-bold text-xs font-mono">
@@ -300,7 +302,7 @@
 	</div>
 </header>
 
-<main class="max-w-7xl mx-auto px-5 py-6 space-y-6">
+<main class="max-w-7xl mx-auto w-full px-4 sm:px-5 2xl:max-w-[88rem] py-5 sm:py-6 space-y-5 flex-1">
 	<!-- Title & Actions Bar -->
 	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
 		<div>
@@ -330,8 +332,21 @@
 		</div>
 	{/if}
 
-	<!-- Telemetry Ribbon (Unified horizontal strip, no floating cards) -->
-	<section class="bg-white border border-slate-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-200">
+	<!-- Telemetry Window (workspace strip) -->
+	<section class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+		<div class="h-9 px-3 flex items-center gap-2 bg-slate-50/80 border-b border-slate-200">
+			<div class="flex items-center gap-1.5 shrink-0">
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			</div>
+			<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 shrink-0">Telemetria da carteira</span>
+			<span class="ml-auto text-[10px] font-mono text-slate-500 hidden sm:inline truncate">
+				{produtores.length} monitoradas · RJ {formatarBRL(totalExposicao)}
+			</span>
+		</div>
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-200">
 		<!-- Carteira Total -->
 		<button
 			type="button"
@@ -419,6 +434,7 @@
 				Cobrança imediata D+0
 			</span>
 		</button>
+	</div>
 	</section>
 
 	<ZonaRebaixamento
@@ -429,33 +445,39 @@
 	/>
 
 	<!-- Table of Producers -->
-	<section class="bg-white border border-slate-200 overflow-hidden">
-		<div class="px-5 py-2.5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50">
-			<div class="flex items-center gap-2">
-				<span class="i-lucide-list-ordered text-slate-500 text-sm"></span>
-				<h3 class="text-xs font-bold uppercase tracking-wider text-slate-900">Classificação da Carteira</h3>
+	<section class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+		<div class="h-9 px-3 border-b border-slate-200 flex items-center gap-2 bg-slate-50/80">
+			<div class="flex items-center gap-1.5 shrink-0">
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
 			</div>
-			<div class="flex items-center gap-3">
-				<div class="relative">
-					<span class="absolute left-2.5 top-1/2 -translate-y-1/2 i-lucide-search text-xs text-slate-400"></span>
-					<input
-						type="text"
-						bind:value={busca}
-						placeholder="Buscar empresa ou CNPJ..."
-						class="pl-8 pr-3 py-1 text-xs bg-white border border-slate-200 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-500 w-52 sm:w-64"
-					/>
-				</div>
-				<span class="text-xs font-mono text-slate-500 shrink-0">
+			<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+			<div class="flex items-center gap-1.5 min-w-0">
+				<span class="i-lucide-list-ordered text-slate-500 text-sm shrink-0"></span>
+				<h3 class="text-[10px] font-bold uppercase tracking-wider text-slate-600 truncate">Classificação da Carteira</h3>
+			</div>
+			<div class="ml-auto flex items-center gap-2 min-w-0">
+				<span class="text-[10px] font-mono text-slate-500 hidden md:inline whitespace-nowrap">
 					Exibindo <strong class="text-slate-900">{filtrados.length}</strong> de {produtores.length}
 					{#if classificacao.posicaoCorte != null && filtro === 'TODOS'}
 						<span class="text-rose-700 font-bold"> · corte no {classificacao.posicaoCorte}º</span>
 					{/if}
 				</span>
+				<div class="relative">
+					<span class="absolute left-2 top-1/2 -translate-y-1/2 i-lucide-search text-xs text-slate-400"></span>
+					<input
+						type="text"
+						bind:value={busca}
+						placeholder="Buscar empresa..."
+						class="pl-7 pr-2 py-0.5 text-xs bg-white border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-400 w-32 sm:w-64"
+					/>
+				</div>
 			</div>
 		</div>
 
 		<div class="overflow-x-auto">
-			<table class="w-full text-xs">
+			<table class="w-full text-xs min-w-[560px]">
 				<thead>
 					<tr class="text-left text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200 bg-slate-50">
 						<th class="pl-4 pr-1 py-2.5 font-mono w-10">#</th>
@@ -559,16 +581,22 @@
 	<!-- Deep Analysis Section for the Selected Producer -->
 	{#if selecionadaLinha}
 		<section class="space-y-4">
-			<div class="flex items-center justify-between gap-4 pb-2 border-b border-slate-200">
-				<div class="flex items-center gap-2.5">
-					<h2 class="text-sm font-bold uppercase tracking-wider text-slate-900">
+			<div class="h-9 px-3 border-b border-slate-200 flex items-center gap-2 bg-slate-50/80">
+				<div class="flex items-center gap-1.5 shrink-0">
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				</div>
+				<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+				<div class="flex items-center gap-2 min-w-0">
+					<h2 class="text-[10px] font-bold uppercase tracking-wider text-slate-600 truncate">
 						Prancha de Análise · {selecionadaLinha.nome}
 					</h2>
-					<span class="inline-flex items-center px-2 py-0.5 text-[10px] font-bold font-mono border {badgeClasse(selecionadaLinha.estado as EstadoCartaz)}">
+					<span class="inline-flex items-center px-2 py-0.5 text-[10px] font-bold font-mono border shrink-0 {badgeClasse(selecionadaLinha.estado as EstadoCartaz)}">
 						{ESTADOS_CARTAZ[selecionadaLinha.estado as EstadoCartaz].rotulo}
 					</span>
 				</div>
-				<span class="text-xs text-slate-600 font-mono">
+				<span class="ml-auto text-[10px] text-slate-500 font-mono hidden md:inline whitespace-nowrap">
 					CNPJ: {selecionadaLinha.cnpjCpf}
 				</span>
 			</div>
@@ -583,7 +611,7 @@
 			{:else if analise}
 				<div class="relative space-y-4">
 					{#if carregando}
-						<div class="absolute inset-0 z-10 flex items-center justify-center bg-white/70 backdrop-blur-xs">
+						<div class="absolute inset-0 z-10 flex items-center justify-center bg-white/90">
 							<div class="flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-300 text-xs font-mono text-slate-800">
 								<span class="i-lucide-loader-2 text-slate-900 text-sm animate-spin"></span>
 								<span>Reavaliando parâmetros...</span>
@@ -638,22 +666,25 @@
 							{/if}
 
 							<!-- Posições por Instrumento Details Card -->
-							<div class="bg-white border border-slate-200 p-4 space-y-3">
-								<div class="flex items-center justify-between pb-2 border-b border-slate-200">
-									<div>
-										<h4 class="text-xs font-bold uppercase tracking-wider text-slate-900">
-											Posição por Instrumento
-										</h4>
-										<span class="text-[10px] text-slate-500">Títulos registrados para este produtor</span>
+							<div class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+								<div class="h-9 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+									<div class="flex items-center gap-1.5 shrink-0">
+										<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+										<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+										<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
 									</div>
-									<span class="text-[10px] font-mono text-slate-600 bg-slate-100 px-2 py-0.5 border border-slate-200">
+									<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+									<h4 class="text-[10px] font-bold uppercase tracking-wider text-slate-600 min-w-0 truncate">
+										Posição por Instrumento
+									</h4>
+									<span class="ml-auto text-[10px] font-mono text-slate-500 bg-slate-100 px-1.5 py-0.5 border border-slate-200 shrink-0">
 										{posicoes.length} item(s)
 									</span>
 								</div>
 
-								<div class="space-y-1.5">
+								<div class="p-3 space-y-1.5">
 									{#each posicoes as [g, v]}
-										<div class="flex items-center justify-between gap-2 text-xs p-2 bg-slate-50 border border-slate-200">
+										<div class="flex items-center justify-between gap-2 text-xs p-2 bg-slate-50 border border-slate-100">
 											<div class="min-w-0">
 												<span class="block font-bold text-slate-800 truncate">{GARANTIAS[g].rotulo}</span>
 												<span class="text-[10px] text-slate-500">{GARANTIAS[g].categoria}</span>
@@ -698,7 +729,7 @@
 
 <!-- Minimalist Corporate Footer -->
 <footer class="mt-auto border-t border-slate-200 bg-white py-4 text-[11px] text-slate-500 font-mono">
-	<div class="max-w-7xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-2">
+	<div class="max-w-7xl mx-auto px-4 sm:px-5 2xl:max-w-[88rem] flex flex-col sm:flex-row items-center justify-between gap-2">
 		<span>KrillShield · Krill Tech · Inteligência e Risco de Crédito no Agro</span>
 		<span>Regras determinísticas sobre bases oficiais (DataJud, SICAR, ZARC, Junta Comercial)</span>
 	</div>
@@ -712,3 +743,5 @@
 		onSaved={salvo}
 	/>
 {/if}
+
+</div>

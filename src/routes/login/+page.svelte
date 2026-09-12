@@ -41,81 +41,90 @@
 	}
 </script>
 
-<div class="min-h-screen bg-slate-950 flex items-center justify-center p-4 selection:bg-rose-500/30 selection:text-white">
+<div class="min-h-screen bg-slate-100/80 flex items-center justify-center p-4">
 	<div class="w-full max-w-sm">
-		<div class="text-center mb-8">
-			<div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-orange-500 to-rose-600 shadow-lg shadow-orange-500/20 mb-4">
-				<span class="i-lucide-shield text-white text-3xl"></span>
+		<div class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+			<!-- Window title bar -->
+			<div class="h-10 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+				<div class="flex items-center gap-1.5 shrink-0">
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				</div>
+				<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+				<span class="i-lucide-shield text-slate-600 shrink-0"></span>
+				<span class="text-xs font-bold uppercase tracking-wider text-slate-700 truncate">
+					KrillShield <span class="text-slate-400">v2.0</span>
+				</span>
+				<span class="ml-auto text-[10px] text-slate-500 hidden sm:block truncate">Balcão de Decisão do Crédito no Agro</span>
 			</div>
-			<h1 class="text-2xl font-black text-white tracking-tight">KrillShield <span class="text-rose-400">v2.0</span></h1>
-			<p class="text-sm text-slate-500 mt-1">Balcão de Decisão do Crédito no Agro</p>
-		</div>
 
-		<div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-			<h2 class="text-sm font-bold text-slate-200 mb-4">Entrar na conta</h2>
+			<div class="p-5">
+				<h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-4">Entrar na conta</h2>
 
-			<form
-				onsubmit={(e) => {
-					e.preventDefault();
-					entrar();
-				}}
-				class="space-y-3"
-			>
-				<div>
-					<label for="email" class="block text-xs font-semibold text-slate-400 mb-1">E-mail</label>
-					<input
-						id="email"
-						type="email"
-						required
-						bind:value={email}
-						placeholder="seu@email.com"
-						class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-slate-200 placeholder-slate-600 focus:border-rose-500 focus:outline-none"
-					/>
+				<form
+					onsubmit={(e) => {
+						e.preventDefault();
+						entrar();
+					}}
+					class="space-y-3"
+				>
+					<div>
+						<label for="email" class="block text-xs font-semibold text-slate-700 mb-1">E-mail</label>
+						<input
+							id="email"
+							type="email"
+							required
+							bind:value={email}
+							placeholder="seu@email.com"
+							class="w-full px-3 py-2 rounded-md bg-white border border-slate-200 shadow-sm text-sm text-slate-900 placeholder-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150"
+						/>
+					</div>
+					<div>
+						<label for="senha" class="block text-xs font-semibold text-slate-700 mb-1">Senha</label>
+						<input
+							id="senha"
+							type="password"
+							required
+							minlength={6}
+							bind:value={senha}
+							placeholder="••••••"
+							class="w-full px-3 py-2 rounded-md bg-white border border-slate-200 shadow-sm text-sm text-slate-900 placeholder-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150"
+						/>
+					</div>
+
+					{#if erro}
+						<div class="rounded-md border border-rose-300 bg-rose-50 px-3 py-2 text-xs text-rose-800 font-medium">{erro}</div>
+					{/if}
+
+					<button
+						type="submit"
+						disabled={carregando}
+						class="w-full px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold border border-slate-900 transition-colors duration-150 cursor-pointer disabled:opacity-50"
+					>
+						{carregando ? 'Entrando...' : 'Entrar'}
+					</button>
+				</form>
+
+				<div class="relative my-4">
+					<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200"></div></div>
+					<div class="relative flex justify-center text-[11px] text-slate-500 bg-white px-3"><span>ou</span></div>
 				</div>
-				<div>
-					<label for="senha" class="block text-xs font-semibold text-slate-400 mb-1">Senha</label>
-					<input
-						id="senha"
-						type="password"
-						required
-						minlength={6}
-						bind:value={senha}
-						placeholder="••••••"
-						class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-slate-200 placeholder-slate-600 focus:border-rose-500 focus:outline-none"
-					/>
-				</div>
-
-				{#if erro}
-					<div class="rounded-xl border border-rose-500/40 bg-rose-500/10 px-3 py-2 text-xs text-rose-300">{erro}</div>
-				{/if}
 
 				<button
-					type="submit"
+					type="button"
+					onclick={entrarDemo}
 					disabled={carregando}
-					class="w-full px-4 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-sm font-bold text-white shadow-lg shadow-rose-600/20 transition active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+					class="w-full px-4 py-2 rounded-md border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-sm font-bold transition-colors duration-150 cursor-pointer disabled:opacity-50"
 				>
-					{carregando ? 'Entrando...' : 'Entrar'}
+					Entrar com conta demo
 				</button>
-			</form>
-
-			<div class="relative my-5">
-				<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-800"></div></div>
-				<div class="relative flex justify-center text-xs text-slate-600 bg-slate-900/60 px-3"><span>ou</span></div>
 			</div>
-
-			<button
-				type="button"
-				onclick={entrarDemo}
-				disabled={carregando}
-				class="w-full px-4 py-2.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-sm font-bold text-emerald-300 transition active:scale-[0.98] disabled:opacity-50 cursor-pointer"
-			>
-				Entrar com conta demo
-			</button>
 		</div>
 
-		<p class="text-center text-xs text-slate-500 mt-5">
+		<p class="text-center text-xs text-slate-600 mt-4">
 			Não tem conta?
-			<a href="/registro" class="text-rose-400 hover:text-rose-300 font-semibold ml-1">Criar conta</a>
+			<a href="/registro" class="text-slate-900 font-semibold ml-1 hover:text-slate-700">Criar conta</a>
 		</p>
 	</div>
 </div>

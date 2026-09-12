@@ -45,27 +45,24 @@
 	let c = $derived(estiloStatus(status));
 </script>
 
-<div class="bg-white border border-slate-200 p-4 flex flex-col justify-between h-full">
-	<div>
-		<div class="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-slate-100">
-			<div class="flex items-center gap-2 min-w-0">
-				<span class="{icone} text-base {c.iconColor} shrink-0"></span>
-				<h4 class="text-xs font-bold text-slate-900 tracking-tight uppercase">
-					{titulo}
-				</h4>
-			</div>
-			<span class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-semibold border {c.tag}">
-				<span class="w-1.5 h-1.5 rounded-full {c.dot}"></span>
-				{c.rotulo}
-			</span>
-		</div>
-
-		<p class="text-xs font-semibold text-slate-900 leading-snug mb-1">
-			{resumo}
-		</p>
+<div class="bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+	<div class="h-8 px-2.5 flex items-center gap-2 border-b border-slate-100 bg-slate-50/80">
+		<span class="{icone} text-sm {c.iconColor} shrink-0"></span>
+		<h4 class="text-[10px] font-bold uppercase tracking-wider text-slate-600 min-w-0 truncate">
+			{titulo}
+		</h4>
+		<span class="ml-auto inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-semibold border shrink-0 {c.tag}">
+			<span class="w-1.5 h-1.5 rounded-full {c.dot}"></span>
+			{c.rotulo}
+		</span>
 	</div>
 
-	<p class="text-[11px] text-slate-500 leading-relaxed pt-2 border-t border-slate-100 mt-2">
-		{detalhe}
-	</p>
+	<div class="p-3 flex flex-col justify-between gap-2">
+		<p class="text-xs font-semibold text-slate-900 leading-snug">
+			{resumo}
+		</p>
+		<p class="text-[11px] text-slate-500 leading-relaxed pt-2 border-t border-slate-100">
+			{detalhe}
+		</p>
+	</div>
 </div>
