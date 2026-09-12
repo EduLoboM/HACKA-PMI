@@ -195,12 +195,18 @@
 <div class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/60 p-2 sm:p-8">
 	<div class="w-full max-w-2xl bg-white border border-slate-300 shadow-xl overflow-hidden my-auto">
 		<!-- Header -->
-		<div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 border-b border-slate-200 bg-slate-50">
-			<div>
-				<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900">
+		<div class="px-4 sm:px-6 py-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+			<div class="flex items-center gap-1.5 shrink-0">
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			</div>
+			<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+			<div class="min-w-0 flex-1">
+				<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 truncate">
 					{produtor ? 'Editar Perfil do Produtor' : 'Nova Empresa na Carteira'}
 				</h3>
-				<p class="text-xs text-slate-500">
+				<p class="text-[11px] text-slate-500 truncate">
 					A alteração recalcula imediatamente as regras da LREF e do Provimento 216
 				</p>
 			</div>
@@ -208,7 +214,7 @@
 				type="button"
 				onclick={onClose}
 				aria-label="Fechar formulário"
-				class="w-7 h-7 flex items-center justify-center bg-white border border-slate-300 text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors duration-150 cursor-pointer"
+				class="w-7 h-7 shrink-0 flex items-center justify-center bg-white border border-slate-300 text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors duration-150 cursor-pointer"
 			>
 				<span class="i-lucide-x text-sm"></span>
 			</button>
@@ -253,7 +259,7 @@
 						bind:value={nome}
 						required
 						placeholder="Ex.: SLC Agrícola S.A."
-						class="w-full px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm"
+						class="w-full px-3.5 py-2 rounded-md bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm"
 					/>
 				</div>
 				<div>
@@ -268,14 +274,14 @@
 							oninput={onInputCNPJ}
 							required
 							placeholder="00.000.000/0001-00"
-							class="flex-1 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm font-mono"
+							class="flex-1 px-3.5 py-2 rounded-md bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm font-mono"
 						/>
 						<button
 							type="button"
 							onclick={consultarCNPJ}
 							disabled={consultandoCNPJ || cnpjLimpo.length !== 14}
 							title="Consultar dados cadastrais na Receita / BrasilAPI"
-							class="px-2.5 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 text-xs font-semibold rounded-xl flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-40"
+							class="px-2.5 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 text-xs font-semibold rounded-md flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-40"
 						>
 							{#if consultandoCNPJ}
 								<span class="i-lucide-loader-2 text-xs animate-spin"></span>
@@ -310,7 +316,7 @@
 						id="pf-junta"
 						type="date"
 						bind:value={dataRegistroJunta}
-						class="w-full px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm"
+						class="w-full px-3.5 py-2 rounded-md bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm"
 					/>
 				</div>
 			</div>
@@ -323,7 +329,7 @@
 						type="number"
 						min="0"
 						bind:value={areaPlantadaCAR}
-						class="w-full px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm tabular-nums"
+						class="w-full px-3.5 py-2 rounded-md bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm tabular-nums"
 					/>
 				</div>
 				<div>
@@ -333,7 +339,7 @@
 						type="number"
 						min="0"
 						bind:value={produtividadeZarc}
-						class="w-full px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm tabular-nums"
+						class="w-full px-3.5 py-2 rounded-md bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm tabular-nums"
 					/>
 				</div>
 				<div>
@@ -343,13 +349,13 @@
 						type="number"
 						min="0"
 						bind:value={volumeComprometidoCPR}
-						class="w-full px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm tabular-nums"
+						class="w-full px-3.5 py-2 rounded-md bg-white border border-slate-200 text-sm text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-[border-color,box-shadow] duration-150 shadow-sm tabular-nums"
 					/>
 				</div>
 			</div>
 
 			<!-- Checkbox Matrix -->
-			<div class="p-4 rounded-xl bg-slate-50/80 border border-slate-200/80 grid grid-cols-1 sm:grid-cols-3 gap-3">
+			<div class="p-4 rounded-md bg-slate-50/80 border border-slate-200/80 grid grid-cols-1 sm:grid-cols-3 gap-3">
 				<label class="flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer select-none">
 					<input type="checkbox" bind:checked={escrituracaoLCDPR} class="accent-emerald-600 w-4 h-4 rounded" />
 					Escrituração LCDPR ativa
@@ -422,7 +428,7 @@
 			</div>
 
 			{#if erro}
-				<div class="rounded-xl border border-rose-200 bg-rose-50 px-3.5 py-2.5 text-xs text-rose-800 font-medium">
+				<div class="rounded-md border border-rose-200 bg-rose-50 px-3.5 py-2.5 text-xs text-rose-800 font-medium">
 					{erro}
 				</div>
 			{/if}
