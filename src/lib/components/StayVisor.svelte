@@ -14,28 +14,24 @@
 	});
 </script>
 
-<div class="bg-white border border-slate-200 p-3.5 sm:p-5 space-y-3 sm:space-y-4">
-	<div class="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-slate-200">
-		<div>
-			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
-				Simulação de Insolvência (Art. 6º e 49 da LREF)
-			</span>
-			<h4 class="text-sm font-bold text-slate-900 tracking-tight">
-				Balanço do Stay Period (180 dias)
-			</h4>
+<div class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+	<div class="h-9 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+		<div class="flex items-center gap-1.5 shrink-0">
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
 		</div>
 		<div class="w-px h-3 bg-slate-200 shrink-0"></div>
-		<div class="flex items-center gap-1.5 min-w-0">
-			<span class="i-lucide-scale text-slate-500 shrink-0"></span>
-			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 truncate">Balanço do Stay Period</span>
-		</div>
+		<span class="i-lucide-scale text-slate-500 shrink-0"></span>
+		<span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 min-w-0 truncate">
+			Balanço do Stay Period (180 dias)
+		</span>
 		<span class="ml-auto text-[10px] font-bold font-mono text-slate-500 bg-slate-100 px-1.5 py-0.5 border border-slate-200 shrink-0">
 			LREF 11.101/05
 		</span>
 	</div>
 
 	<div class="p-4 sm:p-5 space-y-4">
-
 	<!-- Progress Ratio Bar -->
 	<div class="space-y-1.5">
 		<div class="flex flex-col sm:flex-row justify-between text-[10px] sm:text-[11px] font-semibold font-mono gap-0.5">

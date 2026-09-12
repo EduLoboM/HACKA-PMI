@@ -51,12 +51,19 @@
 		</div>
 
 		<!-- Registration Card -->
-		<div class="bg-white border border-slate-200 p-6 space-y-4 shadow-sm">
-			<div class="pb-2 border-b border-slate-100 flex items-center justify-between">
-				<h2 class="text-xs font-bold uppercase tracking-wider text-slate-900">Criar Nova Conta</h2>
-				<span class="text-[10px] font-mono text-slate-500 bg-slate-100 px-2 py-0.5 border border-slate-200">Credencial</span>
+		<div class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+			<div class="h-10 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+				<div class="flex items-center gap-1.5 shrink-0">
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				</div>
+				<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+				<h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 truncate">Criar Nova Conta</h2>
+				<span class="ml-auto text-[10px] font-mono text-slate-500 bg-slate-100 px-1.5 py-0.5 border border-slate-200 shrink-0">Credencial</span>
 			</div>
 
+			<div class="p-5 space-y-4">
 			<form
 				onsubmit={(e) => {
 					e.preventDefault();
@@ -122,9 +129,10 @@
 					disabled={carregando}
 					class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors duration-150 cursor-pointer disabled:opacity-50"
 				>
-					{carregando ? 'Criando conta...' : 'Finalizar Cadastro'}
-				</button>
+{carregando ? 'Criando conta...' : 'Finalizar Cadastro'}
+			</button>
 			</form>
+			</div>
 		</div>
 
 		<p class="text-center text-xs text-slate-500 mt-4">

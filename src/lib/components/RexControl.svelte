@@ -27,33 +27,22 @@
 	let coberturaFlip = $derived(capacidadeFlip >= perfilBase.volumeComprometidoCPR);
 </script>
 
-<div class="bg-white border border-slate-200 p-3.5 sm:p-5 space-y-3 sm:space-y-4">
-	<!-- Top Bar -->
-	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2.5 sm:pb-3 border-b border-slate-200">
-		<div>
-			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
-				Análise de Sensibilidade Contratual
-			</span>
-			<h4 class="text-sm font-bold text-slate-900 tracking-tight">
-				Laboratório de Estresse — Simulação Rex Flip
-			</h4>
+<div class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+	<div class="h-9 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+		<div class="flex items-center gap-1.5 shrink-0">
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
 		</div>
-		<div class="flex items-center gap-2 w-full sm:w-auto">
-			<button
-				type="button"
-				onclick={onToggle}
-				class="flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold border transition-colors duration-150 cursor-pointer w-full sm:w-auto {flipAtivo
-					? 'bg-rose-50 text-rose-800 border-rose-300 hover:bg-rose-100'
-					: 'bg-slate-900 text-white border-slate-900 hover:bg-slate-800'}"
-			>
-				<span class="{flipAtivo ? 'i-lucide-rotate-ccw' : 'i-lucide-sliders'} text-xs"></span>
-				<span>{flipAtivo ? 'Restaurar Parâmetros Base' : 'Aplicar Inversão de Risco'}</span>
-			</button>
-		</div>
+		<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+		<span class="i-lucide-sliders text-slate-500 shrink-0"></span>
+		<span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 min-w-0 truncate">
+			Laboratório de Estresse — Simulação Rex Flip
+		</span>
 		<button
 			type="button"
 			onclick={onToggle}
-			class="ml-auto flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-bold border transition-colors duration-150 cursor-pointer shrink-0 {flipAtivo
+			class="ml-auto shrink-0 flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold border transition-colors duration-150 cursor-pointer {flipAtivo
 				? 'bg-rose-50 text-rose-800 border-rose-300 hover:bg-rose-100'
 				: 'bg-slate-900 text-white border-slate-900 hover:bg-slate-800'}"
 		>

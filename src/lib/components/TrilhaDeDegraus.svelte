@@ -15,22 +15,27 @@
 	}
 </script>
 
-<div class="bg-white border border-slate-200 p-5 space-y-4">
-	<!-- Header -->
-	<div class="flex items-center justify-between pb-3 border-b border-slate-200">
-		<div>
-			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
-				Reason Codes Invertidos · Esteira Jurídica
-			</span>
-			<h4 class="text-sm font-bold text-slate-900 tracking-tight flex items-center gap-2">
-				<span class="i-lucide-stairs text-amber-600 text-sm"></span>
-				Trilha de Subida & Penalidades
-			</h4>
+<div class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+	<div class="h-9 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+		<div class="flex items-center gap-1.5 shrink-0">
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
 		</div>
-		<span class="text-[10px] font-bold font-mono text-slate-600 bg-slate-100 px-2 py-0.5 border border-slate-200">
+		<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+		<span class="i-lucide-stairs text-slate-500 shrink-0"></span>
+		<span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 min-w-0 truncate">
+			Trilha de Subida & Penalidades
+		</span>
+		<span class="ml-auto text-[10px] font-bold font-mono text-slate-600 bg-slate-100 px-1.5 py-0.5 border border-slate-200 shrink-0">
 			LREF · DOC / SAF / REL
 		</span>
 	</div>
+
+	<div class="p-4 space-y-4">
+		<div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 -mb-2">
+			Reason Codes Invertidos · Esteira Jurídica
+		</div>
 
 	<div class="space-y-3.5">
 		<!-- Summary Tags -->
@@ -114,5 +119,6 @@
 				<strong>Regra do degrau:</strong> o valor devolvido é exatamente a penalidade que o gerou (zero calibração, zero arbitragem). Degraus estruturais jamais sobem por comportamento. A prova é <strong class="text-slate-700">declarada com responsável nomeado e data</strong> — nunca simulamos verificação automática.
 			</p>
 		{/if}
+	</div>
 	</div>
 </div>

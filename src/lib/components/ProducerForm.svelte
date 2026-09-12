@@ -195,9 +195,15 @@
 <div class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/60 p-2 sm:p-8">
 	<div class="w-full max-w-2xl bg-white border border-slate-300 shadow-xl overflow-hidden my-auto">
 		<!-- Header -->
-		<div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 border-b border-slate-200 bg-slate-50">
-			<div>
-				<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900">
+		<div class="px-4 sm:px-6 py-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+			<div class="flex items-center gap-1.5 shrink-0">
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			</div>
+			<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+			<div class="min-w-0 flex-1">
+				<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 truncate">
 					{produtor ? 'Editar Perfil do Produtor' : 'Nova Empresa na Carteira'}
 				</h3>
 				<p class="text-[11px] text-slate-500 truncate">

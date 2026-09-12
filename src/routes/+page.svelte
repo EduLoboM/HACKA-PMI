@@ -337,7 +337,23 @@
 	{/if}
 
 	<!-- Telemetry Ribbon (2x2 on mobile, 4-col on desktop) -->
-	<section class="bg-slate-200 gap-px border border-slate-200 grid grid-cols-2 lg:grid-cols-4 overflow-hidden">
+	<section class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+		<div class="h-9 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+			<div class="flex items-center gap-1.5 shrink-0">
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+			</div>
+			<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+			<span class="i-lucide-activity text-slate-500 shrink-0"></span>
+			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 truncate">
+				Telemetria da carteira
+			</span>
+			<span class="ml-auto text-[10px] font-mono text-slate-500 hidden sm:block truncate">
+				Clique num quadro para filtrar o balcão
+			</span>
+		</div>
+		<div class="bg-slate-200 gap-px grid grid-cols-2 lg:grid-cols-4">
 		<!-- Carteira Total -->
 		<button
 			type="button"
@@ -436,34 +452,39 @@
 	/>
 
 	<!-- Table of Producers -->
-	<section class="bg-white border border-slate-200 overflow-hidden">
-		<div class="px-3 sm:px-5 py-2.5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 bg-slate-50">
-			<div class="flex items-center gap-2">
-				<span class="i-lucide-list-ordered text-slate-500 text-sm"></span>
-				<h3 class="text-xs font-bold uppercase tracking-wider text-slate-900">Classificação da Carteira</h3>
+	<section class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+		<div class="h-9 px-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
+			<div class="flex items-center gap-1.5 shrink-0">
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
 			</div>
-			<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-				<div class="relative w-full sm:w-64">
-					<span class="absolute left-2.5 top-1/2 -translate-y-1/2 i-lucide-search text-xs text-slate-400"></span>
-					<input
-						type="text"
-						bind:value={busca}
-						placeholder="Buscar empresa ou CNPJ..."
-						class="w-full pl-8 pr-3 py-1.5 sm:py-1 text-xs bg-white border border-slate-200 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-500"
-					/>
-				</div>
-				<div class="flex items-center justify-between sm:justify-start gap-2">
-					<span class="text-[11px] sm:text-xs font-mono text-slate-500 shrink-0">
-						Exibindo <strong class="text-slate-900">{filtrados.length}</strong> de {produtores.length}
-						{#if classificacao.posicaoCorte != null && filtro === 'TODOS'}
-							<span class="text-rose-700 font-bold"> · corte no {classificacao.posicaoCorte}º</span>
-						{/if}
-					</span>
-					<span class="text-[10px] text-slate-400 font-mono sm:hidden">
-						← deslize →
-					</span>
-				</div>
+			<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+			<span class="i-lucide-list-ordered text-slate-500 shrink-0"></span>
+			<span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 min-w-0 truncate">
+				Classificação da Carteira
+			</span>
+			<span class="ml-auto text-[11px] font-mono text-slate-500 shrink-0 truncate">
+				Exibindo <strong class="text-slate-900">{filtrados.length}</strong> de {produtores.length}
+				{#if classificacao.posicaoCorte != null && filtro === 'TODOS'}
+					<span class="text-rose-700 font-bold"> · corte no {classificacao.posicaoCorte}º</span>
+				{/if}
+			</span>
+		</div>
+
+		<div class="px-3 sm:px-5 py-2.5 border-b border-slate-200 flex items-center justify-between gap-2 bg-slate-50/40">
+			<div class="relative w-full sm:w-64">
+				<span class="absolute left-2.5 top-1/2 -translate-y-1/2 i-lucide-search text-xs text-slate-400"></span>
+				<input
+					type="text"
+					bind:value={busca}
+					placeholder="Buscar empresa ou CNPJ..."
+					class="w-full pl-8 pr-3 py-1.5 sm:py-1 text-xs bg-white border border-slate-200 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-500"
+				/>
 			</div>
+			<span class="text-[10px] text-slate-400 font-mono shrink-0">
+				← deslize →
+			</span>
 		</div>
 
 		<div class="overflow-x-auto">
@@ -571,16 +592,21 @@
 	<!-- Deep Analysis Section for the Selected Producer -->
 	{#if selecionadaLinha}
 		<section class="space-y-4">
-			<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 pb-2 border-b border-slate-200">
-				<div class="flex flex-wrap items-center gap-2">
-					<h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900">
-						Prancha de Análise · {selecionadaLinha.nome}
-					</h2>
-					<span class="inline-flex items-center px-2 py-0.5 text-[10px] font-bold font-mono border shrink-0 {badgeClasse(selecionadaLinha.estado as EstadoCartaz)}">
-						{ESTADOS_CARTAZ[selecionadaLinha.estado as EstadoCartaz].rotulo}
-					</span>
+			<div class="h-9 px-3 flex items-center gap-2 border border-slate-200 bg-slate-50/80">
+				<div class="flex items-center gap-1.5 shrink-0">
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
+					<span class="w-2.5 h-2.5 rounded-full bg-slate-300/80"></span>
 				</div>
-				<span class="text-[11px] sm:text-xs text-slate-600 font-mono">
+				<div class="w-px h-3 bg-slate-200 shrink-0"></div>
+				<span class="i-lucide-file-search text-slate-500 shrink-0"></span>
+				<h2 class="text-[10px] font-bold uppercase tracking-wider text-slate-600 min-w-0 truncate">
+					Prancha de Análise · {selecionadaLinha.nome}
+				</h2>
+				<span class="inline-flex items-center px-2 py-0.5 text-[10px] font-bold font-mono border shrink-0 {badgeClasse(selecionadaLinha.estado as EstadoCartaz)}">
+					{ESTADOS_CARTAZ[selecionadaLinha.estado as EstadoCartaz].rotulo}
+				</span>
+				<span class="ml-auto text-[10px] sm:text-[11px] text-slate-600 font-mono shrink-0 truncate">
 					CNPJ: {selecionadaLinha.cnpjCpf}
 				</span>
 			</div>
