@@ -1,6 +1,8 @@
 import { json, error } from '@sveltejs/kit';
+import { exigeAuth } from '$lib/server/auth';
 
-export async function POST({ request }) {
+export async function POST({ request, locals }) {
+	exigeAuth(locals);
 	let payload: unknown;
 	try {
 		payload = await request.json();

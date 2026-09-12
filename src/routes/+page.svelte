@@ -26,8 +26,18 @@
 	};
 
 	let { data } = $props<{
-		data: { produtores: LinhaBalcao[]; resumo: Record<EstadoCartaz, number> };
+		data: {
+			produtores: LinhaBalcao[];
+			resumo: Record<EstadoCartaz, number>;
+			user: { id: number; nome: string; email: string } | null;
+		};
 	}>();
+
+	async function sair() {
+		await fetch('/api/auth/logout', { method: 'POST' });
+		await invalidateAll();
+		window.location.assign('/login');
+	}
 
 	let produtores = $state<LinhaBalcao[]>([]);
 	let resumo = $state<Record<EstadoCartaz, number>>({ FIADO: 0, 'SÓ_EXTRACONCURSAL': 0, 'À_VISTA': 0 });
@@ -220,14 +230,22 @@
 				</div>
 			</div>
 			<div class="flex items-center gap-2 sm:gap-3">
-				<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 text-[11px] font-semibold">
-					<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-					Lista: SEMPRE um SIM para Arbolina
-				</span>
 				<span class="hidden md:inline-flex items-center px-3 py-1 rounded-full bg-slate-800/80 text-slate-400 border border-slate-700/60 text-[11px] font-semibold">
 					<span class="i-lucide-database mr-1.5"></span>
 					SQLite · WAL
 				</span>
+				<span class="hidden sm:inline-flex items-center px-3 py-1 rounded-full bg-slate-800/80 text-slate-400 border border-slate-700/60 text-[11px] font-semibold overflow-hidden max-w-[180px]">
+					<span class="i-lucide-user mr-1.5 shrink-0"></span>
+					<span class="truncate">{data.user?.email ?? 'conta'}</span>
+				</span>
+				<button
+					onclick={sair}
+					class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/80 hover:bg-rose-500/20 text-slate-300 hover:text-rose-300 border border-slate-700/60 text-[11px] font-semibold transition cursor-pointer"
+					title="Sair da conta"
+				>
+					<span class="i-lucide-log-out"></span>
+					Sair
+				</button>
 			</div>
 		</div>
 	</header>

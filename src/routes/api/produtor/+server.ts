@@ -1,14 +1,17 @@
 import { json } from '@sveltejs/kit';
 import type { PerfilProdutor } from '$lib/krillshield/types';
 import { getDb, inserirProdutor, buscarProdutorCompleto } from '$lib/server/db';
+import { exigeAuth } from '$lib/server/auth';
 
-export async function GET() {
+export async function GET({ locals }) {
+	exigeAuth(locals);
 	const db = getDb();
 	const produtores = db.prepare('SELECT id, cnpj_cpf, nome FROM produtores ORDER BY id').all();
 	return json({ produtores });
 }
 
-export async function POST({ request }) {
+export async function POST({ request, locals }) {
+	exigeAuth(locals);
 	const db = getDb();
 	const body = await request.json();
 
