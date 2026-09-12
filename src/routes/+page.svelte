@@ -312,15 +312,15 @@
 
 <!-- Header -->
 <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
-	<div class="max-w-7xl mx-auto px-3 sm:px-6 h-15 flex items-center justify-between gap-3">
+	<div class="max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-15 flex items-center justify-between gap-2 sm:gap-3">
 		<!-- Brand & Logo -->
-		<div class="flex items-center gap-3 min-w-0">
+		<div class="flex items-center gap-2 sm:gap-3 min-w-0">
 			<div class="w-8 h-8 rounded-xl bg-slate-900 text-emerald-400 flex items-center justify-center shrink-0 shadow-xs border border-slate-800">
-				<span class="i-lucide-shield-check text-lg"></span>
+				<span class="i-lucide-shield-check text-base sm:text-lg"></span>
 			</div>
 			<div class="min-w-0">
 				<div class="flex items-center gap-2">
-					<span class="text-sm font-black tracking-tight text-slate-900 leading-none">
+					<span class="text-sm font-black tracking-tight text-slate-900 leading-none truncate">
 						KRILL<span class="text-emerald-600">SHIELD</span>
 					</span>
 					<span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 hidden sm:inline-flex items-center gap-1">
@@ -335,7 +335,7 @@
 		</div>
 
 		<!-- Direct Actions & System Status -->
-		<div class="flex items-center gap-2 sm:gap-3 shrink-0">
+		<div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
 			<!-- Live DataJud / ZARC badge -->
 			<div class="hidden xl:flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-50 border border-slate-200/80 text-[11px] font-mono text-slate-600">
 				<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -351,8 +351,9 @@
 				</div>
 				<button
 					onclick={sair}
-					class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-rose-50 text-slate-600 hover:text-rose-700 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+					class="inline-flex items-center justify-center p-2 sm:px-3 sm:py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-rose-50 text-slate-600 hover:text-rose-700 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
 					title="Sair da conta"
+					aria-label="Sair da conta"
 				>
 					<span class="i-lucide-log-out text-xs"></span>
 					<span class="hidden sm:inline">Sair</span>
@@ -361,7 +362,7 @@
 
 			<a
 				href="/admin"
-				class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all shadow-2xs"
+				class="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all shadow-2xs"
 				title="Painel Financeiro e Dossiê Admin"
 			>
 				<span class="i-lucide-shield-alert text-xs text-rose-600"></span>
@@ -372,7 +373,7 @@
 			<button
 				type="button"
 				onclick={abrirCriar}
-				class="flex items-center gap-1.5 px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all cursor-pointer shadow-xs"
+				class="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all cursor-pointer shadow-xs"
 				title="Cadastrar Nova Empresa na Carteira"
 			>
 				<span class="i-lucide-plus text-xs text-emerald-400"></span>
@@ -383,15 +384,15 @@
 	</div>
 </header>
 
-<main class="max-w-7xl mx-auto px-3 sm:px-6 py-5 sm:py-8 space-y-6">
+<main class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8 space-y-5 sm:space-y-6 w-full min-w-0">
 	<!-- Title & Actions Bar -->
-	<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-200/80">
+	<div class="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-2 border-b border-slate-200/80">
 		<div>
-			<div class="flex flex-wrap items-center gap-2 mb-1">
-				<h1 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900">
+			<div class="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1">
+				<h1 class="text-lg sm:text-2xl font-black tracking-tight text-slate-900">
 					Balcão de Decisão & Classificação de Carteira
 				</h1>
-				<span class="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 border border-slate-200 text-slate-700">
+				<span class="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 border border-slate-200 text-slate-700">
 					LREF 11.101/05 & CNJ 216/26
 				</span>
 			</div>
@@ -404,7 +405,7 @@
 			<button
 				type="button"
 				onclick={semearDemo}
-				class="flex items-center gap-1.5 px-3.5 py-2 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer font-mono shadow-2xs"
+				class="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 sm:py-2 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer font-mono shadow-2xs"
 				title="Restaurar base canônica com as 57 empresas de referência"
 			>
 				<span class="i-lucide-refresh-cw text-xs text-slate-500"></span>
@@ -421,12 +422,12 @@
 	{/if}
 
 	<!-- Telemetry Ribbon (4 KPI Cards) -->
-	<section class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+	<section class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
 		<!-- Carteira Total -->
 		<button
 			type="button"
 			onclick={() => (filtro = 'TODOS')}
-			class="bg-white rounded-2xl p-4 sm:p-5 border transition-all duration-150 cursor-pointer text-left shadow-xs flex flex-col justify-between {filtro === 'TODOS'
+			class="bg-white rounded-2xl p-3.5 sm:p-5 border transition-all duration-150 cursor-pointer text-left shadow-xs flex flex-col justify-between {filtro === 'TODOS'
 				? 'border-slate-900 ring-2 ring-slate-900/10 shadow-sm bg-slate-50/50'
 				: 'border-slate-200/80 hover:border-slate-300 hover:bg-slate-50/40'}"
 		>
@@ -438,15 +439,15 @@
 					Geral
 				</span>
 			</div>
-			<div class="my-2">
-				<span class="block text-2xl sm:text-3xl font-black text-slate-900 tabular-nums font-mono">
+			<div class="my-1.5 sm:my-2">
+				<span class="block text-xl sm:text-3xl font-black text-slate-900 tabular-nums font-mono">
 					{produtores.length}
 				</span>
-				<span class="text-[11px] text-slate-500 font-medium">empresas monitoradas</span>
+				<span class="text-[10px] sm:text-[11px] text-slate-500 font-medium">empresas monitoradas</span>
 			</div>
-			<div class="pt-2 border-t border-slate-100 text-[11px] text-slate-600 font-mono flex items-center justify-between">
-				<span>Risco Stay:</span>
-				<strong class="text-slate-900 font-bold">{formatarBRL(totalExposicao)}</strong>
+			<div class="pt-2 border-t border-slate-100 text-[10px] sm:text-[11px] text-slate-600 font-mono flex flex-col xs:flex-row xs:items-center justify-between gap-0.5 sm:gap-1">
+				<span class="text-slate-500">Risco Stay:</span>
+				<strong class="text-slate-900 font-bold truncate">{formatarBRL(totalExposicao)}</strong>
 			</div>
 		</button>
 
@@ -454,7 +455,7 @@
 		<button
 			type="button"
 			onclick={() => (filtro = 'FIADO')}
-			class="bg-white rounded-2xl p-4 sm:p-5 border transition-all duration-150 cursor-pointer text-left shadow-xs flex flex-col justify-between {filtro === 'FIADO'
+			class="bg-white rounded-2xl p-3.5 sm:p-5 border transition-all duration-150 cursor-pointer text-left shadow-xs flex flex-col justify-between {filtro === 'FIADO'
 				? 'border-emerald-500 ring-2 ring-emerald-500/20 shadow-sm bg-emerald-50/40'
 				: 'border-slate-200/80 hover:border-emerald-300 hover:bg-emerald-50/20'}"
 		>
@@ -464,16 +465,16 @@
 				</span>
 				<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-100"></span>
 			</div>
-			<div class="my-2">
-				<span class="block text-2xl sm:text-3xl font-black text-emerald-900 tabular-nums font-mono">
+			<div class="my-1.5 sm:my-2">
+				<span class="block text-xl sm:text-3xl font-black text-emerald-900 tabular-nums font-mono">
 					{resumo.FIADO}
 				</span>
-				<span class="text-[11px] text-emerald-700 font-medium">
+				<span class="text-[10px] sm:text-[11px] text-emerald-700 font-medium">
 					{produtores.length > 0 ? Math.round((resumo.FIADO / produtores.length) * 100) : 0}% da carteira
 				</span>
 			</div>
-			<div class="pt-2 border-t border-emerald-100 text-[11px] text-emerald-800 flex items-center justify-between">
-				<span>Fluxo balcão:</span>
+			<div class="pt-2 border-t border-emerald-100 text-[10px] sm:text-[11px] text-emerald-800 flex flex-col xs:flex-row xs:items-center justify-between gap-0.5 sm:gap-1">
+				<span class="text-emerald-700">Fluxo balcão:</span>
 				<strong class="font-bold">Crédito Limpo</strong>
 			</div>
 		</button>
@@ -482,26 +483,26 @@
 		<button
 			type="button"
 			onclick={() => (filtro = 'SÓ_EXTRACONCURSAL')}
-			class="bg-white rounded-2xl p-4 sm:p-5 border transition-all duration-150 cursor-pointer text-left shadow-xs flex flex-col justify-between {filtro === 'SÓ_EXTRACONCURSAL'
+			class="bg-white rounded-2xl p-3.5 sm:p-5 border transition-all duration-150 cursor-pointer text-left shadow-xs flex flex-col justify-between {filtro === 'SÓ_EXTRACONCURSAL'
 				? 'border-amber-500 ring-2 ring-amber-500/20 shadow-sm bg-amber-50/40'
 				: 'border-slate-200/80 hover:border-amber-300 hover:bg-amber-50/20'}"
 		>
 			<div class="flex items-center justify-between gap-1">
-				<span class="text-[10px] font-bold uppercase tracking-wider text-amber-900 font-mono">
-					SÓ EXTRACONCURSAL
+				<span class="text-[10px] font-bold uppercase tracking-wider text-amber-900 font-mono truncate">
+					EXTRACONCURSAL
 				</span>
-				<span class="w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-amber-100"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-amber-100 shrink-0"></span>
 			</div>
-			<div class="my-2">
-				<span class="block text-2xl sm:text-3xl font-black text-amber-950 tabular-nums font-mono">
+			<div class="my-1.5 sm:my-2">
+				<span class="block text-xl sm:text-3xl font-black text-amber-950 tabular-nums font-mono">
 					{resumo['SÓ_EXTRACONCURSAL']}
 				</span>
-				<span class="text-[11px] text-amber-800 font-medium">
+				<span class="text-[10px] sm:text-[11px] text-amber-800 font-medium">
 					{produtores.length > 0 ? Math.round((resumo['SÓ_EXTRACONCURSAL'] / produtores.length) * 100) : 0}% recuperáveis
 				</span>
 			</div>
-			<div class="pt-2 border-t border-amber-100 text-[11px] text-amber-900 flex items-center justify-between">
-				<span>Condição:</span>
+			<div class="pt-2 border-t border-amber-100 text-[10px] sm:text-[11px] text-amber-900 flex flex-col xs:flex-row xs:items-center justify-between gap-0.5 sm:gap-1">
+				<span class="text-amber-800">Condição:</span>
 				<strong class="font-bold">Garantia Real</strong>
 			</div>
 		</button>
@@ -510,26 +511,26 @@
 		<button
 			type="button"
 			onclick={() => (filtro = 'À_VISTA')}
-			class="bg-white rounded-2xl p-4 sm:p-5 border transition-all duration-150 cursor-pointer text-left shadow-xs flex flex-col justify-between {filtro === 'À_VISTA'
+			class="bg-white rounded-2xl p-3.5 sm:p-5 border transition-all duration-150 cursor-pointer text-left shadow-xs flex flex-col justify-between {filtro === 'À_VISTA'
 				? 'border-rose-500 ring-2 ring-rose-500/20 shadow-sm bg-rose-50/40'
 				: 'border-slate-200/80 hover:border-rose-300 hover:bg-rose-50/20'}"
 		>
 			<div class="flex items-center justify-between gap-1">
-				<span class="text-[10px] font-bold uppercase tracking-wider text-rose-900 font-mono">
+				<span class="text-[10px] font-bold uppercase tracking-wider text-rose-900 font-mono truncate">
 					ZONA REBAIXADA
 				</span>
-				<span class="w-2.5 h-2.5 rounded-full bg-rose-500 ring-4 ring-rose-100"></span>
+				<span class="w-2.5 h-2.5 rounded-full bg-rose-500 ring-4 ring-rose-100 shrink-0"></span>
 			</div>
-			<div class="my-2">
-				<span class="block text-2xl sm:text-3xl font-black text-rose-950 tabular-nums font-mono">
+			<div class="my-1.5 sm:my-2">
+				<span class="block text-xl sm:text-3xl font-black text-rose-950 tabular-nums font-mono">
 					{resumo['À_VISTA']}
 				</span>
-				<span class="text-[11px] text-rose-800 font-medium">
+				<span class="text-[10px] sm:text-[11px] text-rose-800 font-medium">
 					{produtores.length > 0 ? Math.round((resumo['À_VISTA'] / produtores.length) * 100) : 0}% em risco crítico
 				</span>
 			</div>
-			<div class="pt-2 border-t border-rose-100 text-[11px] text-rose-900 flex items-center justify-between">
-				<span>Condição:</span>
+			<div class="pt-2 border-t border-rose-100 text-[10px] sm:text-[11px] text-rose-900 flex flex-col xs:flex-row xs:items-center justify-between gap-0.5 sm:gap-1">
+				<span class="text-rose-800">Condição:</span>
 				<strong class="font-bold">Cobrança D+0</strong>
 			</div>
 		</button>
@@ -544,7 +545,7 @@
 	/>
 
 	<!-- Table of Producers -->
-	<section class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
+	<section class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs w-full min-w-0">
 		<!-- Header Controls -->
 		<div class="px-4 sm:px-6 py-3.5 border-b border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-3 bg-slate-50/50">
 			<div class="flex items-center gap-2.5">
@@ -560,7 +561,7 @@
 			</div>
 
 			<!-- Search & Filter Controls -->
-			<div class="flex flex-col sm:flex-row sm:items-center gap-2.5">
+			<div class="flex flex-col sm:flex-row sm:items-center gap-2.5 w-full lg:w-auto">
 				<!-- Search Field with Clear Button -->
 				<div class="relative w-full sm:w-72">
 					<span class="absolute left-3 top-1/2 -translate-y-1/2 i-lucide-search text-xs text-slate-400"></span>
@@ -583,7 +584,7 @@
 				</div>
 
 				<!-- Filter Chips -->
-				<div class="flex items-center gap-1 overflow-x-auto py-0.5">
+				<div class="flex items-center gap-1 overflow-x-auto py-0.5 max-w-full pb-1 [-webkit-overflow-scrolling:touch]">
 					<button
 						type="button"
 						onclick={() => (filtro = 'TODOS')}
@@ -616,9 +617,18 @@
 			</div>
 		</div>
 
+		<!-- Mobile Table Swipe Hint -->
+		<div class="sm:hidden px-4 py-1.5 bg-slate-50/90 text-[10px] text-slate-500 font-mono flex items-center justify-between border-b border-slate-100">
+			<span class="flex items-center gap-1 text-slate-600">
+				<span class="i-lucide-arrow-left-right text-xs text-slate-400"></span>
+				Deslize a tabela para ver ações →
+			</span>
+			<span class="font-bold">{filtrados.length} itens</span>
+		</div>
+
 		<!-- Table -->
-		<div class="overflow-x-auto">
-			<table class="w-full text-xs min-w-[620px]">
+		<div class="overflow-x-auto w-full max-w-full [-webkit-overflow-scrolling:touch]">
+			<table class="w-full text-xs min-w-[580px]">
 				<thead>
 					<tr class="text-left text-[10px] uppercase font-bold text-slate-400 border-b border-slate-100 bg-slate-50/70 font-mono">
 						<th class="pl-4 pr-1 py-3 w-12 text-center">#</th>
@@ -786,27 +796,27 @@
 				</div>
 
 				<!-- Quick Actions on Selected Company Banner -->
-				<div class="flex items-center gap-2 shrink-0 self-start sm:self-auto">
+				<div class="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto shrink-0 pt-1 sm:pt-0">
 					<button
 						type="button"
 						onclick={exportarLaudoPDF}
 						disabled={exportandoLaudoBanner || !analise}
-						class="flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 transition-all cursor-pointer disabled:opacity-50 shadow-2xs"
+						class="flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 transition-all cursor-pointer disabled:opacity-50 shadow-2xs w-full sm:w-auto text-center"
 						title="Exportar Parecer Técnico Desta Empresa em PDF"
 					>
 						{#if exportandoLaudoBanner}
 							<span class="i-lucide-loader-2 text-xs animate-spin"></span>
-							<span>Gerando PDF...</span>
+							<span>Gerando...</span>
 						{:else}
 							<span class="i-lucide-file-down text-xs text-rose-600"></span>
-							<span>Baixar Laudo PDF</span>
+							<span>Laudo PDF</span>
 						{/if}
 					</button>
 
 					<button
 						type="button"
 						onclick={() => abrirModalPosicao(selecionadaLinha)}
-						class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl text-xs font-bold text-emerald-800 transition-all cursor-pointer shadow-2xs"
+						class="flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl text-xs font-bold text-emerald-800 transition-all cursor-pointer shadow-2xs w-full sm:w-auto text-center"
 						title="Ver Modal de Posição Detalhada"
 					>
 						<span class="i-lucide-shield text-xs text-emerald-600"></span>
@@ -823,7 +833,7 @@
 					</div>
 				</div>
 			{:else if analise}
-				<div class="relative space-y-4">
+				<div class="relative space-y-4 w-full min-w-0">
 					{#if carregando}
 						<div class="absolute inset-0 z-10 flex items-center justify-center bg-white/70 backdrop-blur-xs rounded-2xl">
 							<div class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-xl text-xs font-mono text-slate-800 shadow-md">
@@ -834,9 +844,9 @@
 					{/if}
 
 					<!-- Asymmetric 2-Column Inspection Grid -->
-					<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+					<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start w-full min-w-0">
 						<!-- Left Column (8 cols): Poster, Telemetry Cluster, and Rex Control -->
-						<div class="lg:col-span-8 space-y-4">
+						<div class="lg:col-span-8 space-y-4 w-full min-w-0">
 							<!-- Decision Poster -->
 							<PosterDeDecisao decisao={analise.decisao} />
 
@@ -872,7 +882,7 @@
 						</div>
 
 						<!-- Right Column (4 cols): Stay Visor, Trilha de Degraus & Position Breakdown -->
-						<div class="lg:col-span-4 space-y-4">
+						<div class="lg:col-span-4 space-y-4 w-full min-w-0">
 							<StayVisor stay={analise.stay} />
 
 							{#if analise.degraus && analise.degraus.length > 0}

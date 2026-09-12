@@ -14,6 +14,6 @@
 <!-- Clean Enterprise Layout Base -->
 <div class="fixed inset-0 pointer-events-none -z-10 bg-slate-50"></div>
 
-<div class="relative min-h-screen text-slate-800 flex flex-col antialiased">
+<div class="relative min-h-screen text-slate-800 flex flex-col antialiased w-full max-w-full overflow-x-hidden min-w-0">
 	{@render children()}
 </div>

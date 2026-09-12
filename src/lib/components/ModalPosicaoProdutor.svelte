@@ -46,16 +46,16 @@
 
 <!-- Modal Backdrop -->
 <div
-	class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/65 backdrop-blur-xs overflow-y-auto animate-fade-in"
+	class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 bg-slate-900/65 backdrop-blur-xs overflow-y-auto animate-fade-in"
 	role="dialog"
 	aria-modal="true"
 	aria-labelledby="modal-posicao-titulo"
 >
 	<div
-		class="relative w-full max-w-2xl bg-white border border-slate-300 shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
+		class="relative w-full max-w-2xl bg-white border border-slate-300 shadow-2xl overflow-hidden my-auto max-h-[94vh] flex flex-col rounded-xl sm:rounded-none"
 	>
 		<!-- Top Bar / Header -->
-		<div class="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-200 bg-slate-50 shrink-0">
+		<div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 border-b border-slate-200 bg-slate-50 shrink-0">
 			<div class="flex items-center gap-2.5 min-w-0">
 				<div class="w-3 h-3 rounded-full {d.estado === 'FIADO' ? 'bg-emerald-600' : d.estado === 'SÓ_EXTRACONCURSAL' ? 'bg-amber-500' : 'bg-rose-600'} shrink-0"></div>
 				<div class="min-w-0">
@@ -234,21 +234,21 @@
 				</div>
 
 				<!-- 3 Metric Tiles -->
-				<div class="grid grid-cols-3 gap-2 pt-1 text-center font-mono">
-					<div class="p-2 bg-slate-50 border border-slate-200">
-						<span class="text-[10px] text-slate-500 font-bold uppercase block">Exposição</span>
+				<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 font-mono">
+					<div class="p-2 sm:p-2.5 bg-slate-50 border border-slate-200 flex sm:flex-col items-center sm:items-center justify-between sm:justify-center text-center">
+						<span class="text-[10px] text-slate-500 font-bold uppercase">Exposição</span>
 						<span class="text-xs sm:text-sm font-bold text-slate-900 tabular-nums">
 							{formatarBRL(s.totalExposicao)}
 						</span>
 					</div>
-					<div class="p-2 bg-emerald-50/60 border border-emerald-200">
-						<span class="text-[10px] text-emerald-800 font-bold uppercase block">Blindado (Art. 49 §3º)</span>
+					<div class="p-2 sm:p-2.5 bg-emerald-50/60 border border-emerald-200 flex sm:flex-col items-center sm:items-center justify-between sm:justify-center text-center">
+						<span class="text-[10px] text-emerald-800 font-bold uppercase">Blindado (Art. 49 §3º)</span>
 						<span class="text-xs sm:text-sm font-bold text-emerald-800 tabular-nums">
 							{formatarBRL(s.totalSobrevivem)}
 						</span>
 					</div>
-					<div class="p-2 bg-rose-50/60 border border-rose-200">
-						<span class="text-[10px] text-rose-800 font-bold uppercase block">Preso no Stay</span>
+					<div class="p-2 sm:p-2.5 bg-rose-50/60 border border-rose-200 flex sm:flex-col items-center sm:items-center justify-between sm:justify-center text-center">
+						<span class="text-[10px] text-rose-800 font-bold uppercase">Preso no Stay</span>
 						<span class="text-xs sm:text-sm font-bold text-rose-800 tabular-nums">
 							{formatarBRL(s.totalMorrem)}
 						</span>
@@ -314,7 +314,7 @@
 		</div>
 
 		<!-- Footer Action Buttons -->
-		<div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-2 px-4 sm:px-6 py-3.5 border-t border-slate-200 bg-slate-50 shrink-0">
+		<div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-2 px-4 sm:px-6 py-3 border-t border-slate-200 bg-slate-50 shrink-0">
 			{#if onNovoCadastro}
 				<button
 					type="button"
@@ -322,7 +322,7 @@
 						onClose();
 						onNovoCadastro();
 					}}
-					class="px-3.5 py-1.5 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-semibold transition-colors duration-150 cursor-pointer text-center"
+					class="w-full sm:w-auto px-3.5 py-2 sm:py-1.5 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-semibold transition-colors duration-150 cursor-pointer text-center"
 				>
 					+ Cadastrar Outro CNPJ
 				</button>
@@ -330,11 +330,11 @@
 				<div></div>
 			{/if}
 
-			<div class="flex items-center gap-2 justify-end">
+			<div class="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto">
 				<button
 					type="button"
 					onclick={onClose}
-					class="px-4 py-1.5 border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition-colors duration-150 cursor-pointer text-center"
+					class="w-full sm:w-auto px-4 py-2 sm:py-1.5 border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition-colors duration-150 cursor-pointer text-center"
 				>
 					Fechar
 				</button>
@@ -344,9 +344,9 @@
 						onClose();
 						onVerDossie();
 					}}
-					class="px-4 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors duration-150 cursor-pointer flex items-center justify-center gap-1.5 text-center"
+					class="w-full sm:w-auto px-4 py-2 sm:py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors duration-150 cursor-pointer flex items-center justify-center gap-1.5 text-center"
 				>
-					<span>Ver Dossiê Completo</span>
+					<span>Ver Dossiê</span>
 					<span class="i-lucide-arrow-right text-xs"></span>
 				</button>
 			</div>

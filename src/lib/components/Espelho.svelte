@@ -53,7 +53,7 @@
 	}
 </script>
 
-<div class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 space-y-5 shadow-xs">
+<div class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 space-y-5 shadow-xs w-full min-w-0">
 	<!-- Top Bar -->
 	<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
 		<div class="flex items-start gap-3">
@@ -84,11 +84,11 @@
 			</span>
 
 			<!-- Tab Switcher -->
-			<div class="flex items-center bg-slate-100/80 p-0.5 rounded-xl border border-slate-200/80 text-xs w-full sm:w-auto">
+			<div class="grid grid-cols-2 sm:flex sm:items-center bg-slate-100/80 p-0.5 rounded-xl border border-slate-200/80 text-xs w-full sm:w-auto">
 				<button
 					type="button"
 					onclick={() => (abaAtiva = 'inteligencia')}
-					class="flex-1 sm:flex-none px-3.5 py-1.5 text-center font-bold rounded-lg transition-all duration-150 cursor-pointer {abaAtiva === 'inteligencia'
+					class="px-2.5 sm:px-3.5 py-1.5 text-center text-[11px] sm:text-xs font-bold rounded-lg transition-all duration-150 cursor-pointer {abaAtiva === 'inteligencia'
 						? 'bg-white text-slate-900 shadow-xs'
 						: 'text-slate-600 hover:text-slate-900'}"
 				>
@@ -97,7 +97,7 @@
 				<button
 					type="button"
 					onclick={() => (abaAtiva = 'laudo')}
-					class="flex-1 sm:flex-none px-3.5 py-1.5 text-center font-bold rounded-lg transition-all duration-150 cursor-pointer {abaAtiva === 'laudo'
+					class="px-2.5 sm:px-3.5 py-1.5 text-center text-[11px] sm:text-xs font-bold rounded-lg transition-all duration-150 cursor-pointer {abaAtiva === 'laudo'
 						? 'bg-white text-slate-900 shadow-xs'
 						: 'text-slate-600 hover:text-slate-900'}"
 				>
@@ -105,38 +105,41 @@
 				</button>
 			</div>
 
-			<!-- PDF Export Button -->
-			<button
-				type="button"
-				onclick={exportarPDF}
-				disabled={exportandoPDF || !analise}
-				class="flex items-center justify-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-slate-800 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-xl transition-all duration-150 cursor-pointer disabled:opacity-50 shadow-2xs w-full sm:w-auto"
-				title="Baixar Laudo Técnico Oficial em formato PDF"
-			>
-				{#if exportandoPDF}
-					<span class="i-lucide-loader-2 text-xs animate-spin text-slate-700"></span>
-					<span>Gerando PDF...</span>
-				{:else}
-					<span class="i-lucide-file-down text-xs text-rose-600"></span>
-					<span>Exportar PDF</span>
-				{/if}
-			</button>
+			<!-- Export & Action Buttons on Mobile -->
+			<div class="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto">
+				<!-- PDF Export Button -->
+				<button
+					type="button"
+					onclick={exportarPDF}
+					disabled={exportandoPDF || !analise}
+					class="flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-800 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-xl transition-all duration-150 cursor-pointer disabled:opacity-50 shadow-2xs w-full sm:w-auto"
+					title="Baixar Laudo Técnico Oficial em formato PDF"
+				>
+					{#if exportandoPDF}
+						<span class="i-lucide-loader-2 text-xs animate-spin text-slate-700"></span>
+						<span>Gerando...</span>
+					{:else}
+						<span class="i-lucide-file-down text-xs text-rose-600"></span>
+						<span>Exportar PDF</span>
+					{/if}
+				</button>
 
-			<!-- Trigger Rewrite Button -->
-			<button
-				type="button"
-				onclick={onRegredigir}
-				disabled={carregando}
-				class="flex items-center justify-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 border border-slate-900 rounded-xl transition-all duration-150 cursor-pointer disabled:opacity-50 shadow-2xs w-full sm:w-auto"
-			>
-				{#if carregando}
-					<span class="i-lucide-loader-2 text-xs animate-spin"></span>
-					<span>Atualizando Parecer...</span>
-				{:else}
-					<span class="i-lucide-sparkles text-xs text-amber-400"></span>
-					<span>Atualizar Parecer IA</span>
-				{/if}
-			</button>
+				<!-- Trigger Rewrite Button -->
+				<button
+					type="button"
+					onclick={onRegredigir}
+					disabled={carregando}
+					class="flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 border border-slate-900 rounded-xl transition-all duration-150 cursor-pointer disabled:opacity-50 shadow-2xs w-full sm:w-auto"
+				>
+					{#if carregando}
+						<span class="i-lucide-loader-2 text-xs animate-spin"></span>
+						<span>Atualizando...</span>
+					{:else}
+						<span class="i-lucide-sparkles text-xs text-amber-400"></span>
+						<span>Parecer IA</span>
+					{/if}
+				</button>
+			</div>
 		</div>
 	</div>
 
@@ -281,20 +284,20 @@
 					<span class="text-xs font-bold text-slate-900 uppercase tracking-wider">Documento Oficial de Balcão (Laudo Pericial)</span>
 					<p class="text-[11px] text-slate-500">Formatado para impressão, dossiê do comitê e auditoria jurídica</p>
 				</div>
-				<div class="flex items-center gap-2">
+				<div class="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto">
 					<button
 						type="button"
 						onclick={copiarLaudo}
-						class="flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-white border border-slate-200 rounded-xl text-slate-700 hover:bg-slate-50 transition-colors duration-150 cursor-pointer"
+						class="flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 text-xs font-semibold bg-white border border-slate-200 rounded-xl text-slate-700 hover:bg-slate-50 transition-colors duration-150 cursor-pointer w-full sm:w-auto"
 					>
 						<span class="{copiado ? 'i-lucide-check text-emerald-600' : 'i-lucide-copy text-slate-500'} text-xs"></span>
-						<span>{copiado ? 'Copiado!' : 'Copiar Texto'}</span>
+						<span>{copiado ? 'Copiado!' : 'Copiar'}</span>
 					</button>
 					<button
 						type="button"
 						onclick={exportarPDF}
 						disabled={exportandoPDF || !analise}
-						class="flex items-center justify-center gap-1.5 px-3.5 py-1.5 text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white rounded-xl transition-colors duration-150 cursor-pointer disabled:opacity-50"
+						class="flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white rounded-xl transition-colors duration-150 cursor-pointer disabled:opacity-50 w-full sm:w-auto"
 					>
 						<span class="i-lucide-file-down text-xs text-rose-400"></span>
 						<span>Baixar PDF</span>
@@ -302,8 +305,8 @@
 				</div>
 			</div>
 
-			<div class="border border-slate-200 rounded-xl bg-slate-50/90 p-4">
-				<pre class="text-[11px] leading-relaxed text-slate-800 font-mono whitespace-pre-wrap break-words max-h-120 overflow-y-auto selection:bg-emerald-200">{iaResposta?.laudoFormatado || texto}</pre>
+			<div class="border border-slate-200 rounded-xl bg-slate-50/90 p-3 sm:p-4 overflow-hidden">
+				<pre class="text-[11px] leading-relaxed text-slate-800 font-mono whitespace-pre-wrap break-words max-h-120 overflow-y-auto selection:bg-emerald-200 [-webkit-overflow-scrolling:touch]">{iaResposta?.laudoFormatado || texto}</pre>
 			</div>
 		</div>
 	{/if}

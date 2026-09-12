@@ -24,7 +24,7 @@
 	let leftCorte = $derived(Math.max(0, Math.min(100, 100 - pctRebaix)));
 </script>
 
-<section class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
+<section class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs w-full min-w-0">
 	<div class="px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 bg-slate-50/50">
 		<div class="min-w-0">
 			<div class="flex items-center gap-2">
@@ -47,13 +47,13 @@
 			<button
 				type="button"
 				onclick={onIrAoCorte}
-				class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 bg-rose-50 border border-rose-200 text-rose-800 text-xs font-bold rounded-xl hover:bg-rose-100 hover:border-rose-300 transition-all duration-150 cursor-pointer font-mono shadow-2xs self-start sm:self-auto"
+				class="shrink-0 inline-flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 bg-rose-50 border border-rose-200 text-rose-800 text-xs font-bold rounded-xl hover:bg-rose-100 hover:border-rose-300 transition-all duration-150 cursor-pointer font-mono shadow-2xs w-full sm:w-auto"
 			>
 				<span class="i-lucide-scissors text-xs text-rose-600"></span>
 				<span>Ir ao Corte: {classificacao.posicaoCorte}º lugar</span>
 			</button>
 		{:else}
-			<span class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold rounded-xl font-mono self-start sm:self-auto">
+			<span class="shrink-0 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 sm:py-1 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold rounded-xl font-mono w-full sm:w-auto">
 				<span class="i-lucide-shield-check text-xs text-emerald-600"></span>
 				<span>Carteira 100% Blindada</span>
 			</span>
@@ -62,14 +62,14 @@
 
 	<!-- Spectrum Bar -->
 	<div class="px-4 sm:px-6 pt-4 pb-3 border-b border-slate-100">
-		<div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 font-mono">
-			<span class="flex items-center gap-1 text-emerald-700">
-				<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-				Ainda dá para salvar (Crédito Recuperável) →
+		<div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 font-mono gap-1">
+			<span class="flex items-center gap-1 text-emerald-700 truncate">
+				<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+				<span>Ainda dá para salvar <span class="hidden sm:inline">(Recuperável)</span> →</span>
 			</span>
-			<span class="flex items-center gap-1 text-rose-700">
-				← Não vale ir atrás (Cobrança D+0)
-				<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+			<span class="flex items-center gap-1 text-rose-700 truncate text-right">
+				<span>← Não persiga <span class="hidden sm:inline">(Cobrança D+0)</span></span>
+				<span class="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0"></span>
 			</span>
 		</div>
 		<div class="relative py-1">
@@ -92,7 +92,7 @@
 				></div>
 			{/if}
 		</div>
-		<div class="flex flex-wrap items-center gap-x-5 gap-y-1.5 mt-2 text-xs font-mono text-slate-600">
+		<div class="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-1.5 mt-2 text-xs font-mono text-slate-600">
 			<span class="inline-flex items-center gap-1.5 font-medium">
 				<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
 				Normalidade: <strong class="text-slate-800">{nNormalidade}</strong>

@@ -192,8 +192,8 @@
 	}
 </script>
 
-<div class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/60 p-2 sm:p-8">
-	<div class="w-full max-w-2xl bg-white border border-slate-300 shadow-xl overflow-hidden my-auto">
+<div class="fixed inset-0 z-50 flex items-start sm:items-center justify-center overflow-y-auto bg-slate-900/60 p-0 sm:p-4 md:p-8">
+	<div class="w-full max-w-2xl bg-white border border-slate-300 shadow-xl overflow-hidden my-0 sm:my-auto rounded-none sm:rounded-xl">
 		<!-- Header -->
 		<div class="px-4 sm:px-6 py-3 flex items-center gap-2 border-b border-slate-200 bg-slate-50/80">
 			<div class="flex items-center gap-1.5 shrink-0">
@@ -222,18 +222,18 @@
 
 		<!-- Presets Bar (1-Click Fill) -->
 		{#if !produtor}
-			<div class="px-4 sm:px-6 py-2.5 bg-emerald-50/70 border-b border-emerald-100 flex flex-wrap items-center gap-2">
-				<span class="text-[11px] font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1">
-					<span class="i-lucide-sparkles text-emerald-600"></span>
-					Preenchimento 1-Clique:
+			<div class="px-4 sm:px-6 py-2 bg-emerald-50/70 border-b border-emerald-100 flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2">
+				<span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1 shrink-0">
+					<span class="i-lucide-sparkles text-emerald-600 text-xs"></span>
+					1-Clique:
 				</span>
-				<div class="flex flex-wrap items-center gap-1.5">
+				<div class="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full [-webkit-overflow-scrolling:touch]">
 					{#each PRESETS_RAPIDOS as p}
 						<button
 							type="button"
 							onclick={() => aplicarPreset(p.cnpj)}
 							disabled={consultandoCNPJ}
-							class="px-2 py-0.5 rounded text-[11px] font-medium bg-white border border-emerald-200 text-slate-700 hover:bg-emerald-100/60 hover:text-emerald-900 transition-colors cursor-pointer shadow-xs disabled:opacity-50"
+							class="px-2.5 py-1 rounded-lg text-[11px] font-medium bg-white border border-emerald-200 text-slate-700 hover:bg-emerald-100/60 hover:text-emerald-900 transition-colors cursor-pointer shadow-xs disabled:opacity-50 shrink-0 whitespace-nowrap"
 						>
 							<span class="font-semibold">{p.nome}</span>
 							<span class="text-[9px] text-slate-500 font-mono ml-1">({p.estado})</span>
@@ -438,14 +438,14 @@
 				<button
 					type="button"
 					onclick={onClose}
-					class="px-4 py-2 sm:py-1.5 border border-slate-300 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors duration-150 cursor-pointer text-center"
+					class="w-full sm:w-auto px-4 py-2.5 sm:py-1.5 border border-slate-300 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors duration-150 cursor-pointer text-center"
 				>
 					Cancelar
 				</button>
 				<button
 					type="submit"
 					disabled={salvando}
-					class="px-5 py-2 sm:py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors duration-150 cursor-pointer disabled:opacity-50 text-center"
+					class="w-full sm:w-auto px-5 py-2.5 sm:py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors duration-150 cursor-pointer disabled:opacity-50 text-center"
 				>
 					{salvando ? 'Salvando...' : produtor ? 'Salvar Alterações' : 'Cadastrar e Avaliar'}
 				</button>

@@ -136,7 +136,7 @@
 	</div>
 </header>
 
-<main class="max-w-7xl mx-auto px-3 sm:px-5 py-4 sm:py-6 space-y-4 sm:space-y-6">
+<main class="max-w-7xl mx-auto px-3 sm:px-5 py-4 sm:py-6 space-y-4 sm:space-y-6 w-full min-w-0">
 	<!-- Title & Subtitle -->
 	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
 		<div>
@@ -271,9 +271,9 @@
 	</section>
 
 	<!-- 2-Column Grid: Balanço de Instrumentos & Concentração de Risco -->
-	<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-start">
+	<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-start w-full min-w-0">
 		<!-- Coluna 1 (7 cols): Balanço Consolidado por Instrumento Jurídico -->
-		<div class="lg:col-span-7 bg-white border border-slate-200 overflow-hidden space-y-0">
+		<div class="lg:col-span-7 bg-white border border-slate-200 overflow-hidden space-y-0 w-full min-w-0">
 			<div class="px-3.5 sm:px-5 py-2.5 sm:py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
 				<div>
 					<h3 class="text-xs font-bold uppercase tracking-wider text-slate-900">
@@ -286,7 +286,7 @@
 				</span>
 			</div>
 
-			<div class="overflow-x-auto">
+			<div class="overflow-x-auto w-full max-w-full [-webkit-overflow-scrolling:touch]">
 				<table class="w-full text-xs min-w-[480px]">
 					<thead>
 						<tr class="text-left text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200 bg-slate-50">
@@ -327,7 +327,7 @@
 		</div>
 
 		<!-- Coluna 2 (5 cols): Radar de Concentração de Risco (Top Exposições Concursais) -->
-		<div class="lg:col-span-5 bg-white border border-slate-200 overflow-hidden space-y-0">
+		<div class="lg:col-span-5 bg-white border border-slate-200 overflow-hidden space-y-0 w-full min-w-0">
 			<div class="px-3.5 sm:px-5 py-2.5 sm:py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
 				<div>
 					<h3 class="text-xs font-bold uppercase tracking-wider text-rose-900">
@@ -340,7 +340,7 @@
 				</span>
 			</div>
 
-			<div class="overflow-x-auto">
+			<div class="overflow-x-auto w-full max-w-full [-webkit-overflow-scrolling:touch]">
 				<table class="w-full text-xs min-w-[340px]">
 					<thead>
 						<tr class="text-left text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200 bg-slate-50">
@@ -380,7 +380,7 @@
 	</div>
 
 	<!-- Seção 3: Livro-Razão & Histórico Cronológico de Auditorias -->
-	<section class="bg-white border border-slate-200 overflow-hidden space-y-0">
+	<section class="bg-white border border-slate-200 overflow-hidden space-y-0 w-full min-w-0">
 		<div class="px-3.5 sm:px-5 py-2.5 sm:py-3 border-b border-slate-200 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
 			<div>
 				<h3 class="text-xs font-bold uppercase tracking-wider text-slate-900">
@@ -415,7 +415,7 @@
 			</div>
 		</div>
 
-		<div class="overflow-x-auto">
+		<div class="overflow-x-auto w-full max-w-full [-webkit-overflow-scrolling:touch]">
 			<table class="w-full text-xs min-w-[620px]">
 				<thead>
 					<tr class="text-left text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200 bg-slate-50 font-mono">
@@ -477,8 +477,8 @@
 
 <!-- Modal de Inspeção do Laudo Pericial -->
 {#if laudoSelecionado}
-	<div class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/60 p-2 sm:p-8">
-		<div class="w-full max-w-3xl bg-white border border-slate-300 shadow-xl overflow-hidden space-y-0 my-auto">
+	<div class="fixed inset-0 z-50 flex items-start sm:items-center justify-center overflow-y-auto bg-slate-900/60 p-0 sm:p-4 md:p-8">
+		<div class="w-full max-w-3xl bg-white border border-slate-300 shadow-xl overflow-hidden space-y-0 my-0 sm:my-auto rounded-none sm:rounded-xl">
 			<div class="flex flex-col sm:flex-row sm:items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-200 bg-slate-50 gap-2">
 				<div>
 					<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900">

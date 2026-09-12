@@ -15,7 +15,7 @@
 	}
 </script>
 
-<div class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 space-y-4 shadow-xs">
+<div class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 space-y-4 shadow-xs w-full min-w-0">
 	<!-- Header -->
 	<div class="flex items-center justify-between pb-3 border-b border-slate-100">
 		<div>
@@ -34,25 +34,28 @@
 
 	<div class="space-y-3.5">
 		<!-- Summary Tags -->
-		<div class="flex flex-wrap gap-2 text-[11px]">
-			<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-rose-200 bg-rose-50/70 text-rose-800 font-semibold">
+		<div class="flex flex-wrap gap-1.5 sm:gap-2 text-[10px] sm:text-[11px]">
+			<span class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg border border-rose-200 bg-rose-50/70 text-rose-800 font-semibold">
 				<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-				{estruturais.length} estrutural(is) — tempo / fato consumado
+				{estruturais.length} estrutural(is) — tempo
 			</span>
-			<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-emerald-200 bg-emerald-50/70 text-emerald-800 font-semibold">
+			<span class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg border border-emerald-200 bg-emerald-50/70 text-emerald-800 font-semibold">
 				<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-				{reversiveis.length} reversível(is) — superáveis por prova
+				{reversiveis.length} reversível(is) — superáveis
 			</span>
-			<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-amber-200 bg-amber-50/70 text-amber-900 font-bold font-mono">
-				{ativos.length} penalidade(s) ativa(s) bloqueando o cartaz
+			<span class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg border border-amber-200 bg-amber-50/70 text-amber-900 font-bold font-mono">
+				{ativos.length} ativa(s) bloqueando
 			</span>
 		</div>
 
 		{#if degraus.length === 0}
 			<div class="text-xs text-slate-400 italic py-3 text-center">Nenhum degrau ou penalidade calculada para este perfil.</div>
 		{:else}
-			<div class="overflow-x-auto rounded-xl border border-slate-100">
-				<table class="w-full text-xs min-w-[640px]">
+			<div class="overflow-x-auto rounded-xl border border-slate-100 w-full max-w-full [-webkit-overflow-scrolling:touch]">
+				<div class="sm:hidden px-3 py-1 bg-slate-50 text-[10px] text-slate-500 font-mono flex items-center justify-between border-b border-slate-100">
+					<span>Deslize para ver provas e responsáveis →</span>
+				</div>
+				<table class="w-full text-xs min-w-[600px]">
 					<thead>
 						<tr class="text-left text-[10px] uppercase font-bold text-slate-400 border-b border-slate-100 bg-slate-50/60 font-mono">
 							<th class="px-3 py-2.5 font-mono">Código</th>

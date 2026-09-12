@@ -27,7 +27,7 @@
 	let coberturaFlip = $derived(capacidadeFlip >= perfilBase.volumeComprometidoCPR);
 </script>
 
-<div class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 space-y-4 shadow-xs">
+<div class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 space-y-4 shadow-xs w-full min-w-0">
 	<!-- Top Bar -->
 	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
 		<div class="flex items-center gap-2">
@@ -58,8 +58,11 @@
 	</div>
 
 	<!-- Comparative Table -->
-	<div class="overflow-x-auto rounded-xl border border-slate-100">
-		<table class="w-full text-xs min-w-[500px]">
+	<div class="overflow-x-auto rounded-xl border border-slate-100 w-full max-w-full [-webkit-overflow-scrolling:touch]">
+		<div class="sm:hidden px-3 py-1 bg-slate-50 text-[10px] text-slate-500 font-mono flex items-center justify-between border-b border-slate-100">
+			<span>Deslize a simulação para comparar cenários →</span>
+		</div>
+		<table class="w-full text-xs min-w-[460px]">
 			<thead>
 				<tr class="border-b border-slate-100 text-slate-400 font-bold uppercase text-[10px] bg-slate-50/60 font-mono">
 					<th class="py-2.5 px-3 text-left">Variável Testada</th>
