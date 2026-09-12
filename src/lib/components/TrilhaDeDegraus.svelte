@@ -43,7 +43,7 @@
 			<div class="text-xs text-slate-500 italic">Sem degraus calculados.</div>
 		{:else}
 			<div class="overflow-x-auto rounded-xl border border-slate-800">
-				<table class="w-full text-xs">
+				<table class="w-full text-xs min-w-[680px]">
 					<thead>
 						<tr class="text-left text-[10px] uppercase tracking-wider text-slate-500 border-b border-slate-800 bg-slate-950/60">
 							<th class="px-3 py-2 font-semibold">Código</th>

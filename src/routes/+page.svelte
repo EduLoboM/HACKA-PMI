@@ -215,8 +215,8 @@
 </script>
 
 <div class="min-h-screen bg-slate-950 text-slate-100 selection:bg-rose-500/30 selection:text-white">
-	<header class="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-md sticky top-0 z-50">
-		<div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
+	<header class="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-md sticky top-0 z-50 pt-[env(safe-area-inset-top)]">
+		<div class="max-w-7xl mx-auto px-4 sm:px-5 2xl:max-w-[88rem] h-16 flex items-center justify-between gap-2 sm:gap-4">
 			<div class="flex items-center gap-3 min-w-0">
 				<span class="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-tr from-orange-500 to-rose-600 flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
 					<span class="i-lucide-shield text-lg"></span>
@@ -245,16 +245,16 @@
 					title="Sair da conta"
 				>
 					<span class="i-lucide-log-out"></span>
-					Sair
+					<span class="max-sm:hidden">Sair</span>
 				</button>
 			</div>
 		</div>
 	</header>
 
-	<main class="max-w-7xl mx-auto px-5 py-8 space-y-8">
+	<main class="max-w-7xl mx-auto px-4 sm:px-5 py-6 sm:py-8 space-y-8 2xl:max-w-[88rem]">
 		<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-			<div>
-				<h1 class="text-2xl font-black tracking-tight">Balcão de Decisão do Crédito no Agro</h1>
+			<div class="w-full lg:w-auto">
+				<h1 class="text-xl sm:text-2xl font-black tracking-tight">Balcão de Decisão do Crédito no Agro</h1>
 				<p class="text-sm text-slate-400 mt-1 max-w-xl leading-relaxed">
 					{produtores.length} empresas na carteira. Adicione dados e observe o cartaz mudar —
 					garantia e reais mudam, não o modelo.
@@ -264,14 +264,14 @@
 				<button
 					type="button"
 					onclick={abrirCriar}
-					class="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-sm font-bold text-white shadow-lg shadow-rose-600/20 transition active:scale-95 cursor-pointer"
+					class="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-sm font-bold text-white shadow-lg shadow-rose-600/20 transition active:scale-95 cursor-pointer justify-center inline-flex items-center"
 				>
 					<span class="i-lucide-plus mr-1"></span>Nova empresa
 				</button>
 				<button
 					type="button"
 					onclick={semearDemo}
-					class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-300 transition cursor-pointer"
+					class="flex-1 sm:flex-none px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-300 transition cursor-pointer justify-center inline-flex items-center"
 				>
 					Reiniciar demo (57)
 				</button>
@@ -282,7 +282,7 @@
 			<div class="rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-300">{erro}</div>
 		{/if}
 
-		<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+		<section class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
 			<button type="button" onclick={() => (filtro = 'TODOS')} class="group text-left rounded-2xl border p-4 transition cursor-pointer {filtro === 'TODOS' ? 'border-slate-500 bg-slate-800/50' : 'border-slate-800 bg-slate-900/40 hover:border-slate-600'}">
 				<span class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Carteira total</span>
 				<span class="block text-3xl font-black text-white mt-1 tabular-nums">{produtores.length}</span>
@@ -291,17 +291,17 @@
 			<button type="button" onclick={() => (filtro = 'FIADO')} class="group text-left rounded-2xl border p-4 transition cursor-pointer {filtro === 'FIADO' ? 'border-emerald-400/60 bg-emerald-500/10' : 'border-slate-800 bg-slate-900/40 hover:border-emerald-500/40'}">
 				<span class="text-[11px] uppercase tracking-wider text-emerald-400 font-semibold">FIADO</span>
 				<span class="block text-3xl font-black text-emerald-300 mt-1 tabular-nums">{resumo.FIADO}</span>
-				<span class="block text-[11px] text-slate-500 mt-1">Último recurso: {formatarBRL(produtores.filter((p) => p.estado === 'FIADO').reduce((s, p) => s + p.morrem, 0))}</span>
+				<span class="block text-[11px] text-slate-500 mt-1 truncate">Último recurso: {formatarBRL(produtores.filter((p) => p.estado === 'FIADO').reduce((s, p) => s + p.morrem, 0))}</span>
 			</button>
 			<button type="button" onclick={() => (filtro = 'SÓ_EXTRACONCURSAL')} class="group text-left rounded-2xl border p-4 transition cursor-pointer {filtro === 'SÓ_EXTRACONCURSAL' ? 'border-amber-400/60 bg-amber-500/10' : 'border-slate-800 bg-slate-900/40 hover:border-amber-500/40'}">
 				<span class="text-[11px] uppercase tracking-wider text-amber-400 font-semibold">SÓ EXTRACONCURSAL</span>
 				<span class="block text-3xl font-black text-amber-300 mt-1 tabular-nums">{resumo['SÓ_EXTRACONCURSAL']}</span>
-				<span class="block text-[11px] text-slate-500 mt-1">Exigem garantia blindada</span>
+				<span class="block text-[11px] text-slate-500 mt-1 truncate">Exigem garantia blindada</span>
 			</button>
 			<button type="button" onclick={() => (filtro = 'À_VISTA')} class="group text-left rounded-2xl border p-4 transition cursor-pointer {filtro === 'À_VISTA' ? 'border-rose-400/60 bg-rose-500/10' : 'border-slate-800 bg-slate-900/40 hover:border-rose-500/40'}">
 				<span class="text-[11px] uppercase tracking-wider text-rose-400 font-semibold">À VISTA</span>
 				<span class="block text-3xl font-black text-rose-300 mt-1 tabular-nums">{resumo['À_VISTA']}</span>
-				<span class="block text-[11px] text-slate-500 mt-1">Liquidação imediata exigida</span>
+				<span class="block text-[11px] text-slate-500 mt-1 truncate">Liquidação imediata exigida</span>
 			</button>
 		</section>
 
@@ -312,7 +312,7 @@
 			</div>
 
 			<div class="overflow-x-auto">
-				<table class="w-full text-sm">
+				<table class="w-full text-sm min-w-[560px]">
 					<thead>
 						<tr class="text-left text-[11px] uppercase tracking-wider text-slate-500 border-b border-slate-800">
 							<th class="px-5 py-2.5 font-semibold">Empresa</th>
@@ -402,7 +402,7 @@
 							</div>
 						{/if}
 
-						<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
 							<div class="lg:col-span-2 space-y-6">
 								<PosterDeDecisao decisao={analise.decisao} />
 
@@ -410,7 +410,7 @@
 									<RexControl perfilBase={basePerfil} flipAtivo={flipAtivo} onToggle={toggleFlip} />
 								{/if}
 
-								<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+								<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 									<RegraCard
 										titulo="Relógio 216"
 										icone="i-lucide-clock-3"
@@ -484,7 +484,7 @@
 	</main>
 
 	<footer class="border-t border-slate-800/80 py-6 text-center text-[11px] text-slate-600">
-		<div class="max-w-7xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-2">
+		<div class="max-w-7xl mx-auto px-4 sm:px-5 2xl:max-w-[88rem] flex flex-col sm:flex-row items-center justify-between gap-2">
 			<span>KrillShield v2.0 · Hackathon PMI-DF 2026 · Krill Tech</span>
 			<span>Regras determinísticas sobre bases públicas (DataJud, SICAR, ZARC, Junta Comercial) · LLM apenas redige o laudo</span>
 		</div>

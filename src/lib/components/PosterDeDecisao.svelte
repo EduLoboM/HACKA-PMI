@@ -36,7 +36,7 @@
 			{@const c = mostrar(estado)}
 			<button
 				type="button"
-				class="relative rounded-2xl border px-5 py-6 text-left transition-all duration-300 cursor-default {c.shadow} {c.bg} {c.borda}"
+				class="relative rounded-2xl border px-4 py-4 sm:px-5 sm:py-6 text-left transition-all duration-300 cursor-default {c.shadow} {c.bg} {c.borda}"
 			>
 				<span class="{c.opacity} block">
 					<span class="flex items-center justify-between mb-3">
