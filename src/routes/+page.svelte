@@ -801,3 +801,5 @@
 		onNovoCadastro={abrirCriar}
 	/>
 {/if}
+
+</div>
