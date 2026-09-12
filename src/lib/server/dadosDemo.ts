@@ -88,28 +88,29 @@ function verde(empresa: EmpresaRealAgro, i: number): Omit<PerfilProdutor, 'id'> 
 	return {
 		cnpjCpf: empresa.cnpj,
 		nome: `${empresa.nome} — ${empresa.municipio} (${empresa.uf})`,
-		dataRegistroJunta: empresa.dataRegistro || dataAtras(7 + (i % 4), 3),
+		dataRegistroJunta: empresa.dataRegistro || dataAtras(6 + (i % 4), 3),
 		escrituracaoLCDPR: true,
 		areaPlantadaCAR: area,
 		produtividadeZarc: zarc,
-		volumeComprometidoCPR: Math.round(cap * 0.52),
+		volumeComprometidoCPR: Math.round(cap * 0.45),
 		possuiCPRFisica: true,
 		podeConstituirFiducia: true,
 		riscoMoratoria: false,
 		posicaoPorInstrumento: {
-			duplicata_mercantil: valor(i, 350000),
-			cpr_fisica: valor(i, 120000, 25000)
+			duplicata_mercantil: valor(i, 300000, 35000),
+			alienacao_fiduciaria: valor(i, 240000, 40000),
+			cpr_fisica: valor(i, 160000, 25000)
 		}
 	};
 }
 
 function amareloFiducia(empresa: EmpresaRealAgro, i: number): Omit<PerfilProdutor, 'id'> {
-	const area = 650 + (i % 4) * 70;
+	const area = 680 + (i % 4) * 80;
 	const zarc = 60;
 	return {
 		cnpjCpf: empresa.cnpj,
 		nome: `${empresa.nome} — ${empresa.municipio} (${empresa.uf})`,
-		dataRegistroJunta: empresa.dataRegistro || dataAtras(0, 10 + (i % 7)),
+		dataRegistroJunta: dataAtras(0, 8 + (i % 12)), // < 24 meses (Relógio 216 FORMALIZANDO)
 		escrituracaoLCDPR: true,
 		areaPlantadaCAR: area,
 		produtividadeZarc: zarc,
@@ -118,29 +119,29 @@ function amareloFiducia(empresa: EmpresaRealAgro, i: number): Omit<PerfilProduto
 		podeConstituirFiducia: true,
 		riscoMoratoria: false,
 		posicaoPorInstrumento: {
-			duplicata_mercantil: valor(i, 280000),
-			alienacao_fiduciaria: valor(i, 150000, 30000)
+			duplicata_mercantil: valor(i, 280000, 30000),
+			alienacao_fiduciaria: valor(i, 220000, 35000)
 		}
 	};
 }
 
 function amareloCpr(empresa: EmpresaRealAgro, i: number): Omit<PerfilProdutor, 'id'> {
-	const area = 820;
-	const zarc = 60;
+	const area = 780 + (i % 3) * 60;
+	const zarc = 58;
 	return {
 		cnpjCpf: empresa.cnpj,
 		nome: `${empresa.nome} — ${empresa.municipio} (${empresa.uf})`,
-		dataRegistroJunta: empresa.dataRegistro || dataAtras(1, 2 + (i % 5)),
+		dataRegistroJunta: dataAtras(1, 1 + (i % 9)), // < 24 meses (Relógio 216 FORMALIZANDO)
 		escrituracaoLCDPR: true,
 		areaPlantadaCAR: area,
 		produtividadeZarc: zarc,
-		volumeComprometidoCPR: Math.round(area * zarc * 0.48),
+		volumeComprometidoCPR: Math.round(area * zarc * 0.5),
 		possuiCPRFisica: true,
 		podeConstituirFiducia: false,
 		riscoMoratoria: false,
 		posicaoPorInstrumento: {
-			duplicata_mercantil: valor(i, 220000),
-			cpr_fisica: valor(i, 160000, 35000)
+			duplicata_mercantil: valor(i, 240000, 25000),
+			cpr_fisica: valor(i, 200000, 30000)
 		}
 	};
 }
@@ -158,8 +159,8 @@ function vermelhoMoratoria(empresa: EmpresaRealAgro, i: number): Omit<PerfilProd
 		podeConstituirFiducia: false,
 		riscoMoratoria: true,
 		posicaoPorInstrumento: {
-			duplicata_mercantil: valor(i, 380000),
-			penhor_agricola: valor(i, 140000, 25000)
+			duplicata_mercantil: valor(i, 380000, 30000),
+			penhor_agricola: valor(i, 140000, 20000)
 		}
 	};
 }
@@ -169,18 +170,18 @@ function vermelhoSemGarantia(empresa: EmpresaRealAgro, i: number): Omit<PerfilPr
 	return {
 		cnpjCpf: empresa.cnpj,
 		nome: `${empresa.nome} — ${empresa.municipio} (${empresa.uf})`,
-		dataRegistroJunta: empresa.dataRegistro || dataAtras(0, 5 + (i % 4)),
+		dataRegistroJunta: dataAtras(0, 5 + (i % 4)),
 		escrituracaoLCDPR: false,
 		areaPlantadaCAR: area,
-		produtividadeZarc: 60,
-		volumeComprometidoCPR: 45000,
+		produtividadeZarc: 55,
+		volumeComprometidoCPR: 40000,
 		possuiCPRFisica: false,
 		podeConstituirFiducia: false,
 		riscoMoratoria: false,
 		posicaoPorInstrumento: {
-			nota_promissoria: valor(i, 210000),
+			nota_promissoria: valor(i, 210000, 20000),
 			penhor_agricola: valor(i, 95000, 15000),
-			duplicata_mercantil: valor(i, 120000, 15000)
+			duplicata_mercantil: valor(i, 140000, 15000)
 		}
 	};
 }

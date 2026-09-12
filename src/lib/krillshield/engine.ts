@@ -28,9 +28,8 @@ function calcularStay(
 
 		let destino: DestinoStay;
 
-		if (!sinalAtivo) {
-			destino = 'sobrevive';
-		} else if (g === 'cpr_fisica') {
+		if (g === 'cpr_fisica') {
+			// CPR física só sobrevive se a área/produtividade ZARC cobrir o volume prometido (Prov. CNJ 216/2026)
 			destino = safraCoberturaOk ? 'sobrevive' : 'morre';
 		} else {
 			destino = meta.destinoBase;
@@ -43,12 +42,10 @@ function calcularStay(
 			destinoFinal: destino,
 			motivo:
 				destino === 'morre'
-					? sinalAtivo
-						? meta.nota
-						: 'Último recurso — com lastro pleno não seria afetado'
-					: destino === 'sobrevive' && g === 'cpr_fisica' && !safraCoberturaOk
-						? 'Entrega inviável — risco de rebaixamento a quirografário'
+					? g === 'cpr_fisica' && !safraCoberturaOk
+						? 'Déficit de lavoura ZARC — perda de extraconcursalidade e rebaixamento a quirografário (Prov. 216)'
 						: meta.nota
+					: meta.nota
 		};
 
 		if (destino === 'morre') {
